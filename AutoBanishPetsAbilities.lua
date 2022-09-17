@@ -25,6 +25,13 @@ AutoBanishPets.companions = {
     [2] = 9353, -- Mirri
 }
 
+AutoBanishPets.dislikeLocations = {
+    [9245] = {},
+    [9353] = {
+        [826] = true, -- Dark Brotherhood Sanctuary
+    },
+}
+
 AutoBanishPets.thievesTrove = {
     ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true,
 }

@@ -30,6 +30,19 @@ function AutoBanishPets.CreateSettingsWindow()
         [2] = GetCollectibleName(AutoBanishPets.companions[2]),
     }
 
+    local dislikeLocationNames = {
+        [1] = "",
+        [2] = "",
+    }
+    for index, id in pairs(AutoBanishPets.companions) do
+        for zoneId, _ in pairs(AutoBanishPets.dislikeLocations[id]) do
+            dislikeLocationNames[index] = string.format("%s %s,", dislikeLocationNames[index], GetZoneNameById(zoneId))
+        end
+        if dislikeLocationNames[index] ~= "" then
+            dislikeLocationNames[index] = string.sub(dislikeLocationNames[index], 2, -2) -- strip
+        end
+    end
+
     local dS = AutoBanishPets.defaultSettings
     local sV = AutoBanishPets.savedVariables
     local optionsData = {
@@ -690,6 +703,33 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.torchbug[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue) sV.torchbug[AutoBanishPets.companions[2]] = newValue end,
+                },
+                {
+                    type = "header",
+                    name = GetString(ABP_LOCATION_NAME),
+                    width = "full",
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[1],
+                    tooltip = dislikeLocationNames[1],
+                    width = "half",
+                    default = dS.location[AutoBanishPets.companions[1]],
+                    requiresReload = false,
+                    disabled = function() return dislikeLocationNames[1] == "" end,
+                    getFunc = function() return sV.location[AutoBanishPets.companions[1]] end,
+                    setFunc = function(newValue) sV.location[AutoBanishPets.companions[1]] = newValue end,
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[2],
+                    tooltip = dislikeLocationNames[2],
+                    width = "half",
+                    default = dS.location[AutoBanishPets.companions[2]],
+                    requiresReload = false,
+                    disabled = function() return dislikeLocationNames[2] == "" end,
+                    getFunc = function() return sV.location[AutoBanishPets.companions[2]] end,
+                    setFunc = function(newValue) sV.location[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",

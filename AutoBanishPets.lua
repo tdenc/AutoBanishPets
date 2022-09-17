@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.2.1"
+AutoBanishPets.version = "0.2.2"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -132,6 +132,13 @@ AutoBanishPets.defaultSettings = {
         [9245] = true,
         [9353] = false,
     },
+    ["location"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = true,
+    }
 }
 local EM = EVENT_MANAGER
 local messages = {
@@ -518,13 +525,28 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
         return
     end
 
+    -- Interaction
     if (eventCode == EVENT_CLIENT_INTERACT_RESULT) then
+        -- Thieves Trove
         if AutoBanishPets.thievesTrove[arg2] then
             for k, v in pairs(sV.thievesTrove) do
                 if (k == "pets") or (k == "vanityPets") or (k == "assistants") then
-                        -- Do nothing
-                else
-                    if v then AutoBanishPets.BanishCompanions(k) end
+                    -- Do nothing
+                elseif v then
+                    AutoBanishPets.BanishCompanions(k)
+                end
+            end
+        else
+            -- Open the door which companions dislike
+            for k, v in pairs(sV.location) do
+                if (k == "pets") or (k == "vanityPets") or (k == "assistants") then
+                    -- Do nothing
+                elseif v then
+                    for zoneId, _ in pairs(AutoBanishPets.dislikeLocations[k]) do
+                        if (arg2 == GetZoneNameById(zoneId)) then
+                            AutoBanishPets.BanishCompanions(k)
+                        end
+                    end
                 end
             end
         end
@@ -571,8 +593,24 @@ function AutoBanishPets.onLogout()
     -- I don't know the reason :(
 end
 
--- Clear registers from time to time
+-- Trigger after loading
 function AutoBanishPets.onPlayerActivated()
+    -- Refresh registerUpdates
+    for _, v in ipairs({"vanityPets", "assistants", "companions"}) do
+        UnregisterUpdate(v)
+    end
+
+    -- Locations which companions dislike
+    for k, v in pairs(AutoBanishPets.savedVariables.location) do
+        if (k == "pets") or (k == "vanityPets") or (k == "assistants") then
+            -- Do nothing
+        elseif v then
+            if (AutoBanishPets.dislikeLocations[k][GetZoneId(GetUnitZoneIndex("player"))]) then
+                AutoBanishPets.BanishCompanions(k)
+            end
+        end
+    end
+
     -- PVP/PVE zone detection
     if (IsPlayerInAvAWorld() or IsActiveWorldBattleground()) then
         if not AutoBanishPets.isInPVP then -- Zone changed from PVE to PVP
@@ -586,10 +624,6 @@ function AutoBanishPets.onPlayerActivated()
         end
     end
 
-    -- Refresh registerUpdates
-    for _, v in ipairs({"vanityPets", "assistants", "companions"}) do
-        UnregisterUpdate(v)
-    end
 end
 
 -----------------------

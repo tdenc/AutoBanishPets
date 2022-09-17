@@ -14,6 +14,8 @@ This addon dismisses your pets/assistants/companions under some circumstances:
   - Crafting writs / Undaunted pledges / WBs and delves
   - Guild dailies (Mages / Fighters / Undaunted / Thieves)
   - Event dailies and so on
+- When you visit
+  - Dark Brotherhood Sanctuary [Mirri only]
 - When you crouch (+auto-resummon)
 - When you are arrested [Companions only]
 - When you begin/finish combat (+auto-resummon)
