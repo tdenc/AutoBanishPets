@@ -6,7 +6,7 @@ function AutoBanishPets.CreateSettingsWindow()
     local panelData = {
         type = "panel",
         name = "Auto Banish Pets",
-        displayName = "Auto Banish Pets",
+        displayName = "Auto Banish Pets/Assistants/Companions",
         author = "@tdenc",
         version = AutoBanishPets.version,
         registerForRefresh = true,
@@ -696,6 +696,65 @@ function AutoBanishPets.CreateSettingsWindow()
                 },
                 {
                     type = "header",
+                    name = GetString(ABP_THIEVESTROVE_NAME),
+                    width = "full",
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[1],
+                    tooltip = GetString(ABP_THIEVESTROVE_TOOLTIP),
+                    width = "half",
+                    default = true,
+                    requiresReload = false,
+                    getFunc = function() return sV.thievesTrove[AutoBanishPets.companions[1]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.thievesTrove[AutoBanishPets.companions[1]] = newValue
+                    end,
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[2],
+                    tooltip = GetString(ABP_THIEVESTROVE_TOOLTIP),
+                    width = "half",
+                    default = true,
+                    requiresReload = false,
+                    getFunc = function() return sV.thievesTrove[AutoBanishPets.companions[2]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.thievesTrove[AutoBanishPets.companions[2]] = newValue
+                    end,
+                },
+                -- Banishment works but cannot avoid decreasing report :(
+                -- {
+                --     type = "header",
+                --     name = GetString(ABP_TORCHBUG_NAME),
+                --     width = "full",
+                -- },
+                -- {
+                --     type = "checkbox",
+                --     name = companionNames[1],
+                --     tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
+                --     width = "half",
+                --     default = false,
+                --     requiresReload = false,
+                --     getFunc = function() return sV.torchbug[AutoBanishPets.companions[1]] end,
+                --     setFunc = function(newValue)
+                --         AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[1]] = newValue
+                --     end,
+                -- },
+                -- {
+                --     type = "checkbox",
+                --     name = companionNames[2],
+                --     tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
+                --     width = "half",
+                --     default = true,
+                --     requiresReload = false,
+                --     getFunc = function() return sV.torchbug[AutoBanishPets.companions[2]] end,
+                --     setFunc = function(newValue)
+                --         AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[2]] = newValue
+                --     end,
+                -- },
+                {
+                    type = "header",
                     name = GetString(ABP_QUEST_NAME),
                     width = "full",
                 },
@@ -793,13 +852,12 @@ function AutoBanishPets.CreateSettingsWindow()
         },
         {
             type = "header",
-            name = GetString(ABP_NOTIFICATION_NAME),
+            name = GetString(ABP_GENERAL_NAME),
             width = "full",
         },
         {
             type = "checkbox",
             name = GetString(ABP_NOTIFICATION_NAME),
-            tooltip = GetString(ABP_NOTIFICATION_TOOLTIP),
             default = true,
             requiresReload = false,
             getFunc = function() return sV.notification end,

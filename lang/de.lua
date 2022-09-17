@@ -2,6 +2,8 @@ local stringsDE = {
     -- Name
     ABP_FENCE_NAME = "Hehler",
     ABP_RETRAIT_STATION_NAME = "Transmutationsstelle",
+    ABP_THIEVESTROVE_NAME = "Diebesgut",
+    -- ABP_TORCHBUG_NAME = "Fackelkäfer",
     -- Tooltip
     ABP_BANK_TOOLTIP = "Wenn du eine Bank öffnest",
     ABP_GUILD_BANK_TOOLTIP = "Wenn du eine Gilden Bank öffnest",
@@ -12,6 +14,8 @@ local stringsDE = {
     ABP_RETRAIT_STATION_TOOLTIP = "Wenn du mit einer Transmuations-Station interagierst",
     ABP_DYEING_STATION_TOOLTIP = "Wenn du mit einer Montur/Färber Station interagierst",
     ABP_WAYSHRINE_TOOLTIP = "Wenn du mit einem Wegschrein interagierst",
+    ABP_THIEVESTROVE_TOOLTIP = "Wenn du mit einem Diebesgut interagierst",
+    -- ABP_TORCHBUG_TOOLTIP = "When you interact with a torchbug",
     ABP_QUEST_TOOLTIP = "Beim Erhalten/abschließen einer täglichen Quest",
     ABP_STEALTH_TOOLTIP = "Wenn du schleichen",
     ABP_BEFORE_COMBAT_TOOLTIP = "Wenn du in den Kampf ziehst",

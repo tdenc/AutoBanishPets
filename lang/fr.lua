@@ -2,6 +2,8 @@ local stringsFR = {
     -- Name
     ABP_FENCE_NAME = "Receleur",
     ABP_RETRAIT_STATION_NAME = "Atelier de transmutation",
+    ABP_THIEVESTROVE_NAME = "trésor des voleurs",
+    -- ABP_TORCHBUG_NAME = "flammouche",
     -- Tooltip
     --ABP_BANK_TOOLTIP = "When you open a bank",
     --ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",
@@ -12,6 +14,8 @@ local stringsFR = {
     --ABP_RETRAIT_STATION_TOOLTIP = "When you interact with a retrait station",
     --ABP_DYEING_STATION_TOOLTIP = "When you interact with a dyeing station",
     --ABP_WAYSHRINE_TOOLTIP = "When you interact with a wayshrine",
+    --ABP_THIEVESTROVE_TOOLTIP = "When you interact with a thieves trove",
+    --ABP_TORCHBUG_TOOLTIP = "When you interact with a torchbug",
     --ABP_QUEST_TOOLTIP = "When you recieve/complete a daily quest",
     --ABP_STEALTH_TOOLTIP = "When you crouch",
     --ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",

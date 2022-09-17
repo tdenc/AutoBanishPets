@@ -1,8 +1,8 @@
-## Title: Auto Banish Pets
-## Description: Banish your pets/assistants/companions under some circumstances
+## Title: Auto Banish Pets/Assistants/Companions
+## Description: Banish your minions under some circumstances
 ## APIVersion: 100035
 ## Author: @tdenc
-## Version: 0.1.3
+## Version: 0.1.4
 ## DepentsOn: LibAddonMenu-2.0>=32
 ## SavedVariables: AutoBanishPetsSavedVars
 

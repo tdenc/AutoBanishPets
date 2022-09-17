@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.1.3"
+AutoBanishPets.version = "0.1.4"
 AutoBanishPets.variableVersion = 8
 
 AutoBanishPets.defaultSettings = {
@@ -105,12 +105,36 @@ AutoBanishPets.defaultSettings = {
         [9245] = false,
         [9353] = false,
     },
+    ["thievesTrove"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = true,
+        [9353] = true,
+    },
+    --[[ Banishment works but cannot avoid decreasing report :(
+    ["torchbug"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = true,
+    },
+    ]]
 }
 AutoBanishPets.messages = {
-    ["pets"] = GetString(ABP_NOTIFICATION_PETS),
-    ["vanityPets"] = GetString(ABP_NOTIFICATION_VANITY_PETS),
-    ["assistants"] = GetString(ABP_NOTIFICATION_ASSISTANTS),
-    ["companions"] = GetString(ABP_NOTIFICATION_COMPANIONS),
+    ["banish"] = {
+        ["pets"] = GetString(ABP_NOTIFICATION_PETS),
+        ["vanityPets"] = GetString(ABP_NOTIFICATION_VANITY_PETS),
+        ["assistants"] = GetString(ABP_NOTIFICATION_ASSISTANTS),
+        ["companions"] = GetString(ABP_NOTIFICATION_COMPANIONS),
+    },
+    ["resummon"] = {
+        ["pets"] = GetString(ABP_NOTIFICATION_RESUMMON_PETS),
+        ["vanityPets"] = GetString(ABP_NOTIFICATION_RESUMMON_VANITY_PETS),
+        ["assistants"] = GetString(ABP_NOTIFICATION_RESUMMON_ASSISTANTS),
+        ["companions"] = GetString(ABP_NOTIFICATION_RESUMMON_COMPANIONS),
+    },
 }
 AutoBanishPets.eventKeys = {
     [EVENT_OPEN_BANK] = "bank",
@@ -169,24 +193,34 @@ function AutoBanishPets.ToggleCollectible(collectibleId, toggle, key)
     elseif (key == "companions") then
         activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
     end
-    if (toggle and activeId ~= 0) then -- Already active
+
+    -- Already active/inactive
+    if (toggle and activeId ~= 0) or (not toggle and activeId == 0) then
         AutoBanishPets.UnregisterUpdate(key)
-    elseif (not toggle and activeId == 0) then -- Already inactive
+    -- Player changed collectible manually during cooldown
+    elseif (activeId ~= 0 and activeId ~= collectibleId) then
         AutoBanishPets.UnregisterUpdate(key)
-    elseif (activeId ~= 0 and activeId ~= collectibleId) then -- Player changed collectible manually during cooldown
+    -- Do not summon in combat
+    elseif (toggle and IsUnitInCombat("player")) then
         AutoBanishPets.UnregisterUpdate(key)
-    elseif (toggle and IsUnitInCombat("player")) then -- Do not summon in combat
-        AutoBanishPets.UnregisterUpdate(key)
+    -- Then toggle
     elseif (IsCollectibleActive(collectibleId) ~= toggle and not IsCollectibleBlocked(collectibleId) and not AutoBanishPets.isToggling[key]) then
         UseCollectible(collectibleId)
         if toggle then
             AutoBanishPets.queuedId[key] = 0
         end
         AutoBanishPets.isToggling[key] = true
-        -- Notify only banishment
-        if not toggle then
-            df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages[key])
+    -- Toggle done
+    elseif AutoBanishPets.isToggling[key] then -- Done toggling
+        if AutoBanishPets.savedVariables.notification then
+            if toggle then
+                df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages.resummon[key])
+            else
+                df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages.banish[key])
+            end
         end
+        AutoBanishPets.UnregisterUpdate(key)
+    -- This should not happen :)
     else
         AutoBanishPets.UnregisterUpdate(key)
     end
@@ -212,7 +246,7 @@ function AutoBanishPets.BanishPets()
     -- Notify once
     if isBanished then
         if AutoBanishPets.savedVariables.notification then
-            df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["pets"])
+            df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages.banish["pets"])
         end
     end
 end
@@ -459,7 +493,7 @@ function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
 end
 
 -- Other events
-function AutoBanishPets.onEventTriggered(eventCode, arg)
+function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
     local sV = AutoBanishPets.savedVariables
 
     -- Dailies
@@ -467,7 +501,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
     -- EVENT_QUEST_COMPLETE_DIALOG (number eventCode, number journalIndex)
     if (eventCode == EVENT_QUEST_ADDED or eventCode == EVENT_QUEST_COMPLETE_DIALOG) then
         for k, v in pairs(sV.quest) do
-            if (v and isDaily(arg)) then
+            if (v and isDaily(arg1)) then
                 if (k == "pets") then
                     AutoBanishPets.BanishPets()
                 elseif (k == "vanityPets") then
@@ -478,6 +512,29 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                     AutoBanishPets.BanishCompanions(k)
                 end
             end
+        end
+        return
+    end
+
+    if (eventCode == EVENT_CLIENT_INTERACT_RESULT) then
+        if AutoBanishPets.thievesTrove[arg2] then
+            for k, v in pairs(sV.thievesTrove) do
+                if (k == "pets") or (k == "vanityPets") or (k == "assistants") then
+                        -- Do nothing
+                else
+                    if v then AutoBanishPets.BanishCompanions(k) end
+                end
+            end
+        --[[ Banishment works but cannot avoid decreasing report :(
+        elseif AutoBanishPets.torchbug[arg2] then
+            for k, v in pairs(sV.torchbug) do
+                if (k == "pets") or (k == "vanityPets") or (k == "assistants") then
+                        -- Do nothing
+                else
+                    if v then AutoBanishPets.BanishCompanions(k) end
+                end
+            end
+        ]]
         end
         return
     end
@@ -556,6 +613,7 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_WAYSHRINE", EVENT_START_FAST_TRAVEL_INTERACTION, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_QUEST_ADDED", EVENT_QUEST_ADDED, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_QUEST_COMPLETE", EVENT_QUEST_COMPLETE_DIALOG, AutoBanishPets.onEventTriggered)
+    EM:RegisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT, AutoBanishPets.onEventTriggered)
     -- Prehook
     ZO_PreHook("Logout", AutoBanishPets.onLogout)
 end
@@ -580,6 +638,7 @@ function AutoBanishPets:UnregisterEvents()
     EM:UnregisterForEvent(ns .. "_WAYSHRINE", EVENT_START_FAST_TRAVEL_INTERACTION)
     EM:UnregisterForEvent(ns .. "_QUEST_ADDED", EVENT_QUEST_ADDED)
     EM:UnregisterForEvent(ns .. "_QUEST_COMPLETE", EVENT_QUEST_COMPLETE_DIALOG)
+    EM:UnregisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT)
     -- Prehook
     ZO_PreHook("Logout", function() end)
 end

@@ -1,5 +1,6 @@
 local stringsEN = {
     -- Name
+    ABP_GENERAL_NAME = GetString(SI_GAMEPLAY_OPTIONS_GENERAL),
     ABP_NOTIFICATION_NAME = GetString(SI_MAIN_MENU_NOTIFICATIONS),
     ABP_PETS_NAME = zo_strformat(SI_INTERACT_OPTION_DISMISS_ASSISTANT, GetString(SI_OUTFITSLOT30)),
     ABP_VANITY_PETS_NAME = zo_strformat(SI_INTERACT_OPTION_DISMISS_ASSISTANT, GetString(SI_COLLECTIBLECATEGORYTYPE3)),
@@ -14,6 +15,8 @@ local stringsEN = {
     ABP_RETRAIT_STATION_NAME = "Transmute station",
     ABP_DYEING_STATION_NAME = GetString(SI_RESTYLE_STATION_MENU_ROOT_TITLE),
     ABP_WAYSHRINE_NAME = GetString(SI_MAPFILTER8),
+    ABP_THIEVESTROVE_NAME = "Thieves trove",
+    -- ABP_TORCHBUG_NAME = "Torchbug",
     ABP_QUEST_NAME = string.format("%s (%s)", GetString(SI_ITEMTYPEDISPLAYCATEGORY8), GetString(SI_QUESTREPEATABLETYPE2)),
     ABP_STEALTH_NAME = GetString(SI_BINDING_NAME_SPECIAL_MOVE_CROUCH),
     ABP_BEFORE_COMBAT_NAME = GetString(SI_AUDIO_OPTIONS_COMBAT),
@@ -29,6 +32,8 @@ local stringsEN = {
     ABP_RETRAIT_STATION_TOOLTIP = "When you interact with a retrait station",
     ABP_DYEING_STATION_TOOLTIP = "When you interact with a dyeing station",
     ABP_WAYSHRINE_TOOLTIP = "When you interact with a wayshrine",
+    ABP_THIEVESTROVE_TOOLTIP = "When you interact with a thieves trove",
+    -- ABP_TORCHBUG_TOOLTIP = "When you interact with a torchbug",
     ABP_QUEST_TOOLTIP = "When you recieve/complete a daily quest",
     ABP_STEALTH_TOOLTIP = "When you crouch",
     ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",
@@ -44,6 +49,7 @@ local stringsEN = {
     ABP_NOTIFICATION_COMPANIONS = "Your companions were banished!",
     ABP_NOTIFICATION_RESUMMON_VANITY_PETS = "Your non-combat pets are back!",
     ABP_NOTIFICATION_RESUMMON_ASSISTANTS = "Your assistants are back!",
+    ABP_NOTIFICATION_RESUMMON_COMPANIONS = "Your companions are back!",
     -- Keybind
     SI_BINDING_NAME_BANISH_ALL = "Banish all",
     SI_BINDING_NAME_BANISH_PETS = "Banish combat pets",
