@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.1.1"
+AutoBanishPets.version = "0.1.2"
 AutoBanishPets.variableVersion = 8
 
 AutoBanishPets.defaultSettings = {
@@ -89,6 +89,15 @@ AutoBanishPets.defaultSettings = {
             [9353] = 1,
         },
     },
+    ["stealth"] = {
+        ["pets"] = false,
+        ["vanityPets"] = 1,
+        ["assistants"] = 1,
+        ["companions"] = {
+            [9245] = 2,
+            [9353] = 2,
+        },
+    },
     ["logout"] = {
         ["pets"] = false,
         ["vanityPets"] = false,
@@ -102,6 +111,17 @@ AutoBanishPets.messages = {
     ["vanityPets"] = GetString(ABP_NOTIFICATION_VANITY_PETS),
     ["assistants"] = GetString(ABP_NOTIFICATION_ASSISTANTS),
     ["companions"] = GetString(ABP_NOTIFICATION_COMPANIONS),
+}
+AutoBanishPets.eventKeys = {
+    [EVENT_OPEN_BANK] = "bank",
+    [EVENT_OPEN_GUILD_BANK] = "guildBank",
+    [EVENT_OPEN_STORE] = "store",
+    [EVENT_OPEN_TRADING_HOUSE] = "guildStore",
+    [EVENT_OPEN_FENCE] = "fence",
+    [EVENT_CRAFTING_STATION_INTERACT] = "craftStation",
+    [EVENT_DYEING_STATION_INTERACT_START] = "dyeingStation",
+    [EVENT_RETRAIT_STATION_INTERACT_START] = "retraitStation",
+    [EVENT_START_FAST_TRAVEL_INTERACTION] = "wayshrine",
 }
 
 ---------------------
@@ -295,225 +315,157 @@ end
 -------------------
 --EVENT FUNCTIONS--
 -------------------
--- Start combat
-function AutoBanishPets.onStartCombat(eventCode, inCombat)
-    if not inCombat then return end
-
-    local activeId, queuedId
+-- Combat events
+function AutoBanishPets.onCombat(eventCode, inCombat)
+    local activeId, targetId
     local sV = AutoBanishPets.savedVariables
 
-    -- Non-combat pets
-    if (sV.combat.vanityPets > 1) then
-        activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
-        if (activeId ~= 0) then
-            AutoBanishPets.queuedId.vanityPets = activeId
-            AutoBanishPets.UnregisterUpdate("vanityPets")
-            AutoBanishPets.BanishVanityPets(activeId)
-        end
-    end
-
-    -- Assistants
-    if (sV.combat.assistants > 1) then
-        activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-        if (activeId ~= 0) then
-            AutoBanishPets.queuedId.assistants = activeId
-            AutoBanishPets.UnregisterUpdate("assistants")
-            AutoBanishPets.BanishAssistants(activeId)
-        end
-    end
-end
-
--- End combat
-function AutoBanishPets.onEndCombat(eventCode, inCombat)
-    if inCombat then return end
-
-    local targetId
-    local sV = AutoBanishPets.savedVariables
-
-    -- Dismiss combat pets
-    if sV.combat.pets then
-        AutoBanishPets.BanishPets()
-    end
-
-    -- Resummon non-combat pets
-    if (sV.combat.vanityPets > 2) then
-        targetId = AutoBanishPets.queuedId.vanityPets
-        if (targetId ~= 0) then
-            AutoBanishPets.ResummonVanityPets(targetId)
-        end
-    end
-
-    -- Resummon assistants
-    if (sV.combat.assistants > 2) then
-        targetId = AutoBanishPets.queuedId.assistants
-        if (targetId ~= 0) then
-            AutoBanishPets.ResummonAssistants(targetId)
-        end
-    end
-
-    -- Dismiss/Resummon companions
-    for k, v in pairs(sV.combat.companions) do
-        -- Dismiss
-        if (v > 1) then
-            local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
-            if (activeCompanionId == k) then
-                AutoBanishPets.BanishCompanions(k)
-                AutoBanishPets.queuedId.companions = k
+    -- Start
+    if inCombat then
+        -- Dismiss non-combat pets
+        if (sV.combat.vanityPets > 1) then
+            activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+            if (activeId ~= 0) then
+                AutoBanishPets.queuedId.vanityPets = activeId
+                AutoBanishPets.UnregisterUpdate("vanityPets")
+                AutoBanishPets.BanishVanityPets(activeId)
             end
         end
-        -- Resummon
-        if (v > 2) then
-            targetId = AutoBanishPets.queuedId.companions
+
+        -- Dismiss assistants
+        if (sV.combat.assistants > 1) then
+            activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+            if (activeId ~= 0) then
+                AutoBanishPets.queuedId.assistants = activeId
+                AutoBanishPets.UnregisterUpdate("assistants")
+                AutoBanishPets.BanishAssistants(activeId)
+            end
+        end
+    -- End
+    else
+        -- Dismiss combat pets
+        if sV.combat.pets then
+            AutoBanishPets.BanishPets()
+        end
+
+        -- Resummon non-combat pets
+        if (sV.combat.vanityPets > 2) then
+            targetId = AutoBanishPets.queuedId.vanityPets
             if (targetId ~= 0) then
-                AutoBanishPets.ResummonCompanions(targetId)
+                AutoBanishPets.ResummonVanityPets(targetId)
+            end
+        end
+
+        -- Resummon assistants
+        if (sV.combat.assistants > 2) then
+            targetId = AutoBanishPets.queuedId.assistants
+            if (targetId ~= 0) then
+                AutoBanishPets.ResummonAssistants(targetId)
+            end
+        end
+
+        -- Dismiss/Resummon companions
+        for k, v in pairs(sV.combat.companions) do
+            -- Dismiss
+            if (v > 1) then
+                local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+                if (activeCompanionId == k) then
+                    AutoBanishPets.BanishCompanions(k)
+                    AutoBanishPets.queuedId.companions = k
+                end
+            end
+            -- Resummon
+            if (v > 2) then
+                targetId = AutoBanishPets.queuedId.companions
+                if (targetId ~= 0) then
+                    AutoBanishPets.ResummonCompanions(targetId)
+                end
             end
         end
     end
 end
 
--- Events except combat
+-- Stealth events
+function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
+    local activeId
+    local sV = AutoBanishPets.savedVariables
+
+    -- Start
+    if (stealthState > 0) then
+        -- Dismiss combat pets
+        if sV.stealth.pets then
+            AutoBanishPets.BanishPets()
+        end
+
+        -- Dismiss non-combat pets
+        if (sV.stealth.vanityPets > 1) then
+            activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+            if (activeId ~= 0) then
+                AutoBanishPets.queuedId.vanityPets = activeId
+                AutoBanishPets.UnregisterUpdate("vanityPets")
+                AutoBanishPets.BanishVanityPets(activeId)
+            end
+        end
+
+        -- Dismiss assistants
+        if (sV.stealth.assistants > 1) then
+            activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+            if (activeId ~= 0) then
+                AutoBanishPets.queuedId.assistants = activeId
+                AutoBanishPets.UnregisterUpdate("assistants")
+                AutoBanishPets.BanishAssistants(activeId)
+            end
+        end
+
+        -- Dismiss companions
+        for k, v in pairs(sV.stealth.companions) do
+            -- Dismiss
+            if (v > 1) then
+                local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+                if (activeCompanionId == k) then
+                    AutoBanishPets.BanishCompanions(k)
+                    AutoBanishPets.queuedId.companions = k
+                end
+            end
+        end
+    -- End
+    else
+        -- Resummon non-combat pets
+        if (sV.stealth.vanityPets > 2) then
+            targetId = AutoBanishPets.queuedId.vanityPets
+            if (targetId ~= 0) then
+                AutoBanishPets.ResummonVanityPets(targetId)
+            end
+        end
+
+        -- Resummon assistants
+        if (sV.stealth.assistants > 2) then
+            targetId = AutoBanishPets.queuedId.assistants
+            if (targetId ~= 0) then
+                AutoBanishPets.ResummonAssistants(targetId)
+            end
+        end
+
+        -- Resummon companions
+        for k, v in pairs(sV.stealth.companions) do
+            if (v > 2) then
+                targetId = AutoBanishPets.queuedId.companions
+                if (targetId ~= 0) then
+                    AutoBanishPets.ResummonCompanions(targetId)
+                end
+            end
+        end
+    end
+end
+
+-- Other events
 function AutoBanishPets.onEventTriggered(eventCode, arg)
     local sV = AutoBanishPets.savedVariables
 
-    -- Bank
-    if (eventCode == EVENT_OPEN_BANK) then
-        for k, v in pairs(sV.bank) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    -- Do nothing
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Guild bank
-    elseif (eventCode == EVENT_OPEN_GUILD_BANK) then
-        for k, v in pairs(sV.guildBank) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    AutoBanishPets.BanishAssistants()
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Store
-    elseif (eventCode == EVENT_OPEN_STORE) then
-        for k, v in pairs(sV.store) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    -- Do nothing
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Guild store
-    elseif (eventCode == EVENT_OPEN_TRADING_HOUSE) then
-        for k, v in pairs(sV.guildStore) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    AutoBanishPets.BanishAssistants()
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Fence
-    elseif (eventCode == EVENT_OPEN_FENCE) then
-        for k, v in pairs(sV.fence) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    -- Do nothing
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Craft station
-    elseif (eventCode == EVENT_CRAFTING_STATION_INTERACT) then
-        for k, v in pairs(sV.craftStation) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    AutoBanishPets.BanishAssistants()
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Dyeing station
-    elseif (eventCode == EVENT_DYEING_STATION_INTERACT_START) then
-        for k, v in pairs(sV.dyeingStation) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    AutoBanishPets.BanishAssistants()
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Retrait station
-    elseif (eventCode == EVENT_RETRAIT_STATION_INTERACT_START) then
-        for k, v in pairs(sV.retraitStation) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    AutoBanishPets.BanishAssistants()
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
-    -- Wayshrine
-    elseif (eventCode == EVENT_START_FAST_TRAVEL_INTERACTION) then
-        for k, v in pairs(sV.wayshrine) do
-            if v then
-                if (k == "pets") then
-                    AutoBanishPets.BanishPets()
-                elseif (k == "vanityPets") then
-                    AutoBanishPets.BanishVanityPets()
-                elseif (k == "assistants") then
-                    AutoBanishPets.BanishAssistants()
-                else
-                    AutoBanishPets.BanishCompanions(k)
-                end
-            end
-        end
     -- Dailies
     -- EVENT_QUEST_ADDED (number eventCode, number journalIndex, string questName, string objectiveName)
     -- EVENT_QUEST_COMPLETE_DIALOG (number eventCode, number journalIndex)
-    elseif (eventCode == EVENT_QUEST_ADDED or eventCode == EVENT_QUEST_COMPLETE_DIALOG) then
+    if (eventCode == EVENT_QUEST_ADDED or eventCode == EVENT_QUEST_COMPLETE_DIALOG) then
         for k, v in pairs(sV.quest) do
             if (v and isDaily(arg)) then
                 if (k == "pets") then
@@ -525,6 +477,22 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 else
                     AutoBanishPets.BanishCompanions(k)
                 end
+            end
+        end
+        return
+    end
+
+    -- Others
+    for k, v in pairs(sV[AutoBanishPets.eventKeys[eventCode]]) do
+        if v then
+            if (k == "pets") then
+                AutoBanishPets.BanishPets()
+            elseif (k == "vanityPets") then
+                AutoBanishPets.BanishVanityPets()
+            elseif (k == "assistants") then
+                AutoBanishPets.BanishAssistants()
+            else
+                AutoBanishPets.BanishCompanions(k)
             end
         end
     end
@@ -571,8 +539,11 @@ function AutoBanishPets:RegisterEvents()
     local EM = EVENT_MANAGER
     local ns = AutoBanishPets.name
     -- Combat events
-    EM:RegisterForEvent(ns .. "_COMBAT_START", EVENT_PLAYER_COMBAT_STATE, AutoBanishPets.onStartCombat)
-    EM:RegisterForEvent(ns .. "_COMBAT_END", EVENT_PLAYER_COMBAT_STATE, AutoBanishPets.onEndCombat)
+    EM:RegisterForEvent(ns .. "_COMBAT", EVENT_PLAYER_COMBAT_STATE, AutoBanishPets.onCombat)
+    EM:AddFilterForEvent(ns .. "_COMBAT", EVENT_PLAYER_COMBAT_STATE, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER)
+    -- Stealth events
+    EM:RegisterForEvent(ns .. "_STEALTH", EVENT_STEALTH_STATE_CHANGED, AutoBanishPets.onStealth)
+    EM:AddFilterForEvent(ns .. "_STEALTH", EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
     -- Other events
     EM:RegisterForEvent(ns .. "_BANK", EVENT_OPEN_BANK, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_GUILD_BANK", EVENT_OPEN_GUILD_BANK, AutoBanishPets.onEventTriggered)
@@ -594,8 +565,9 @@ function AutoBanishPets:UnregisterEvents()
     local EM = EVENT_MANAGER
     local ns = AutoBanishPets.name
     -- Combat events
-    EM:UnregisterForEvent(ns .. "_COMBAT_START", EVENT_PLAYER_COMBAT_STATE)
-    EM:UnregisterForEvent(ns .. "_COMBAT_END", EVENT_PLAYER_COMBAT_STATE)
+    EM:UnregisterForEvent(ns .. "_COMBAT", EVENT_PLAYER_COMBAT_STATE)
+    -- Stealth events
+    EM:UnregisterForEvent(ns .. "_STEALTH", EVENT_STEALTH_STATE_CHANGED)
     -- Other events
     EM:UnregisterForEvent(ns .. "_BANK", EVENT_OPEN_BANK)
     EM:UnregisterForEvent(ns .. "_GUILD_BANK", EVENT_OPEN_GUILD_BANK)

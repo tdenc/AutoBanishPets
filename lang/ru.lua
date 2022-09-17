@@ -13,6 +13,7 @@ local stringsRU = {
     --ABP_DYEING_STATION_TOOLTIP = "When you interact with a dyeing station",
     --ABP_WAYSHRINE_TOOLTIP = "When you interact with a wayshrine",
     --ABP_QUEST_TOOLTIP = "When you recieve/complete a daily quest",
+    --ABP_STEALTH_TOOLTIP = "When you crouch",
     --ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",
     --ABP_AFTER_COMBAT_TOOLTIP = "When you finish combat",
     --ABP_LOGOUT_TOOLTIP = "When you logout",

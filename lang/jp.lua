@@ -14,6 +14,7 @@ local stringsJP = {
     ABP_DYEING_STATION_TOOLTIP = "染色台に触れる時",
     ABP_WAYSHRINE_TOOLTIP = "旅の祠に触れる時",
     ABP_QUEST_TOOLTIP = "デイリークエストを受注/報告する時",
+    ABP_STEALTH_TOOLTIP = "かがむ時",
     ABP_BEFORE_COMBAT_TOOLTIP = "戦闘に突入する時",
     ABP_AFTER_COMBAT_TOOLTIP = "戦闘を終える時",
     ABP_LOGOUT_TOOLTIP = "ログアウトする時",

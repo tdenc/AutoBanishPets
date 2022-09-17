@@ -152,6 +152,17 @@ function AutoBanishPets.CreateSettingsWindow()
                 },
                 {
                     type = "checkbox",
+                    name = GetString(ABP_STEALTH_NAME),
+                    tooltip = GetString(ABP_STEALTH_TOOLTIP),
+                    default = false,
+                    requiresReload = false,
+                    getFunc = function() return sV.stealth.pets end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.stealth.pets = newValue
+                    end,
+                },
+                {
+                    type = "checkbox",
                     name = GetString(ABP_AFTER_COMBAT_NAME),
                     tooltip = GetString(ABP_AFTER_COMBAT_TOOLTIP),
                     default = false,
@@ -288,6 +299,19 @@ function AutoBanishPets.CreateSettingsWindow()
                 },
                 {
                     type = "dropdown",
+                    name = GetString(ABP_STEALTH_NAME),
+                    tooltip = GetString(ABP_STEALTH_TOOLTIP),
+                    default = 1,
+                    requiresReload = false,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
+                    getFunc = function() return sV.stealth.vanityPets end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.vanityPets.pets = newValue
+                    end,
+                },
+                {
+                    type = "dropdown",
                     name = GetString(ABP_BEFORE_COMBAT_NAME),
                     tooltip = GetString(ABP_BEFORE_COMBAT_TOOLTIP),
                     default = 2,
@@ -378,6 +402,19 @@ function AutoBanishPets.CreateSettingsWindow()
                     getFunc = function() return sV.quest.assistants end,
                     setFunc = function(newValue)
                         AutoBanishPets.savedVariables.quest.assistants = newValue
+                    end,
+                },
+                {
+                    type = "dropdown",
+                    name = GetString(ABP_STEALTH_NAME),
+                    tooltip = GetString(ABP_STEALTH_TOOLTIP),
+                    default = 1,
+                    requiresReload = false,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
+                    getFunc = function() return sV.stealth.assistants end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.stealth.assistants = newValue
                     end,
                 },
                 {
@@ -685,6 +722,39 @@ function AutoBanishPets.CreateSettingsWindow()
                     getFunc = function() return sV.quest[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
                         AutoBanishPets.savedVariables.quest[AutoBanishPets.companions[2]] = newValue
+                    end,
+                },
+                {
+                    type = "header",
+                    name = GetString(ABP_STEALTH_NAME),
+                    width = "full",
+                },
+                {
+                    type = "dropdown",
+                    name = companionNames[1],
+                    tooltip = GetString(ABP_STEALTH_TOOLTIP),
+                    width = "half",
+                    default = 2,
+                    requiresReload = false,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
+                    getFunc = function() return sV.stealth.companions[AutoBanishPets.companions[1]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.stealth.companions[AutoBanishPets.companions[1]] = newValue
+                    end,
+                },
+                {
+                    type = "dropdown",
+                    name = companionNames[2],
+                    tooltip = GetString(ABP_STEALTH_TOOLTIP),
+                    width = "half",
+                    default = 2,
+                    requiresReload = false,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
+                    getFunc = function() return sV.stealth.companions[AutoBanishPets.companions[2]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.stealth.companions[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {

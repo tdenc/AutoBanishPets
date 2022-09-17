@@ -13,6 +13,7 @@ local stringsDE = {
     ABP_DYEING_STATION_TOOLTIP = "Wenn du mit einer Montur/Färber Station interagierst",
     ABP_WAYSHRINE_TOOLTIP = "Wenn du mit einem Wegschrein interagierst",
     ABP_QUEST_TOOLTIP = "Beim Erhalten/abschließen einer täglichen Quest",
+    ABP_STEALTH_TOOLTIP = "Wenn du schleichen",
     ABP_BEFORE_COMBAT_TOOLTIP = "Wenn du in den Kampf ziehst",
     ABP_AFTER_COMBAT_TOOLTIP = "Wenn du fertig Kampf ziehst",
     ABP_LOGOUT_TOOLTIP = "Wenn du dich ausloggst",
