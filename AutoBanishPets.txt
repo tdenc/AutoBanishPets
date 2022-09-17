@@ -1,0 +1,14 @@
+## Title: Auto Banish Pets
+## Description: Banish your pets under some circumstances
+## APIVersion: 100035
+## Author: @tdenc
+## Version: 0.0.1
+## DepentsOn: LibAddonMenu-2.0
+## SavedVariables: AutoBanishPetsSavedVars
+
+lang/en.lua
+lang/$(language).lua
+
+AutoBanishPetsSettings.lua
+AutoBanishPetsAbilities.lua
+AutoBanishPets.lua
