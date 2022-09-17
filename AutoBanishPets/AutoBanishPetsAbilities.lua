@@ -37,7 +37,7 @@ AutoBanishPets.abilities = {
 AutoBanishPets.companions = {
     [1] = 9245, -- Bastian
     [2] = 9353, -- Mirri
-    [3] = 9911, -- Funke
+    [3] = 9911, -- Ember
     [4] = 9912, -- Isobel
 }
 

@@ -150,6 +150,15 @@ AutoBanishPets.defaultSettings = {
         [9911] = false,
         [9912] = false,
     },
+    ["fishing"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+        [9911] = true,
+        [9912] = false,
+    },
     ["steal"] = {
         ["pets"] = false,
         ["vanityPets"] = false,
@@ -851,9 +860,15 @@ function AutoBanishPets:Initialize()
             return ZO_StartInteraction(...)
         end
 
-        local _, interactableName, interactionBlocked, _, _, _, _, isCriminalInteract = GetGameCameraInteractableActionInfo()
+        local _, interactableName, interactionBlocked, _, additionalInfo, _, _, isCriminalInteract = GetGameCameraInteractableActionInfo()
         -- Block taking torchbug/butterfly
         if AutoBanishPets.savedVariables.torchbug[activeId] and AutoBanishPets.torchbug[interactableName] then
+            AutoBanishPets.BanishCompanions(activeId)
+            ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked the interaction.", AutoBanishPets.name))
+            return true
+        end
+        -- Fishing
+        if AutoBanishPets.savedVariables.fishing[activeId] and additionalInfo == ADDITIONAL_INTERACT_INFO_FISHING_NODE then
             AutoBanishPets.BanishCompanions(activeId)
             ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked the interaction.", AutoBanishPets.name))
             return true

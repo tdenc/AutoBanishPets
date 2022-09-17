@@ -9,7 +9,7 @@ This addon dismisses your pets/assistants/companions under some circumstances:
 - When you interact with
   - Craft station / Dyeing station / Retrait station
   - Wayshrine
-  - Thieves trove / Torchbug / Butterfly [Companions only]
+  - Thieves trove / Torchbug / Butterfly [Companions only] / Fishing hole
 - When you recieve/complete a daily quest
   - Crafting writs / Undaunted pledges / WBs and delves
   - Guild dailies (Mages / Fighters / Undaunted / Thieves)
