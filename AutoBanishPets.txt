@@ -2,7 +2,7 @@
 ## Description: Banish your pets/assistants/companions under some circumstances
 ## APIVersion: 100035
 ## Author: @tdenc
-## Version: 0.0.11
+## Version: 0.1.0
 ## DepentsOn: LibAddonMenu-2.0
 ## SavedVariables: AutoBanishPetsSavedVars
 

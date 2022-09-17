@@ -5,16 +5,11 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.0.11"
-AutoBanishPets.variableVersion = 7
+AutoBanishPets.version = "0.1.0"
+AutoBanishPets.variableVersion = 8
 
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
-    ["interval"] = {
-        ["vanityPets"] = 2,
-        ["assistants"] = 3,
-        -- ["companions"] = 5,
-    } ,
     ["bank"] = {
         ["pets"] = true,
         ["vanityPets"] = false,
@@ -39,7 +34,7 @@ AutoBanishPets.defaultSettings = {
     ["guildStore"] = {
         ["pets"] = true,
         ["vanityPets"] = false,
-        ["assistants"] = false,
+        ["assistants"] = true,
         [9245] = false,
         [9353] = false,
     },
@@ -79,18 +74,20 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
     },
     ["quest"] = {
-        ["pets"] = false,
+        ["pets"] = true,
         ["vanityPets"] = false,
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
     },
     ["combat"] = {
-        -- ["pets"] = false,
+        ["pets"] = false,
         ["vanityPets"] = 2,
         ["assistants"] = 2,
-        -- [9245] = 1,
-        -- [9353] = 1,
+        ["companions"] = {
+            [9245] = 1,
+            [9353] = 1,
+        },
     },
 }
 AutoBanishPets.messages = {
@@ -100,53 +97,35 @@ AutoBanishPets.messages = {
     ["companions"] = GetString(ABP_NOTIFICATION_COMPANIONS),
 }
 
---------------------------
---DEFINE LOCAL FUNCTIONS--
---------------------------
+---------------------
+--WRAPPER FUNCTIONS--
+---------------------
+-- Return true if daily
 local function isDaily(journalIndex)
     return (GetJournalQuestRepeatType(journalIndex) == QUEST_REPEAT_DAILY)
 end
 
-
---------------------------
---DEFINE ADDON FUNCTIONS--
---------------------------
--- Banish combat pets
-function AutoBanishPets.BanishPets()
-    local unitClassId = AutoBanishPets.unitClassId
-    local abilities = AutoBanishPets.abilities -- AutoBanishPetsAbilities.lua
-    if not abilities[unitClassId] then return end
-
-    local isBanished = false
-	for i = 1, GetNumBuffs("player") do
-		local _, _, _, buffSlot, _, _, _, _, _, _, abilityId, _ = GetUnitBuffInfo("player", i)
-        if abilities[unitClassId][abilityId] then
-            isBanished = true
-            CancelBuff(buffSlot)
-        end
-	end
-    -- Notify once
-    if isBanished then
-        if AutoBanishPets.savedVariables.notification then
-            df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["pets"])
-        end
-    end
-end
-
 -- RegisterForUpdate
 function AutoBanishPets.RegisterUpdate(collectibleId, toggle, key, second)
-    local ns = AutoBanishPets.name .. "_" .. tostring(toggle) .. "_" .. tostring(collectibleId)
+    local cooldown
+    local cooldownRemaining, cooldownDuration = GetCollectibleCooldownAndDuration(collectibleId)
+    if (cooldownRemaining == 0) then
+        cooldown = second
+    else
+        cooldown = cooldownRemaining
+    end
+
+    local ns = string.format("%s_%s_%d", AutoBanishPets.name, tostring(toggle), collectibleId)
     EVENT_MANAGER:UnregisterForUpdate(ns)
-    EVENT_MANAGER:RegisterForUpdate(ns, second,
+    EVENT_MANAGER:RegisterForUpdate(ns, cooldown,
         function() AutoBanishPets.ToggleCollectible(collectibleId, toggle, key) end
     )
 end
 
 -- UnregisterForUpdate
 function AutoBanishPets.UnregisterUpdate(collectibleId, toggle, key)
-    EVENT_MANAGER:UnregisterForUpdate(
-        AutoBanishPets.name .. "_" .. tostring(toggle) .. "_" .. tostring(collectibleId)
-    )
+    local ns = string.format("%s_%s_%d", AutoBanishPets.name, tostring(toggle), collectibleId)
+    EVENT_MANAGER:UnregisterForUpdate(ns)
     AutoBanishPets.isToggling[key] = false
 end
 
@@ -173,8 +152,37 @@ function AutoBanishPets.ToggleCollectible(collectibleId, toggle, key)
     elseif (IsCollectibleActive(collectibleId) ~= toggle and not AutoBanishPets.isToggling[key]) then
         UseCollectible(collectibleId)
         AutoBanishPets.isToggling[key] = true
+        -- Notify only banishment
+        if not toggle then
+            df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages[key])
+        end
     else
-        -- do nothing (repeat update)
+        AutoBanishPets.UnregisterUpdate(collectibleId, toggle, key)
+    end
+end
+
+--------------------
+--BANISH FUNCTIONS--
+--------------------
+-- Banish combat pets
+function AutoBanishPets.BanishPets()
+    local unitClassId = AutoBanishPets.unitClassId
+    local abilities = AutoBanishPets.abilities -- AutoBanishPetsAbilities.lua
+    if not abilities[unitClassId] then return end
+
+    local isBanished = false
+	for i = 1, GetNumBuffs("player") do
+		local _, _, _, buffSlot, _, _, _, _, _, _, abilityId, _ = GetUnitBuffInfo("player", i)
+        if abilities[unitClassId][abilityId] then
+            isBanished = true
+            CancelBuff(buffSlot)
+        end
+	end
+    -- Notify once
+    if isBanished then
+        if AutoBanishPets.savedVariables.notification then
+            df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["pets"])
+        end
     end
 end
 
@@ -189,7 +197,6 @@ function AutoBanishPets.BanishVanityPets(collectibleId)
     if (targetId == 0) then return end -- No active non-combat pet
 
     AutoBanishPets.RegisterUpdate(targetId, false, "vanityPets", 100)
-    df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["vanityPets"])
 end
 
 -- Banish assistants
@@ -203,30 +210,46 @@ function AutoBanishPets.BanishAssistants(collectibleId)
     if (targetId == 0) then return end -- No active assistant
 
     AutoBanishPets.RegisterUpdate(targetId, false, "assistants", 100)
-    df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["assistants"])
 end
 
 -- Banish companions
 function AutoBanishPets.BanishCompanions(collectibleId)
     local targetId
     local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    if (activeId == 0) then return end -- No active companion
+
     if not collectibleId then -- Manual banishment
         targetId = activeId
     else
         targetId = collectibleId
     end
-
-    if (activeId == 0) then return end -- No active companion
     if (targetId ~= activeId) then return end -- Different companion
     -- TODO: Manage pending
 
     AutoBanishPets.RegisterUpdate(targetId, false, "companions", 100)
-    df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["companions"])
 end
 
+-- For Bindings.xml
+function AutoBanishPets.BanishAll()
+    AutoBanishPets.BanishPets()
+    AutoBanishPets.BanishVanityPets()
+    AutoBanishPets.BanishAssistants()
+    AutoBanishPets.BanishCompanions()
+
+    -- Unregister and clear queue
+    for k, v in pairs(AutoBanishPets.queuedId) do
+        AutoBanishPets.UnregisterUpdate(v, true, k)
+        AutoBanishPets.UnregisterUpdate(v, false, k)
+        AutoBanishPets.queuedId[k] = 0
+    end
+end
+
+----------------------
+--RESUMMON FUNCTIONS--
+----------------------
 -- Resummon vanity pets
 function AutoBanishPets.ResummonVanityPets(collectibleId)
-    AutoBanishPets.RegisterUpdate(collectibleId, true, "vanityPets", AutoBanishPets.savedVariables.interval.vanityPets * 1000)
+    AutoBanishPets.RegisterUpdate(collectibleId, true, "vanityPets", 3000)
 end
 
 -- Resummon assistants
@@ -235,11 +258,21 @@ function AutoBanishPets.ResummonAssistants(collectibleId)
     local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
     if (activeCompanionId ~= 0) then return end
 
-    AutoBanishPets.RegisterUpdate(collectibleId, true, "assistants", AutoBanishPets.savedVariables.interval.assistants * 1000)
+    AutoBanishPets.RegisterUpdate(collectibleId, true, "assistants", 3000)
 end
 
--- TODO: Resummon companions
+-- Resummon companions
+function AutoBanishPets.ResummonCompanions(collectibleId)
+    -- Manage conflict between assistants and companions
+    local activeAssistantId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+    if (activeAssistantId ~= 0) then return end
 
+    AutoBanishPets.RegisterUpdate(collectibleId, true, "companions", 3000)
+end
+
+-------------------
+--EVENT FUNCTIONS--
+-------------------
 -- Start combat
 function AutoBanishPets.onStartCombat(eventCode, inCombat)
     if not inCombat then return end
@@ -287,11 +320,12 @@ function AutoBanishPets.onEndCombat(eventCode, inCombat)
     local targetId
     local sV = AutoBanishPets.savedVariables
 
-    -- TODO: combat pets
-    -- if sV.combat.pets then
-    -- end
+    -- Banish combat pets
+    if sV.combat.pets then
+        AutoBanishPets.BanishPets()
+    end
 
-    -- non-combat pets
+    -- Resummon non-combat pets
     if (sV.combat.vanityPets > 2) then
         targetId = AutoBanishPets.queuedId.vanityPets
         if (targetId ~= 0) then
@@ -299,7 +333,7 @@ function AutoBanishPets.onEndCombat(eventCode, inCombat)
         end
     end
 
-    -- assistants
+    -- Resummon assistants
     if (sV.combat.assistants > 2) then
         targetId = AutoBanishPets.queuedId.assistants
         if (targetId ~= 0) then
@@ -307,10 +341,24 @@ function AutoBanishPets.onEndCombat(eventCode, inCombat)
         end
     end
 
-    -- TODO: companions
-    -- if (sV.combat.companions > 1) then
-    -- end
-
+    -- Banish/Resummon companions
+    for k, v in pairs(sV.combat.companions) do
+        -- Banish
+        if (v > 1) then
+            local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+            if (activeCompanionId == k) then
+                AutoBanishPets.BanishCompanions(k)
+                AutoBanishPets.queuedId.companions = k
+            end
+        end
+        -- Resummon
+        if (v > 2) then
+            targetId = AutoBanishPets.queuedId.companions
+            if (targetId ~= 0) then
+                AutoBanishPets.ResummonCompanions(targetId)
+            end
+        end
+    end
 end
 
 -- Events except combat
@@ -341,7 +389,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "vanityPets") then
                     AutoBanishPets.BanishVanityPets()
                 elseif (k == "assistants") then
-                    -- do nothing
+                    AutoBanishPets.BanishAssistants()
                 else
                     AutoBanishPets.BanishCompanions(k)
                 end
@@ -470,25 +518,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
             end
         end
     end
-
 end
-
-
--- For Bindings.xml
-function AutoBanishPets.BanishAll()
-    AutoBanishPets.BanishPets()
-    AutoBanishPets.BanishVanityPets()
-    AutoBanishPets.BanishAssistants()
-    AutoBanishPets.BanishCompanions()
-
-    -- Unregister and clear queue
-    for k, v in pairs(AutoBanishPets.queuedId) do
-        AutoBanishPets.UnregisterUpdate(v, true, k)
-        AutoBanishPets.UnregisterUpdate(v, false, k)
-        AutoBanishPets.queuedId[k] = 0
-    end
-end
-
 
 -------------------
 --REGISTER EVENTS--
@@ -513,16 +543,20 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_QUEST_COMPLETE", EVENT_QUEST_COMPLETE_DIALOG, AutoBanishPets.onEventTriggered)
 end
 
+--------------------
+--INITIALIZE ADDON--
+--------------------
 function AutoBanishPets:Initialize()
     AutoBanishPets.savedVariables = ZO_SavedVars:NewAccountWide("AutoBanishPetsSavedVars", AutoBanishPets.variableVersion, nil, AutoBanishPets.defaultSettings)
     AutoBanishPets.queuedId = { -- Table for resummoning
         ["vanityPets"] = 0,
         ["assistants"] = 0,
-        -- ["companions"] = 0,
+        ["companions"] = 0,
     }
     AutoBanishPets.isToggling = { -- we need this for lagging :(
         ["vanityPets"] = false,
         ["assistants"] = false,
+        ["companions"] = false,
     }
     AutoBanishPets.unitClassId = GetUnitClassId("player")
     AutoBanishPets.CreateSettingsWindow() -- AutoBanishPetsSettings.lua

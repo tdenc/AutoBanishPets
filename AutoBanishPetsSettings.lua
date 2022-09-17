@@ -12,6 +12,7 @@ function AutoBanishPets.CreateSettingsWindow()
         version = AutoBanishPets.version,
         registerForRefresh = true,
         registerForDefaults = true,
+        website = "https://www.esoui.com/downloads/info3099-AutoBanishPets.html",
     }
     local cntrlOptionsPanel = LAM2:RegisterAddonPanel("AutoBanishPets_Settings", panelData)
 
@@ -149,6 +150,17 @@ function AutoBanishPets.CreateSettingsWindow()
                         AutoBanishPets.savedVariables.quest.pets = newValue
                     end,
                 },
+                {
+                    type = "checkbox",
+                    name = GetString(ABP_AFTER_COMBAT_NAME),
+                    tooltip = GetString(ABP_AFTER_COMBAT_TOOLTIP),
+                    default = false,
+                    requiresReload = false,
+                    getFunc = function() return sV.combat.pets end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.combat.pets = newValue
+                    end,
+                },
             }
         },
         {
@@ -265,9 +277,9 @@ function AutoBanishPets.CreateSettingsWindow()
                 },
                 {
                     type = "dropdown",
-                    name = GetString(ABP_COMBAT_NAME),
-                    tooltip = GetString(ABP_COMBAT_TOOLTIP),
-                    default = 3,
+                    name = GetString(ABP_BEFORE_COMBAT_NAME),
+                    tooltip = GetString(ABP_BEFORE_COMBAT_TOOLTIP),
+                    default = 2,
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
@@ -276,23 +288,32 @@ function AutoBanishPets.CreateSettingsWindow()
                         AutoBanishPets.savedVariables.combat.vanityPets = newValue
                     end,
                 },
-                {
-                    type = "slider",
-                    name = GetString(ABP_INTERVAL_NAME),
-                    min = 1,
-                    max = 60,
-                    default = 2,
-                    requiresReload = false,
-                    disabled = function() return sV.combat.vanityPets < 3 end,
-                    getFunc = function() return sV.interval.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.interval.vanityPets = newValue
-                    end,
-                },
             }
         },
         {
             type = "submenu", name = GetString(ABP_ASSISTANTS_NAME), controls = {
+                {
+                    type = "checkbox",
+                    name = GetString(ABP_GUILD_BANK_NAME),
+                    tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
+                    default = true,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildBank.assistants end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.guildBank.assistants = newValue
+                    end,
+                },
+                {
+                    type = "checkbox",
+                    name = GetString(ABP_GUILD_STORE_NAME),
+                    tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
+                    default = true,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildStore.assistants end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.guildStore.assistants = newValue
+                    end,
+                },
                 {
                     type = "checkbox",
                     name = GetString(ABP_CRAFT_STATION_NAME),
@@ -350,28 +371,15 @@ function AutoBanishPets.CreateSettingsWindow()
                 },
                 {
                     type = "dropdown",
-                    name = GetString(ABP_COMBAT_NAME),
-                    tooltip = GetString(ABP_COMBAT_TOOLTIP),
-                    default = 3,
+                    name = GetString(ABP_BEFORE_COMBAT_NAME),
+                    tooltip = GetString(ABP_BEFORE_COMBAT_TOOLTIP),
+                    default = 2,
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.combat.assistants end,
                     setFunc = function(newValue)
                         AutoBanishPets.savedVariables.combat.assistants = newValue
-                    end,
-                },
-                {
-                    type = "slider",
-                    name = GetString(ABP_INTERVAL_NAME),
-                    min = 1,
-                    max = 60,
-                    default = 3,
-                    requiresReload = false,
-                    disabled = function() return sV.combat.assistants < 3 end,
-                    getFunc = function() return sV.interval.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.interval.assistants = newValue
                     end,
                 },
             }
@@ -386,6 +394,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_BANK_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -397,6 +406,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_BANK_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -413,6 +423,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -424,6 +435,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -440,6 +452,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_STORE_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -451,6 +464,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_STORE_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -467,6 +481,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -478,6 +493,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -494,6 +510,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_FENCE_TOOLTIP),
                     width = "half",
                     default = true,
                     requiresReload = false,
@@ -505,6 +522,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_FENCE_TOOLTIP),
                     width = "half",
                     default = true,
                     requiresReload = false,
@@ -521,6 +539,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
                     width = "half",
                     default = true,
                     requiresReload = false,
@@ -532,6 +551,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -548,6 +568,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -559,6 +580,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -575,6 +597,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -586,6 +609,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -602,6 +626,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -613,6 +638,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -629,6 +655,7 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[1],
+                    tooltip = GetString(ABP_QUEST_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
@@ -640,12 +667,46 @@ function AutoBanishPets.CreateSettingsWindow()
                 {
                     type = "checkbox",
                     name = companionNames[2],
+                    tooltip = GetString(ABP_QUEST_TOOLTIP),
                     width = "half",
                     default = false,
                     requiresReload = false,
                     getFunc = function() return sV.quest[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
                         AutoBanishPets.savedVariables.quest[AutoBanishPets.companions[2]] = newValue
+                    end,
+                },
+                {
+                    type = "header",
+                    name = GetString(ABP_AFTER_COMBAT_NAME),
+                    width = "full",
+                },
+                {
+                    type = "dropdown",
+                    name = companionNames[1],
+                    tooltip = GetString(ABP_AFTER_COMBAT_TOOLTIP),
+                    width = "half",
+                    default = 1,
+                    requiresReload = false,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
+                    getFunc = function() return sV.combat.companions[AutoBanishPets.companions[1]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.combat.companions[AutoBanishPets.companions[1]] = newValue
+                    end,
+                },
+                {
+                    type = "dropdown",
+                    name = companionNames[2],
+                    tooltip = GetString(ABP_AFTER_COMBAT_TOOLTIP),
+                    width = "half",
+                    default = 1,
+                    requiresReload = false,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
+                    getFunc = function() return sV.combat.companions[AutoBanishPets.companions[2]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.combat.companions[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
             },
