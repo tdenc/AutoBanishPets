@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.0.10"
+AutoBanishPets.version = "0.0.11"
 AutoBanishPets.variableVersion = 7
 
 AutoBanishPets.defaultSettings = {
@@ -186,7 +186,7 @@ function AutoBanishPets.BanishVanityPets(collectibleId)
         targetId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
     end
 
-    if (targetId == 0) then return end -- no active non-combat pet
+    if (targetId == 0) then return end -- No active non-combat pet
 
     AutoBanishPets.RegisterUpdate(targetId, false, "vanityPets", 100)
     df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["vanityPets"])
@@ -200,7 +200,7 @@ function AutoBanishPets.BanishAssistants(collectibleId)
         targetId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
     end
 
-    if (targetId == 0) then return end -- no active assistant
+    if (targetId == 0) then return end -- No active assistant
 
     AutoBanishPets.RegisterUpdate(targetId, false, "assistants", 100)
     df("[%s] %s", AutoBanishPets.name, AutoBanishPets.messages["assistants"])
@@ -208,13 +208,16 @@ end
 
 -- Banish companions
 function AutoBanishPets.BanishCompanions(collectibleId)
-    local targetId = collectibleId
-    -- Need for manual banishment
-    if not targetId then
-        targetId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    local targetId
+    local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    if not collectibleId then -- Manual banishment
+        targetId = activeId
+    else
+        targetId = collectibleId
     end
 
-    if (targetId == 0) then return end -- no active companion
+    if (activeId == 0) then return end -- No active companion
+    if (targetId ~= activeId) then return end -- Different companion
     -- TODO: Manage pending
 
     AutoBanishPets.RegisterUpdate(targetId, false, "companions", 100)
@@ -325,7 +328,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     -- do nothing
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -340,7 +343,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     -- do nothing
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -355,7 +358,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     -- do nothing
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -370,7 +373,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     AutoBanishPets.BanishAssistants()
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -385,7 +388,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     -- do nothing
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -400,7 +403,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     AutoBanishPets.BanishAssistants()
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -415,7 +418,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     AutoBanishPets.BanishAssistants()
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -430,7 +433,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     AutoBanishPets.BanishAssistants()
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -445,7 +448,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     AutoBanishPets.BanishAssistants()
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
@@ -462,7 +465,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg)
                 elseif (k == "assistants") then
                     AutoBanishPets.BanishAssistants()
                 else
-                    AutoBanishPets.BanishCompanions()
+                    AutoBanishPets.BanishCompanions(k)
                 end
             end
         end
