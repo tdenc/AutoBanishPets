@@ -26,8 +26,8 @@ function AutoBanishPets.CreateSettingsWindow()
         [3] = 3,
     }
     local companionNames = {
-        [1] = GetCollectibleName(AutoBanishPets.companions[1]),
-        [2] = GetCollectibleName(AutoBanishPets.companions[2]),
+        [1] = ZO_CachedStrFormat("<<1>>", GetCollectibleName(AutoBanishPets.companions[1])),
+        [2] = ZO_CachedStrFormat("<<1>>", GetCollectibleName(AutoBanishPets.companions[2])),
     }
 
     local dislikeLocationNames = {
@@ -190,7 +190,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_LOGOUT_NAME),
                     tooltip = GetString(ABP_LOGOUT_TOOLTIP),
                     default = dS.logout.pets,
-                    requiresReload = false,
+                    requiresReload = true,
                     getFunc = function() return sV.logout.pets end,
                     setFunc = function(newValue) sV.logout.pets = newValue end,
                     disabled = function() return sV.noPetsAllowed end,
@@ -687,6 +687,56 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.steal[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue) sV.steal[AutoBanishPets.companions[2]] = newValue end,
+                },
+                {
+                    type = "header",
+                    name = GetString(ABP_VAMPIRE_NAME),
+                    width = "full",
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[1],
+                    tooltip = GetString(ABP_VAMPIRE_TOOLTIP),
+                    width = "half",
+                    default = dS.vampire[AutoBanishPets.companions[1]],
+                    requiresReload = true,
+                    getFunc = function() return sV.vampire[AutoBanishPets.companions[1]] end,
+                    setFunc = function(newValue) sV.vampire[AutoBanishPets.companions[1]] = newValue end,
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[2],
+                    tooltip = GetString(ABP_VAMPIRE_TOOLTIP),
+                    width = "half",
+                    default = dS.vampire[AutoBanishPets.companions[2]],
+                    requiresReload = true,
+                    getFunc = function() return sV.vampire[AutoBanishPets.companions[2]] end,
+                    setFunc = function(newValue) sV.vampire[AutoBanishPets.companions[2]] = newValue end,
+                },
+                {
+                    type = "header",
+                    name = GetString(ABP_WEREWOLF_NAME),
+                    width = "full",
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[1],
+                    tooltip = GetString(ABP_WEREWOLF_TOOLTIP),
+                    width = "half",
+                    default = dS.werewolf[AutoBanishPets.companions[1]],
+                    requiresReload = true,
+                    getFunc = function() return sV.werewolf[AutoBanishPets.companions[1]] end,
+                    setFunc = function(newValue) sV.werewolf[AutoBanishPets.companions[1]] = newValue end,
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[2],
+                    tooltip = GetString(ABP_WEREWOLF_TOOLTIP),
+                    width = "half",
+                    default = dS.werewolf[AutoBanishPets.companions[2]],
+                    requiresReload = true,
+                    getFunc = function() return sV.werewolf[AutoBanishPets.companions[2]] end,
+                    setFunc = function(newValue) sV.werewolf[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",

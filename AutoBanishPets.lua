@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.3.2"
+AutoBanishPets.version = "0.4.0"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -134,6 +134,20 @@ AutoBanishPets.defaultSettings = {
         [9245] = true,
         [9353] = false,
     },
+    ["vampire"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["werewolf"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
     ["location"] = {
         ["pets"] = false,
         ["vanityPets"] = false,
@@ -244,12 +258,12 @@ end
 function AutoBanishPets.BanishPets()
     local unitClassId = AutoBanishPets.unitClassId
     local abilities = AutoBanishPets.abilities -- AutoBanishPetsAbilities.lua
-    if not abilities[unitClassId] then return end
+    if not abilities[SKILL_TYPE_CLASS][unitClassId] then return end
 
     local isBanished = false
 	for i = 1, GetNumBuffs("player") do
 		local _, _, _, buffSlot, _, _, _, _, _, _, abilityId, _ = GetUnitBuffInfo("player", i)
-        if abilities[unitClassId][abilityId] then
+        if abilities[SKILL_TYPE_CLASS][unitClassId][abilityId] then
             isBanished = true
             CancelBuff(buffSlot)
         end
@@ -326,7 +340,7 @@ end
 function AutoBanishPets.ToggleNPA(enable)
     local unitClassId = AutoBanishPets.unitClassId
     local abilities = AutoBanishPets.abilities -- AutoBanishPetsAbilities.lua
-    if not abilities[unitClassId] then return end
+    if not abilities[SKILL_TYPE_CLASS][unitClassId] then return end
 
     if (AutoBanishPets.savedVariables.notification and enable ~= AutoBanishPets.savedVariables.noPetsAllowed) then
         if enable then
@@ -601,6 +615,8 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
         end
         return
     end
+    -- Armory assistants
+    -- TODO: There does not exist EVENT_CLOSE_ARMORY!
 
     -- Others
     local eventKeys = {
@@ -633,13 +649,27 @@ end
 -- Trigger on Logout
 function AutoBanishPets.onLogout()
     -- Dismiss combat pets
-    if AutoBanishPets.savedVariables.logout.pets then
-        AutoBanishPets.BanishPets()
-    end
+    AutoBanishPets.BanishPets()
     -- Assistants are disabled automatically at logout.
     -- We can also dismiss non-combat pets and companions
     -- but they are resummoned like zombies at next login.
     -- I don't know the reason :(
+end
+
+-- Trigger when skills are cast
+function AutoBanishPets.onSkillCast()
+    local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    if (activeId == 0) then return false end
+
+    local slotNum = tonumber(debug.traceback():match('keybind = "ACTION_BUTTON_(%d)')) or tonumber(debug.traceback():match('keybind = "GAMEPAD_ACTION_BUTTON_(%d)'))
+    local abilityId = GetSlotBoundId(slotNum)
+    
+    if (AutoBanishPets.savedVariables.vampire[activeId] and AutoBanishPets.abilities[SKILL_TYPE_WORLD][5][abilityId]) or
+       (AutoBanishPets.savedVariables.werewolf[activeId] and AutoBanishPets.abilities[SKILL_TYPE_WORLD][6][abilityId]) then
+        AutoBanishPets.BanishCompanions(activeId)
+        ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked the criminal ability.", AutoBanishPets.name))
+        return true
+    end
 end
 
 -- Trigger after loading
@@ -686,6 +716,7 @@ end
 -- Register events
 function AutoBanishPets:RegisterEvents()
     local ns = AutoBanishPets.name
+    local sV = AutoBanishPets.savedVariables
     -- Combat events
     EM:RegisterForEvent(ns .. "_COMBAT", EVENT_PLAYER_COMBAT_STATE, AutoBanishPets.onCombat)
     EM:AddFilterForEvent(ns .. "_COMBAT", EVENT_PLAYER_COMBAT_STATE, REGISTER_FILTER_SOURCE_COMBAT_UNIT_TYPE, COMBAT_UNIT_TYPE_PLAYER)
@@ -709,7 +740,14 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_ARRESTED", EVENT_JUSTICE_BEING_ARRESTED, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT, AutoBanishPets.onEventTriggered)
     -- Prehook
-    ZO_PreHook("Logout", AutoBanishPets.onLogout)
+    -- Logout
+    if sV.logout.pets then
+        ZO_PreHook("Logout", AutoBanishPets.onLogout)
+    end
+    -- Skill Blocker
+    if (sV.vampire[AutoBanishPets.companions[1]] or sV.vampire[AutoBanishPets.companions[2]] or sV.werewolf[AutoBanishPets.companions[1]] or sV.werewolf[AutoBanishPets.companions[2]]) then
+        ZO_PreHook("ZO_ActionBar_CanUseActionSlots", AutoBanishPets.onSkillCast)
+    end
     -- Slash command
     SLASH_COMMANDS["/abp"] = AutoBanishPets.BanishAll
 
@@ -738,8 +776,6 @@ function AutoBanishPets:UnregisterEvents()
     EM:UnregisterForEvent(ns .. "_QUEST_COMPLETE", EVENT_QUEST_COMPLETE_DIALOG)
     EM:UnregisterForEvent(ns .. "_ARRESTED", EVENT_JUSTICE_BEING_ARRESTED)
     EM:UnregisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT)
-    -- Prehook
-    ZO_PreHook("Logout", function() end)
 
 end
 
@@ -776,11 +812,13 @@ function AutoBanishPets:Initialize()
         -- Block taking torchbug/butterfly
         if AutoBanishPets.savedVariables.torchbug[activeId] and AutoBanishPets.torchbug[interactableName] then
             AutoBanishPets.BanishCompanions(activeId)
+            ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked the interaction.", AutoBanishPets.name))
             return true
         end
         -- Block stealing
         if AutoBanishPets.savedVariables.steal[activeId] and isCriminalInteract then
             AutoBanishPets.BanishCompanions(activeId)
+            ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked the interaction.", AutoBanishPets.name))
             return true
         end
         return ZO_StartInteraction(...)

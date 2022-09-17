@@ -16,6 +16,8 @@ local stringsDE = {
     ABP_WAYSHRINE_TOOLTIP = "Wenn du mit einem Wegschrein interagierst",
     ABP_THIEVESTROVE_TOOLTIP = "Wenn du mit einem Diebesgut interagierst",
     ABP_STEAL_TOOLTIP = "Wenn du stiehlst",
+    --ABP_VAMPIRE_TOOLTIP = "When you transform into vampire",
+    --ABP_WEREWOLF_TOOLTIP = "When you transform into werewolf",
     ABP_ARRESTED_TOOLTIP = "Wenn du bist verhaftet",
     ABP_TORCHBUG_TOOLTIP = "Wenn du mit einem Fackelkäfer/Schmetterling interagierst",
     ABP_QUEST_TOOLTIP = "Beim Erhalten/abschließen einer täglichen Quest",
@@ -24,7 +26,7 @@ local stringsDE = {
     ABP_AFTER_COMBAT_TOOLTIP = "Wenn du fertig Kampf ziehst",
     ABP_LOGOUT_TOOLTIP = "Wenn du dich ausloggst",
     --ABP_EXIT_TOOLTIP = "When you exit",
-    ABP_NO_PETS_ALLOWED_NAME = "Deaktiviere Kampf Begleittier in allen Situationen",
+    ABP_NO_PETS_ALLOWED_TOOLTIP = "Deaktiviere Kampf Begleittier in allen Situationen",
     -- Setting
     ABP_NOTIFICATION_PETS = "Deine Kampf Begleittier wurden verbannt!",
     ABP_NOTIFICATION_VANITY_PETS = "Deine Friedliche Begleiter wurden verbannt!",
