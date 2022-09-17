@@ -400,6 +400,15 @@ function AutoBanishPets.CreateSettingsWindow()
                     getFunc = function() return sV.combat.assistants end,
                     setFunc = function(newValue) sV.combat.assistants = newValue end,
                 },
+                {
+                    type = "checkbox",
+                    name = GetString(ABP_EXIT_NAME),
+                    tooltip = GetString(ABP_EXIT_TOOLTIP),
+                    default = dS.exit,
+                    requiresReload = false,
+                    getFunc = function() return sV.exit end,
+                    setFunc = function(newValue) sV.exit = newValue end,
+                },
             }
         },
         {

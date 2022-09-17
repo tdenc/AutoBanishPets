@@ -23,6 +23,7 @@ local stringsDE = {
     ABP_BEFORE_COMBAT_TOOLTIP = "Wenn du in den Kampf ziehst",
     ABP_AFTER_COMBAT_TOOLTIP = "Wenn du fertig Kampf ziehst",
     ABP_LOGOUT_TOOLTIP = "Wenn du dich ausloggst",
+    --ABP_EXIT_TOOLTIP = "When you exit",
     ABP_NO_PETS_ALLOWED_NAME = "Deaktiviere Kampf Begleittier in allen Situationen",
     -- Setting
     ABP_NOTIFICATION_PETS = "Deine Kampf Begleittier wurden verbannt!",

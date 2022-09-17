@@ -25,6 +25,22 @@ AutoBanishPets.companions = {
     [2] = 9353, -- Mirri
 }
 
+AutoBanishPets.bankers = {
+    [267] = true, -- Tythis
+    [6376] = true, -- Ezabi
+    [8994] = true, -- Baron
+}
+
+AutoBanishPets.merchants = {
+    [301] = true, -- Nuzhimeh
+    [6378] = true, -- Fezez
+    [8995] = true, -- Peddler
+}
+
+AutoBanishPets.fences = {
+    [300] = true, -- Pirharri
+}
+
 AutoBanishPets.dislikeLocations = {
     [9245] = {},
     [9353] = {

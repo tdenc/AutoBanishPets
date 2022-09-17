@@ -23,6 +23,7 @@ local stringsFR = {
     --ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",
     --ABP_AFTER_COMBAT_TOOLTIP = "When you finish combat",
     --ABP_LOGOUT_TOOLTIP = "When you logout",
+    --ABP_EXIT_TOOLTIP = "When you exit",
     --ABP_NO_PETS_ALLOWED_TOOLTIP = "Disable your combat pets in all situations",
     -- Setting
     --ABP_NOTIFICATION_PETS = "Your combat pets were banished!",

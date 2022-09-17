@@ -5,11 +5,12 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.3.0"
+AutoBanishPets.version = "0.3.1"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
     ["noPetsAllowed"] = false,
+    ["exit"] = false,
     ["bank"] = {
         ["pets"] = true,
         ["vanityPets"] = false,
@@ -579,6 +580,28 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
         return
     end
 
+    -- Exit option for assistants
+    -- Bankers
+    if (eventCode == EVENT_CLOSE_BANK) then
+        if sV.exit then
+            local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+            if AutoBanishPets.bankers[activeId] then
+                AutoBanishPets.BanishAssistants(activeId)
+            end
+        end
+        return
+    end
+    -- Merchants and fences
+    if (eventCode == EVENT_CLOSE_STORE) then
+        if sV.exit then
+            local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+            if AutoBanishPets.merchants[activeId] or AutoBanishPets.fences[activeId] then
+                AutoBanishPets.BanishAssistants(activeId)
+            end
+        end
+        return
+    end
+
     -- Others
     local eventKeys = {
         [EVENT_OPEN_BANK] = "bank",
@@ -671,8 +694,10 @@ function AutoBanishPets:RegisterEvents()
     EM:AddFilterForEvent(ns .. "_STEALTH", EVENT_STEALTH_STATE_CHANGED, REGISTER_FILTER_UNIT_TAG, "player")
     -- Other events
     EM:RegisterForEvent(ns .. "_BANK", EVENT_OPEN_BANK, AutoBanishPets.onEventTriggered)
+    EM:RegisterForEvent(ns .. "_BANK_CLOSE", EVENT_CLOSE_BANK, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_GUILD_BANK", EVENT_OPEN_GUILD_BANK, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_STORE", EVENT_OPEN_STORE, AutoBanishPets.onEventTriggered)
+    EM:RegisterForEvent(ns .. "_STORE_CLOSE", EVENT_CLOSE_STORE, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_GUILD_STORE", EVENT_OPEN_TRADING_HOUSE, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_FENCE", EVENT_OPEN_FENCE, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_CRAFT_STATION", EVENT_CRAFTING_STATION_INTERACT, AutoBanishPets.onEventTriggered)
@@ -699,8 +724,10 @@ function AutoBanishPets:UnregisterEvents()
     EM:UnregisterForEvent(ns .. "_STEALTH", EVENT_STEALTH_STATE_CHANGED)
     -- Other events
     EM:UnregisterForEvent(ns .. "_BANK", EVENT_OPEN_BANK)
+    EM:UnregisterForEvent(ns .. "_BANK_CLOSE", EVENT_CLOSE_BANK)
     EM:UnregisterForEvent(ns .. "_GUILD_BANK", EVENT_OPEN_GUILD_BANK)
     EM:UnregisterForEvent(ns .. "_STORE", EVENT_OPEN_STORE)
+    EM:UnregisterForEvent(ns .. "_STORE_CLOSE", EVENT_CLOSE_STORE)
     EM:UnregisterForEvent(ns .. "_GUILD_STORE", EVENT_OPEN_TRADING_HOUSE)
     EM:UnregisterForEvent(ns .. "_FENCE", EVENT_OPEN_FENCE)
     EM:UnregisterForEvent(ns .. "_CRAFT_STATION", EVENT_CRAFTING_STATION_INTERACT)

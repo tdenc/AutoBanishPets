@@ -25,6 +25,7 @@ local stringsEN = {
     ABP_BEFORE_COMBAT_NAME = GetString(SI_AUDIO_OPTIONS_COMBAT),
     ABP_AFTER_COMBAT_NAME = GetString(SI_AUDIO_OPTIONS_COMBAT),
     ABP_LOGOUT_NAME = GetString(SI_GAME_MENU_LOGOUT),
+    ABP_EXIT_NAME = GetString(SI_DIALOG_EXIT),
     ABP_NO_PETS_ALLOWED_NAME = "NO-PETS-ALLOWED",
     -- Tooltip
     ABP_BANK_TOOLTIP = "When you open a bank",
@@ -45,6 +46,7 @@ local stringsEN = {
     ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",
     ABP_AFTER_COMBAT_TOOLTIP = "When you finish combat",
     ABP_LOGOUT_TOOLTIP = "When you logout",
+    ABP_EXIT_TOOLTIP = "When you exit",
     ABP_NO_PETS_ALLOWED_TOOLTIP = "Disable your combat pets in all situations",
     -- Setting
     ABP_SELECT_OPTION1 = GetString(SI_CHECK_BUTTON_OFF),

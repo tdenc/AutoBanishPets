@@ -25,6 +25,7 @@ local stringsJP = {
     ABP_BEFORE_COMBAT_TOOLTIP = "戦闘に突入する時",
     ABP_AFTER_COMBAT_TOOLTIP = "戦闘を終える時",
     ABP_LOGOUT_TOOLTIP = "ログアウトする時",
+    ABP_EXIT_TOOLTIP = "終了する時",
     ABP_NO_PETS_ALLOWED_NAME = "あらゆる状況で戦闘ペットを無効にする",
     -- Setting
     ABP_NOTIFICATION_PETS = "戦闘ペットが消えました！",
