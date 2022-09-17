@@ -15,7 +15,8 @@ This addon dismisses your pets/assistants/companions under some circumstances:
   - Guild dailies (Mages / Fighters / Undaunted / Thieves)
   - Event dailies and so on
 - When you visit
-  - Dark Brotherhood Sanctuary [Mirri only]
+  - Dark Brotherhood Sanctuary [Mirri, Isobel]
+  - Outlaws Refuge [Isobel only]
 - When you are arrested [Companions only]
 - When you crouch (+auto-resummon)
 - When you begin/finish combat (+auto-resummon)

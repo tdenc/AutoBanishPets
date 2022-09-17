@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.4.0"
+AutoBanishPets.version = "0.5.0"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -17,6 +17,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["guildBank"] = {
         ["pets"] = true,
@@ -24,6 +26,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = true,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["store"] = {
         ["pets"] = true,
@@ -31,6 +35,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["guildStore"] = {
         ["pets"] = true,
@@ -38,6 +44,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = true,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["fence"] = {
         ["pets"] = true,
@@ -45,6 +53,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["craftStation"] = {
         ["pets"] = true,
@@ -52,6 +62,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = true,
         [9245] = true,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["dyeingStation"] = {
         ["pets"] = true,
@@ -59,6 +71,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = true,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["retraitStation"] = {
         ["pets"] = true,
@@ -66,6 +80,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = true,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["wayshrine"] = {
         ["pets"] = true,
@@ -73,6 +89,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["quest"] = {
         ["pets"] = true,
@@ -80,6 +98,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["combat"] = {
         ["pets"] = false,
@@ -88,6 +108,8 @@ AutoBanishPets.defaultSettings = {
         ["companions"] = {
             [9245] = 1,
             [9353] = 1,
+            [9911] = 1,
+            [9912] = 1,
         },
     },
     ["stealth"] = {
@@ -97,6 +119,8 @@ AutoBanishPets.defaultSettings = {
         ["companions"] = {
             [9245] = 2,
             [9353] = 2,
+            [9911] = 2,
+            [9912] = 2,
         },
     },
     ["logout"] = {
@@ -105,6 +129,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["thievesTrove"] = {
         ["pets"] = false,
@@ -112,6 +138,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = true,
         [9353] = false,
+        [9911] = false,
+        [9912] = true,
     },
     ["torchbug"] = {
         ["pets"] = false,
@@ -119,6 +147,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = true,
+        [9911] = false,
+        [9912] = false,
     },
     ["steal"] = {
         ["pets"] = false,
@@ -126,6 +156,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = true,
         [9353] = false,
+        [9911] = true,
+        [9912] = true,
     },
     ["arrested"] = {
         ["pets"] = false,
@@ -133,6 +165,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = true,
         [9353] = false,
+        [9911] = true,
+        [9912] = false,
     },
     ["vampire"] = {
         ["pets"] = false,
@@ -140,6 +174,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["werewolf"] = {
         ["pets"] = false,
@@ -147,6 +183,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = false,
+        [9911] = false,
+        [9912] = false,
     },
     ["location"] = {
         ["pets"] = false,
@@ -154,6 +192,8 @@ AutoBanishPets.defaultSettings = {
         ["assistants"] = false,
         [9245] = false,
         [9353] = true,
+        [9911] = false,
+        [9912] = true,
     }
 }
 local EM = EVENT_MANAGER
@@ -638,7 +678,10 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
             elseif (k == "vanityPets") then
                 AutoBanishPets.BanishVanityPets()
             elseif (k == "assistants") then
-                AutoBanishPets.BanishAssistants()
+                local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+                if not AutoBanishPets.otherAssistants[activeId] then
+                    AutoBanishPets.BanishAssistants()
+                end
             else
                 AutoBanishPets.BanishCompanions(k)
             end

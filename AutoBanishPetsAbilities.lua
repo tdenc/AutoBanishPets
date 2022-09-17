@@ -37,32 +37,68 @@ AutoBanishPets.abilities = {
 AutoBanishPets.companions = {
     [1] = 9245, -- Bastian
     [2] = 9353, -- Mirri
+    [3] = 9911, -- Funke
+    [4] = 9912, -- Isobel
 }
 
 AutoBanishPets.bankers = {
     [267] = true, -- Tythis
     [6376] = true, -- Ezabi
     [8994] = true, -- Baron
+    [9743] = true, -- Factotum Property
 }
 
 AutoBanishPets.merchants = {
     [301] = true, -- Nuzhimeh
     [6378] = true, -- Fezez
     [8995] = true, -- Peddler
-}
-
-AutoBanishPets.armoryAssistants = {
-    [9745] = true, -- Ghrasharog
+    [9744] = true, -- Factotum Commerce
 }
 
 AutoBanishPets.fences = {
     [300] = true, -- Pirharri
 }
 
+AutoBanishPets.otherAssistants = {
+    [9745] = true, -- Ghrasharog
+    [10184] = true, -- Giladil
+}
+
 AutoBanishPets.dislikeLocations = {
     [9245] = {},
     [9353] = {
         [826] = true, -- Dark Brotherhood Sanctuary
+    },
+    [9911] = {},
+    [9912] = {
+        [826] = true, -- Dark Brotherhood Sanctuary
+        [746] = true, -- Vulkhel Guard Outlaws Refuge
+        [747] = true, -- Elden Root Outlaws Refuge
+        [748] = true, -- Marbruk Outlaws Refuge
+        [749] = true, -- Velyn Harbor Outlaws Refuge
+        [750] = true, -- Rawl'kha Outlaws Refuge
+        [751] = true, -- Belkarth Outlaws Refuge
+        [752] = true, -- Wayrest Outlaws Refuge
+        [753] = true, -- Daggerfall Outlaws Refuge
+        [754] = true, -- Evermore Outlaws Refuge
+        [755] = true, -- Shornhelm Outlaws Refuge
+        [756] = true, -- Sentinel Outlaws Refuge
+        [757] = true, -- Davon's Watch Outlaws Refuge
+        [758] = true, -- Windhelm Outlaws Refuge
+        [759] = true, -- Stormhold Outlaws Refuge
+        [760] = true, -- Mournhold Outlaws Refuge
+        [761] = true, -- Riften Outlaws Refuge
+        [780] = true, -- Orsinium Outlaws Refuge
+        [837] = true, -- Anvil Outlaws Refuge
+        [971] = true, -- Vivec City Outlaws Refuge
+        [982] = true, -- Slag Town Outlaws Refuge
+        [1028] = true, -- Alinor Outlaws Refuge
+        [1070] = true, -- Lilmoth Outlaws Refuge
+        [1088] = true, -- Rimmen Outlaws Refuge
+        [1139] = true, -- Senchal Outlaws Refuge
+        [1178] = true, -- Solitude Outlaws Refuge
+        [1211] = true, -- Markarth Outlaws Refuge
+        [1252] = true, -- Leyawiin Outlaws Refuge
     },
 }
 
