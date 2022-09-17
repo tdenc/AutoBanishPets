@@ -1,7 +1,9 @@
 local stringsDE = {
     ABP_WHEN_NAME = "Zu verbannen, wenn:",
     ABP_PETS_NAME = "Kampf Begleiter",
+    ABP_VANITY_PETS_NAME = "Friedliche Begleiter",
     ABP_ASSISTANTS_NAME = "Assistenten",
+    ABP_COMPANIONS_NAME = "Gefährten",
     ABP_BANK_NAME = "Bank",
     ABP_BANK_TOOLTIP = "Wenn du eine Bank öffnest",
     ABP_GUILD_BANK_NAME = "Gilden Bank",
@@ -9,9 +11,9 @@ local stringsDE = {
     ABP_STORE_NAME = "Händler",
     ABP_STORE_TOOLTIP = "Wenn du mit einen Händler interagierst",
     ABP_GUILD_STORE_NAME = "Gilden Laden",
-    ABP_GUILD_STORE_NAME = "Wenn du mit einem Gilden Laden interagierst",
+    ABP_GUILD_STORE_TOOLTIP = "Wenn du mit einem Gilden Laden interagierst",
     ABP_FENCE_NAME = "Hehler",
-    ABP_FENCE_STORE_NAME = "Wenn du mit einem Hehler interagierst",
+    ABP_FENCE_TOOLTIP = "Wenn du mit einem Hehler interagierst",
     ABP_CRAFT_STATION_NAME = "Handwerksstation",
     ABP_CRAFT_STATION_TOOLTIP = "Wenn du mit einer Handwerksstation interagierst",
     ABP_RETRAIT_STATION_NAME = "Transmutations-Station",
@@ -28,9 +30,12 @@ local stringsDE = {
     ABP_NOTIFICATION_TOOLTIP = "Zeige Nachricht im Chat, wenn verbannt wird",
     ABP_NOTIFICATION_PETS = "Deine Begleiter wurden verbannt!",
     ABP_NOTIFICATION_ASSISTANTS = "Deine Assistenten wurden verbannt!",
+    ABP_NOTIFICATION_COMPANIONS = "Deine Gefährten wurden verbannt!",
     SI_BINDING_NAME_BANISH_ALL = "Verbanne alle",
-    SI_BINDING_NAME_BANISH_PETS = "Verbanne Begleiter",
+    SI_BINDING_NAME_BANISH_PETS = "Verbanne Kampf Begleiter",
+    SI_BINDING_NAME_BANISH_VANITY_PETS = "Verbanne Kampf Begleiter",
     SI_BINDING_NAME_BANISH_ASSISTANTS = "Verbanne Assistenten",
+    SI_BINDING_NAME_BANISH_COMPANIONS = "Verbanne Gefährten",
 }
 
 for stringId, stringValue in pairs(stringsDE) do

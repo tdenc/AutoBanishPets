@@ -1,7 +1,9 @@
 local stringsJP = {
     ABP_WHEN_NAME = "以下の時に消す：",
     ABP_PETS_NAME = "戦闘ペット",
+    ABP_VANITY_PETS_NAME = "非戦闘ペット",
     ABP_ASSISTANTS_NAME = "助手",
+    ABP_COMPANIONS_NAME = "コンパニオン",
     ABP_BANK_NAME = "銀行",
     ABP_BANK_TOOLTIP = "銀行を開く時",
     ABP_GUILD_BANK_NAME = "ギルド銀行",
@@ -28,9 +30,12 @@ local stringsJP = {
     ABP_NOTIFICATION_TOOLTIP = "ペットや助手が消えた時にチャット欄に通知する",
     ABP_NOTIFICATION_PETS = "ペットが消えました！",
     ABP_NOTIFICATION_ASSISTANTS = "助手が消えました！",
-    SI_BINDING_NAME_BANISH_ALL = "手動で全てを消す",
-    SI_BINDING_NAME_BANISH_PETS = "手動でペットを消す",
-    SI_BINDING_NAME_BANISH_ASSISTANTS = "手動で助手を消す",
+    ABP_NOTIFICATION_COMPANIONS = "コンパニオンが消えました！",
+    SI_BINDING_NAME_BANISH_ALL = "全てを消す",
+    SI_BINDING_NAME_BANISH_PETS = "戦闘ペットを消す",
+    SI_BINDING_NAME_BANISH_VANITY_PETS = "非戦闘ペットを消す",
+    SI_BINDING_NAME_BANISH_ASSISTANTS = "助手を消す",
+    SI_BINDING_NAME_BANISH_COMPANIONS = "コンパニオンを消す",
 }
 
 for stringId, stringValue in pairs(stringsJP) do

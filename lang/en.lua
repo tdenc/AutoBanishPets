@@ -1,7 +1,9 @@
 local stringsEN = {
     ABP_WHEN_NAME = "When to banish:",
     ABP_PETS_NAME = "Combat pets",
+    ABP_VANITY_PETS_NAME = "Non-combat pets",
     ABP_ASSISTANTS_NAME = "Assistants",
+    ABP_COMPANIONS_NAME = "Companions",
     ABP_BANK_NAME = "Bank",
     ABP_BANK_TOOLTIP = "When you open a bank",
     ABP_GUILD_BANK_NAME = "Guild bank",
@@ -28,9 +30,12 @@ local stringsEN = {
     ABP_NOTIFICATION_TOOLTIP = "Notify messages in chat when banished",
     ABP_NOTIFICATION_PETS = "Your pets were banished!",
     ABP_NOTIFICATION_ASSISTANTS = "Your assistants were banished!",
-    SI_BINDING_NAME_BANISH_ALL = "Banish all manually",
-    SI_BINDING_NAME_BANISH_PETS = "Banish pets manually",
-    SI_BINDING_NAME_BANISH_ASSISTANTS = "Banish assistants manually",
+    ABP_NOTIFICATION_COMPANIONS = "Your companions were banished!",
+    SI_BINDING_NAME_BANISH_ALL = "Banish all",
+    SI_BINDING_NAME_BANISH_PETS = "Banish combat pets",
+    SI_BINDING_NAME_BANISH_VANITY_PETS = "Banish non-combat pets",
+    SI_BINDING_NAME_BANISH_ASSISTANTS = "Banish assistants",
+    SI_BINDING_NAME_BANISH_COMPANIONS = "Banish companions",
 }
 
 for stringId, stringValue in pairs(stringsEN) do

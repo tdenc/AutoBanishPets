@@ -7,8 +7,14 @@
 			<Action name="BANISH_PETS">
 				<Up>AutoBanishPets.BanishPets()</Up>
 			</Action>
+			<Action name="BANISH_VANITY_PETS">
+				<Up>AutoBanishPets.BanishVanityPets()</Up>
+			</Action>
 			<Action name="BANISH_ASSISTANTS">
 				<Up>AutoBanishPets.BanishAssistants()</Up>
+			</Action>
+			<Action name="BANISH_COMPANIONS">
+				<Up>AutoBanishPets.BanishCompanions()</Up>
 			</Action>
 		</Category>
 	</Layer>
@@ -16,7 +22,9 @@
         <Category>
             <AllowAction name="BANISH_ALL"/>
             <AllowAction name="BANISH_PETS"/>
+            <AllowAction name="BANISH_VANITY_PETS"/>
             <AllowAction name="BANISH_ASSISTANTS"/>
+            <AllowAction name="BANISH_COMPANIONS"/>
         </Category>
     </Layer>
 </Bindings>
