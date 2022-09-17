@@ -2,6 +2,7 @@ local stringsDE = {
     ABP_SELECT_OPTION1 = "AUS",
     ABP_SELECT_OPTION2 = "EIN (Verbanne)",
     ABP_SELECT_OPTION3 = "UMSCHALTEN (Verbanne und beschwören)",
+    ABP_INTERVAL_NAME = "Beschwören intervall (sek.)",
     ABP_NOTIFICATION_NAME = "Benachrichtigung",
     ABP_NOTIFICATION_TOOLTIP = "Zeige Nachricht im Chat, wenn verbannt wird",
     ABP_NOTIFICATION_PETS = "Deine Begleiter wurden verbannt!",

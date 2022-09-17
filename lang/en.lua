@@ -2,6 +2,7 @@ local stringsEN = {
     ABP_SELECT_OPTION1 = "OFF",
     ABP_SELECT_OPTION2 = "ON (Banish)",
     ABP_SELECT_OPTION3 = "TOGGLE (Banish and resummon)",
+    ABP_INTERVAL_NAME = "Resummon interval (sec.)",
     ABP_NOTIFICATION_NAME = "Notification",
     ABP_NOTIFICATION_TOOLTIP = "Notify messages in chat when banished",
     ABP_NOTIFICATION_PETS = "Your pets were banished!",

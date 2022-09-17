@@ -30,7 +30,7 @@ function AutoBanishPets.CreateSettingsWindow()
         [2] = GetCollectibleName(AutoBanishPets.companions[2]),
     }
 
-    local savedVariables = AutoBanishPets.savedVariables
+    local sV = AutoBanishPets.savedVariables
     local optionsData = {
         {
             type = "header",
@@ -44,10 +44,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_BANK_NAME),
                     tooltip = GetString(ABP_BANK_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.bank end,
+                    requiresReload = false,
+                    getFunc = function() return sV.bank.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.bank = newValue
+                        AutoBanishPets.savedVariables.bank.pets = newValue
                     end,
                 },
                 {
@@ -55,10 +55,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_GUILD_BANK_NAME),
                     tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.guildBank end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildBank.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.guildBank = newValue
+                        AutoBanishPets.savedVariables.guildBank.pets = newValue
                     end,
                 },
                 {
@@ -66,10 +66,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_STORE_NAME),
                     tooltip = GetString(ABP_STORE_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.store end,
+                    requiresReload = false,
+                    getFunc = function() return sV.store.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.store = newValue
+                        AutoBanishPets.savedVariables.store.pets = newValue
                     end,
                 },
                 {
@@ -77,10 +77,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_GUILD_STORE_NAME),
                     tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.guildStore end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildStore.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.guildStore = newValue
+                        AutoBanishPets.savedVariables.guildStore.pets = newValue
                     end,
                 },
                 {
@@ -88,10 +88,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_FENCE_NAME),
                     tooltip = GetString(ABP_FENCE_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.fence end,
+                    requiresReload = false,
+                    getFunc = function() return sV.fence.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.fence = newValue
+                        AutoBanishPets.savedVariables.fence.pets = newValue
                     end,
                 },
                 {
@@ -99,10 +99,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_CRAFT_STATION_NAME),
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.craftStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.craftStation.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.craftStation = newValue
+                        AutoBanishPets.savedVariables.craftStation.pets = newValue
                     end,
                 },
                 {
@@ -110,10 +110,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_RETRAIT_STATION_NAME),
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.retraitStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.retraitStation.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.retraitStation = newValue
+                        AutoBanishPets.savedVariables.retraitStation.pets = newValue
                     end,
                 },
                 {
@@ -121,10 +121,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_DYEING_STATION_NAME),
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.dyeingStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.dyeingStation.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.dyeingStation = newValue
+                        AutoBanishPets.savedVariables.dyeingStation.pets = newValue
                     end,
                 },
                 {
@@ -132,10 +132,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_WAYSHRINE_NAME),
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.wayshrine end,
+                    requiresReload = false,
+                    getFunc = function() return sV.wayshrine.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.wayshrine = newValue
+                        AutoBanishPets.savedVariables.wayshrine.pets = newValue
                     end,
                 },
                 {
@@ -143,10 +143,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_QUEST_NAME),
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.pets.quest end,
+                    requiresReload = false,
+                    getFunc = function() return sV.quest.pets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.pets.quest = newValue
+                        AutoBanishPets.savedVariables.quest.pets = newValue
                     end,
                 },
             }
@@ -158,10 +158,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_BANK_NAME),
                     tooltip = GetString(ABP_BANK_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.bank end,
+                    requiresReload = false,
+                    getFunc = function() return sV.bank.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.bank = newValue
+                        AutoBanishPets.savedVariables.bank.vanityPets = newValue
                     end,
                 },
                 {
@@ -169,10 +169,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_GUILD_BANK_NAME),
                     tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.guildBank end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildBank.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.guildBank = newValue
+                        AutoBanishPets.savedVariables.guildBank.vanityPets = newValue
                     end,
                 },
                 {
@@ -180,10 +180,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_STORE_NAME),
                     tooltip = GetString(ABP_STORE_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.store end,
+                    requiresReload = false,
+                    getFunc = function() return sV.store.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.store = newValue
+                        AutoBanishPets.savedVariables.store.vanityPets = newValue
                     end,
                 },
                 {
@@ -191,10 +191,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_GUILD_STORE_NAME),
                     tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.guildStore end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildStore.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.guildStore = newValue
+                        AutoBanishPets.savedVariables.guildStore.vanityPets = newValue
                     end,
                 },
                 {
@@ -202,10 +202,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_FENCE_NAME),
                     tooltip = GetString(ABP_FENCE_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.fence end,
+                    requiresReload = false,
+                    getFunc = function() return sV.fence.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.fence = newValue
+                        AutoBanishPets.savedVariables.fence.vanityPets = newValue
                     end,
                 },
                 {
@@ -213,10 +213,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_CRAFT_STATION_NAME),
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.craftStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.craftStation.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.craftStation = newValue
+                        AutoBanishPets.savedVariables.craftStation.vanityPets = newValue
                     end,
                 },
                 {
@@ -224,10 +224,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_RETRAIT_STATION_NAME),
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.retraitStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.retraitStation.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.retraitStation = newValue
+                        AutoBanishPets.savedVariables.retraitStation.vanityPets = newValue
                     end,
                 },
                 {
@@ -235,10 +235,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_DYEING_STATION_NAME),
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.dyeingStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.dyeingStation.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.dyeingStation = newValue
+                        AutoBanishPets.savedVariables.dyeingStation.vanityPets = newValue
                     end,
                 },
                 {
@@ -246,10 +246,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_WAYSHRINE_NAME),
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.wayshrine end,
+                    requiresReload = false,
+                    getFunc = function() return sV.wayshrine.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.wayshrine = newValue
+                        AutoBanishPets.savedVariables.wayshrine.vanityPets = newValue
                     end,
                 },
                 {
@@ -257,10 +257,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_QUEST_NAME),
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.vanityPets.quest end,
+                    requiresReload = false,
+                    getFunc = function() return sV.quest.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.quest = newValue
+                        AutoBanishPets.savedVariables.quest.vanityPets = newValue
                     end,
                 },
                 {
@@ -268,12 +268,25 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_COMBAT_NAME),
                     tooltip = GetString(ABP_COMBAT_TOOLTIP),
                     default = 3,
-                    requiresReload = true,
+                    requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
-                    getFunc = function() return savedVariables.vanityPets.combat end,
+                    getFunc = function() return sV.combat.vanityPets end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.combat = newValue
+                        AutoBanishPets.savedVariables.combat.vanityPets = newValue
+                    end,
+                },
+                {
+                    type = "slider",
+                    name = GetString(ABP_INTERVAL_NAME),
+                    min = 1,
+                    max = 60,
+                    default = 2,
+                    requiresReload = false,
+                    disabled = function() return sV.combat.vanityPets < 3 end,
+                    getFunc = function() return sV.interval.vanityPets end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.interval.vanityPets = newValue
                     end,
                 },
             }
@@ -285,10 +298,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_CRAFT_STATION_NAME),
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.assistants.craftStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.craftStation.assistants end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.assistants.craftStation = newValue
+                        AutoBanishPets.savedVariables.craftStation.assistants = newValue
                     end,
                 },
                 {
@@ -296,10 +309,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_RETRAIT_STATION_NAME),
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.assistants.retraitStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.retraitStation.assistants end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.assistants.retraitStation = newValue
+                        AutoBanishPets.savedVariables.retraitStation.assistants = newValue
                     end,
                 },
                 {
@@ -307,10 +320,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_DYEING_STATION_NAME),
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.assistants.dyeingStation end,
+                    requiresReload = false,
+                    getFunc = function() return sV.dyeingStation.assistants end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.assistants.dyeingStation = newValue
+                        AutoBanishPets.savedVariables.dyeingStation.assistants = newValue
                     end,
                 },
                 {
@@ -318,10 +331,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_WAYSHRINE_NAME),
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.assistants.wayshrine end,
+                    requiresReload = false,
+                    getFunc = function() return sV.wayshrine.assistants end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.assistants.wayshrine = newValue
+                        AutoBanishPets.savedVariables.wayshrine.assistants = newValue
                     end,
                 },
                 {
@@ -329,10 +342,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_QUEST_NAME),
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.assistants.quest end,
+                    requiresReload = false,
+                    getFunc = function() return sV.quest.assistants end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.assistants.quest = newValue
+                        AutoBanishPets.savedVariables.quest.assistants = newValue
                     end,
                 },
                 {
@@ -340,12 +353,25 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = GetString(ABP_COMBAT_NAME),
                     tooltip = GetString(ABP_COMBAT_TOOLTIP),
                     default = 3,
-                    requiresReload = true,
+                    requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
-                    getFunc = function() return savedVariables.assistants.combat end,
+                    getFunc = function() return sV.combat.assistants end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.assistants.combat = newValue
+                        AutoBanishPets.savedVariables.combat.assistants = newValue
+                    end,
+                },
+                {
+                    type = "slider",
+                    name = GetString(ABP_INTERVAL_NAME),
+                    min = 1,
+                    max = 60,
+                    default = 3,
+                    requiresReload = false,
+                    disabled = function() return sV.combat.assistants < 3 end,
+                    getFunc = function() return sV.interval.assistants end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.interval.assistants = newValue
                     end,
                 },
             }
@@ -362,10 +388,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.bank[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.bank[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.bank[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.bank[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -373,10 +399,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.bank[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.bank[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.bank[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.bank[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -389,10 +415,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.guildBank[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildBank[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.guildBank[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.guildBank[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -400,10 +426,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.guildBank[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildBank[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.guildBank[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.guildBank[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -416,10 +442,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.store[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.store[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.store[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.store[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -427,10 +453,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.store[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.store[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.store[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.store[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -443,10 +469,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.guildStore[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildStore[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.guildStore[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.guildStore[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -454,10 +480,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.guildStore[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.guildStore[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.guildStore[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.guildStore[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -470,10 +496,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.fence[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.fence[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.fence[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.fence[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -481,10 +507,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.fence[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.fence[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.fence[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.fence[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -497,10 +523,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = true,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.craftStation[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.craftStation[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.craftStation[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.craftStation[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -508,10 +534,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.craftStation[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.craftStation[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.craftStation[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.craftStation[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -524,10 +550,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.retraitStation[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.retraitStation[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.retraitStation[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.retraitStation[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -535,10 +561,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.retraitStation[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.retraitStation[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.retraitStation[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.retraitStation[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -551,10 +577,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.dyeingStation[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.dyeingStation[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.dyeingStation[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.dyeingStation[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -562,10 +588,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.dyeingStation[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.dyeingStation[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.dyeingStation[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.dyeingStation[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -578,10 +604,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.wayshrine[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.wayshrine[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.wayshrine[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.wayshrine[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -589,10 +615,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.wayshrine[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.wayshrine[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.wayshrine[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.wayshrine[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
                 {
@@ -605,10 +631,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.quest[AutoBanishPets.companions[1]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.quest[AutoBanishPets.companions[1]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.quest[AutoBanishPets.companions[1]] = newValue
+                        AutoBanishPets.savedVariables.quest[AutoBanishPets.companions[1]] = newValue
                     end,
                 },
                 {
@@ -616,10 +642,10 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[2],
                     width = "half",
                     default = false,
-                    requiresReload = true,
-                    getFunc = function() return savedVariables.companions.quest[AutoBanishPets.companions[2]] end,
+                    requiresReload = false,
+                    getFunc = function() return sV.quest[AutoBanishPets.companions[2]] end,
                     setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.companions.quest[AutoBanishPets.companions[2]] = newValue
+                        AutoBanishPets.savedVariables.quest[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
             },
@@ -635,7 +661,7 @@ function AutoBanishPets.CreateSettingsWindow()
             tooltip = GetString(ABP_NOTIFICATION_TOOLTIP),
             default = true,
             requiresReload = false,
-            getFunc = function() return savedVariables.notification end,
+            getFunc = function() return sV.notification end,
             setFunc = function(newValue)
                 AutoBanishPets.savedVariables.notification = newValue
             end,

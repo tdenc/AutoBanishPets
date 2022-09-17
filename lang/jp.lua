@@ -2,6 +2,7 @@ local stringsJP = {
     ABP_SELECT_OPTION1 = "オフ",
     ABP_SELECT_OPTION2 = "オン (消す)",
     ABP_SELECT_OPTION3 = "トグル (消す＆再召喚する)",
+    ABP_INTERVAL_NAME = "再召喚インターバル (秒)",
     ABP_NOTIFICATION_NAME = "通知",
     ABP_NOTIFICATION_TOOLTIP = "ペットや助手が消えた時にチャット欄に通知する",
     ABP_NOTIFICATION_PETS = "ペットが消えました！",
