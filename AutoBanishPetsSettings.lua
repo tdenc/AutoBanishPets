@@ -15,6 +15,17 @@ function AutoBanishPets.CreateSettingsWindow()
     }
     local cntrlOptionsPanel = LAM2:RegisterAddonPanel("AutoBanishPets_Settings", panelData)
 
+    local selectOptions = {
+        [1] = GetString(ABP_SELECT_OPTION1),
+        [2] = GetString(ABP_SELECT_OPTION2),
+        [3] = GetString(ABP_SELECT_OPTION3),
+    }
+    local selectOptionValues = {
+        [1] = 1,
+        [2] = 2,
+        [3] = 3,
+    }
+
     local savedVariables = AutoBanishPets.savedVariables
     local optionsData = {
         {
@@ -143,7 +154,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     type = "checkbox",
                     name = GetString(ABP_QUEST_NAME),
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
-                    default = false,
+                    default = true,
                     requiresReload = true,
                     getFunc = function() return savedVariables.pets.quest end,
                     setFunc = function(newValue)
@@ -270,11 +281,13 @@ function AutoBanishPets.CreateSettingsWindow()
                     end,
                 },
                 {
-                    type = "checkbox",
+                    type = "dropdown",
                     name = GetString(ABP_COMBAT_NAME),
                     tooltip = GetString(ABP_COMBAT_TOOLTIP),
-                    default = false,
+                    default = 3,
                     requiresReload = true,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
                     getFunc = function() return savedVariables.vanityPets.combat end,
                     setFunc = function(newValue)
                         AutoBanishPets.savedVariables.vanityPets.combat = newValue
@@ -345,11 +358,13 @@ function AutoBanishPets.CreateSettingsWindow()
                     end,
                 },
                 {
-                    type = "checkbox",
+                    type = "dropdown",
                     name = GetString(ABP_COMBAT_NAME),
                     tooltip = GetString(ABP_COMBAT_TOOLTIP),
-                    default = false,
+                    default = 3,
                     requiresReload = true,
+                    choices = selectOptions,
+                    choicesValues = selectOptionValues,
                     getFunc = function() return savedVariables.assistants.combat end,
                     setFunc = function(newValue)
                         AutoBanishPets.savedVariables.assistants.combat = newValue
