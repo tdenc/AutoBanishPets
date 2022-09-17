@@ -19,3 +19,8 @@ AutoBanishPets.abilities = {
         [85990] = true, [85991] = true, [85992] = true, [85993] = true,
     },
 }
+
+AutoBanishPets.companions = {
+    [1] = 9245, -- Bastian
+    [2] = 9353, -- Mirri
+}

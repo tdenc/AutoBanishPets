@@ -5,8 +5,8 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.0.7"
-AutoBanishPets.variableVersion = 5
+AutoBanishPets.version = "0.0.8"
+AutoBanishPets.variableVersion = 6
 
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -36,6 +36,7 @@ AutoBanishPets.defaultSettings = {
         ["combat"] = 3,
     },
     ["assistants"] = {
+        ["guildStore"] = true,
         ["craftStation"] = true,
         ["dyeingStation"] = true,
         ["retraitStation"] = true,
@@ -44,16 +45,46 @@ AutoBanishPets.defaultSettings = {
         ["combat"] = 3,
     },
     ["companions"] = {
-        ["bank"] = false,
-        ["guildBank"] = false,
-        ["store"] = false,
-        ["guildStore"] = false,
-        ["fence"] = true,
-        ["craftStation"] = true,
-        ["dyeingStation"] = false,
-        ["retraitStation"] = false,
-        ["wayshrine"] = false,
-        ["quest"] = false,
+        ["bank"] = {
+            [9245] = false,
+            [9353] = false,
+        },
+        ["guildBank"] = {
+            [9245] = false,
+            [9353] = false,
+        },
+        ["store"] = {
+            [9245] = false,
+            [9353] = false,
+        },
+        ["guildStore"] = {
+            [9245] = false,
+            [9353] = false,
+        },
+        ["fence"] = {
+            [9245] = true,
+            [9353] = true,
+        },
+        ["craftStation"] = {
+            [9245] = true,
+            [9353] = false,
+        },
+        ["dyeingStation"] = {
+            [9245] = false,
+            [9353] = false,
+        },
+        ["retraitStation"] = {
+            [9245] = false,
+            [9353] = false,
+        },
+        ["wayshrine"] = {
+            [9245] = false,
+            [9353] = false,
+        },
+        ["quest"] = {
+            [9245] = false,
+            [9353] = false,
+        },
     },
 }
 
@@ -143,20 +174,40 @@ end
 
 -- Banish companions only
 function AutoBanishPets.BanishCompanions(eventCode, arg)
+    local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    if (activeId == 0) then
+        return
+    end
+
+    local savedVariables = AutoBanishPets.savedVariables.companions
     -- EVENT_QUEST_ADDED (number eventCode, number journalIndex, string questName, string objectiveName)
     -- EVENT_QUEST_COMPLETE_DIALOG (number eventCode, number journalIndex)
     if (eventCode == EVENT_QUEST_ADDED or eventCode == EVENT_QUEST_COMPLETE_DIALOG) then
         if not isDaily(arg) then return end
+    elseif (eventCode == EVENT_OPEN_BANK) then
+        if not savedVariables.bank[activeId] then return end
+    elseif (eventCode == EVENT_OPEN_GUILD_BANK) then
+        if not savedVariables.guildBank[activeId] then return end
+    elseif (eventCode == EVENT_OPEN_STORE) then
+        if not savedVariables.store[activeId] then return end
+    elseif (eventCode == EVENT_OPEN_TRADING_HOUSE) then
+        if not savedVariables.guildStore[activeId] then return end
+    elseif (eventCode == EVENT_OPEN_FENCE) then
+        if not savedVariables.fence[activeId] then return end
+    elseif (eventCode == EVENT_CRAFTING_STATION_INTERACT) then
+        if not savedVariables.craftStation[activeId] then return end
+    elseif (eventCode == EVENT_DYEING_STATION_INTERACT_START) then
+        if not savedVariables.dyeingStation[activeId] then return end
+    elseif (eventCode == EVENT_RETRAIT_STATION_INTERACT_START) then
+        if not savedVariablesretraitStation[activeId] then return end
+    elseif (eventCode == EVENT_START_FAST_TRAVEL_INTERACTION) then
+        if not savedVariables.wayshrine[activeId] then return end
     end
 
-    local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
-    if (activeId ~= 0) then
-        local collectibleData = ZO_COLLECTIBLE_DATA_MANAGER:GetCollectibleDataById(activeId)
-        if not IsCollectibleBlocked(activeId) then
-            collectibleData:Use()
-            if AutoBanishPets.savedVariables.notification then
-                df("[%s] %s", AutoBanishPets.name, GetString(ABP_NOTIFICATION_COMPANIONS))
-            end
+    if not IsCollectibleBlocked(activeId) then
+        UseCollectible(activeId)
+        if AutoBanishPets.savedVariables.notification then
+            df("[%s] %s", AutoBanishPets.name, GetString(ABP_NOTIFICATION_COMPANIONS))
         end
     end
 end
@@ -221,7 +272,7 @@ function AutoBanishPets:RegisterPetsEvents()
     AutoBanishPets:Register(namespace, EVENT_OPEN_BANK, "pets", "bank")
     AutoBanishPets:Register(namespace, EVENT_OPEN_GUILD_BANK, "pets", "guildBank")
     AutoBanishPets:Register(namespace, EVENT_OPEN_STORE, "pets", "store")
-    AutoBanishPets:Register(namespace, EVENT_OPEN_GUILD_STORE, "pets", "guildStore")
+    AutoBanishPets:Register(namespace, EVENT_OPEN_TRADING_HOUSE, "pets", "guildStore")
     AutoBanishPets:Register(namespace, EVENT_OPEN_FENCE, "pets", "fence")
     AutoBanishPets:Register(namespace, EVENT_CRAFTING_STATION_INTERACT, "pets", "craftStation")
     AutoBanishPets:Register(namespace, EVENT_DYEING_STATION_INTERACT_START, "pets", "dyeingStation")
@@ -238,7 +289,7 @@ function AutoBanishPets:RegisterVanityPetsEvents()
     AutoBanishPets:Register(namespace, EVENT_OPEN_BANK, "vanityPets", "bank")
     AutoBanishPets:Register(namespace, EVENT_OPEN_GUILD_BANK, "vanityPets", "guildBank")
     AutoBanishPets:Register(namespace, EVENT_OPEN_STORE, "vanityPets", "store")
-    AutoBanishPets:Register(namespace, EVENT_OPEN_GUILD_STORE, "vanityPets", "guildStore")
+    AutoBanishPets:Register(namespace, EVENT_OPEN_TRADING_HOUSE, "vanityPets", "guildStore")
     AutoBanishPets:Register(namespace, EVENT_OPEN_FENCE, "vanityPets", "fence")
     AutoBanishPets:Register(namespace, EVENT_CRAFTING_STATION_INTERACT, "vanityPets", "craftStation")
     AutoBanishPets:Register(namespace, EVENT_DYEING_STATION_INTERACT_START, "vanityPets", "dyeingStation")
@@ -252,6 +303,7 @@ end
 -- Assistants
 function AutoBanishPets:RegisterAssistantsEvents()
     local namespace = AutoBanishPets.name .. "_ASSISTANTS"
+    AutoBanishPets:Register(namespace, EVENT_OPEN_TRADING_HOUSE, "assistants", "guildStore")
     AutoBanishPets:Register(namespace, EVENT_CRAFTING_STATION_INTERACT, "assistants", "craftStation")
     AutoBanishPets:Register(namespace, EVENT_DYEING_STATION_INTERACT_START, "assistants", "dyeingStation")
     AutoBanishPets:Register(namespace, EVENT_RETRAIT_STATION_INTERACT_START, "assistants", "retraitStation")
@@ -267,7 +319,7 @@ function AutoBanishPets:RegisterCompanionsEvents()
     AutoBanishPets:Register(namespace, EVENT_OPEN_BANK, "companions", "bank")
     AutoBanishPets:Register(namespace, EVENT_OPEN_GUILD_BANK, "companions", "guildBank")
     AutoBanishPets:Register(namespace, EVENT_OPEN_STORE, "companions", "store")
-    AutoBanishPets:Register(namespace, EVENT_OPEN_GUILD_STORE, "companions", "guildStore")
+    AutoBanishPets:Register(namespace, EVENT_OPEN_TRADING_HOUSE, "companions", "guildStore")
     AutoBanishPets:Register(namespace, EVENT_OPEN_FENCE, "companions", "fence")
     AutoBanishPets:Register(namespace, EVENT_CRAFTING_STATION_INTERACT, "companions", "craftStation")
     AutoBanishPets:Register(namespace, EVENT_DYEING_STATION_INTERACT_START, "companions", "dyeingStation")
@@ -290,15 +342,17 @@ function AutoBanishPets:Register(namespace, eventCode, whoKey, whenKey)
         banishFunc = AutoBanishPets.BanishAssistants
         resummonFunc = AutoBanishPets.ResummonAssistants
     elseif (whoKey == "companions") then
-        banishFunc = AutoBanishPets.BanishAssistants
+        banishFunc = AutoBanishPets.BanishCompanions
     else
         return
     end
 
     local value = AutoBanishPets.savedVariables[whoKey][whenKey]
+    -- General option
     if (type(value) == "boolean") then
         if not value then return end
         EVENT_MANAGER:RegisterForEvent(namespace, eventCode, banishFunc)
+    -- Combat option
     elseif (type(value) == "number") then
         if (value == 1) then return end
         if (value > 1) then
@@ -306,6 +360,15 @@ function AutoBanishPets:Register(namespace, eventCode, whoKey, whenKey)
         end
         if (value > 2 and not ressumonFunc) then
             EVENT_MANAGER:RegisterForEvent(namespace .. "_RESUMMON", eventCode, resummonFunc)
+        end
+    -- Companion option
+    elseif (type(value) == "table") then
+        local isChecked = false
+        for _, v in pairs(value) do
+            isChecked = isChecked or v
+        end
+        if isChecked then
+            EVENT_MANAGER:RegisterForEvent(namespace, eventCode, banishFunc)
         end
     end
 end
