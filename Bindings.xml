@@ -2,22 +2,22 @@
 	<Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
 		<Category name="Auto Banish Pets">
 			<Action name="BANISH_ALL">
-				<Up>AutoBanishPets.BanishAll()</Up>
+				<Down>AutoBanishPets.BanishAll()</Down>
 			</Action>
 			<Action name="BANISH_PETS">
-				<Up>AutoBanishPets.BanishPets()</Up>
+				<Down>AutoBanishPets.BanishPets()</Down>
 			</Action>
 			<Action name="BANISH_VANITY_PETS">
-				<Up>AutoBanishPets.BanishVanityPets()</Up>
+				<Down>AutoBanishPets.BanishVanityPets()</Down>
 			</Action>
 			<Action name="BANISH_ASSISTANTS">
-				<Up>AutoBanishPets.BanishAssistants()</Up>
+				<Down>AutoBanishPets.BanishAssistants()</Down>
 			</Action>
 			<Action name="BANISH_COMPANIONS">
-				<Up>AutoBanishPets.BanishCompanions()</Up>
+				<Down>AutoBanishPets.BanishCompanions()</Down>
 			</Action>
 			<Action name="NO_PETS_ALLOWED">
-				<Up>AutoBanishPets.ToggleNPA(not AutoBanishPets.savedVariables.noPetsAllowed)</Up>
+				<Down>AutoBanishPets.ToggleNPA(not AutoBanishPets.savedVariables.noPetsAllowed)</Down>
 			</Action>
 		</Category>
 	</Layer>
