@@ -5,10 +5,9 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.1.6"
+AutoBanishPets.version = "0.1.8"
 AutoBanishPets.variableVersion = 8
 local EM = EVENT_MANAGER
-local ZO_StartInteraction = FISHING_MANAGER.StartInteraction
 local messages = {
     ["banish"] = {
         ["pets"] = GetString(ABP_NOTIFICATION_PETS),
@@ -416,6 +415,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
         [EVENT_DYEING_STATION_INTERACT_START] = "dyeingStation",
         [EVENT_RETRAIT_STATION_INTERACT_START] = "retraitStation",
         [EVENT_START_FAST_TRAVEL_INTERACTION] = "wayshrine",
+        [EVENT_JUSTICE_BEING_ARRESTED] = "arrested",
     }
     for k, v in pairs(sV[eventKeys[eventCode]]) do
         if v then
@@ -489,10 +489,12 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_WAYSHRINE", EVENT_START_FAST_TRAVEL_INTERACTION, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_QUEST_ADDED", EVENT_QUEST_ADDED, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_QUEST_COMPLETE", EVENT_QUEST_COMPLETE_DIALOG, AutoBanishPets.onEventTriggered)
+    EM:RegisterForEvent(ns .. "_ARRESTED", EVENT_JUSTICE_BEING_ARRESTED, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT, AutoBanishPets.onEventTriggered)
     -- Prehook
     ZO_PreHook("Logout", AutoBanishPets.onLogout)
     -- Override StartInteraction
+    local ZO_StartInteraction = FISHING_MANAGER.StartInteraction
     FISHING_MANAGER.StartInteraction = function(...)
         local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
         if (activeId == 0) then
@@ -505,12 +507,11 @@ function AutoBanishPets:RegisterEvents()
             AutoBanishPets.BanishCompanions(activeId)
             return true
         end
-        -- This might conflict with other addons
-        -- -- Block stealing
-        -- if AutoBanishPets.savedVariables.steal[activeId] and isCriminalInteract then
-        --     AutoBanishPets.BanishCompanions(activeId)
-        --     return true
-        -- end
+        -- Block stealing
+        if AutoBanishPets.savedVariables.steal[activeId] and isCriminalInteract then
+            AutoBanishPets.BanishCompanions(activeId)
+            return true
+        end
         return ZO_StartInteraction(...)
     end
 
@@ -535,6 +536,7 @@ function AutoBanishPets:UnregisterEvents()
     EM:UnregisterForEvent(ns .. "_WAYSHRINE", EVENT_START_FAST_TRAVEL_INTERACTION)
     EM:UnregisterForEvent(ns .. "_QUEST_ADDED", EVENT_QUEST_ADDED)
     EM:UnregisterForEvent(ns .. "_QUEST_COMPLETE", EVENT_QUEST_COMPLETE_DIALOG)
+    EM:UnregisterForEvent(ns .. "_ARRESTED", EVENT_JUSTICE_BEING_ARRESTED)
     EM:UnregisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT)
     -- Prehook
     ZO_PreHook("Logout", function() end)
@@ -658,14 +660,20 @@ function AutoBanishPets:Initialize()
             [9245] = false,
             [9353] = true,
         },
-        -- This might conflict with other addons
-        -- ["steal"] = {
-        --     ["pets"] = false,
-        --     ["vanityPets"] = false,
-        --     ["assistants"] = false,
-        --     [9245] = true,
-        --     [9353] = true,
-        -- },
+        ["steal"] = {
+            ["pets"] = false,
+            ["vanityPets"] = false,
+            ["assistants"] = false,
+            [9245] = true,
+            [9353] = false,
+        },
+        ["arrested"] = {
+            ["pets"] = false,
+            ["vanityPets"] = false,
+            ["assistants"] = false,
+            [9245] = true,
+            [9353] = false,
+        },
     }
     AutoBanishPets.savedVariables = ZO_SavedVars:NewAccountWide("AutoBanishPetsSavedVars", AutoBanishPets.variableVersion, nil, defaultSettings)
     AutoBanishPets.queuedId = { -- Table for resummoning
