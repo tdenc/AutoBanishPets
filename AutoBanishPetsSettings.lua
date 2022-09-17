@@ -1,9 +1,8 @@
 AutoBanishPets = AutoBanishPets or {}
 local AutoBanishPets = AutoBanishPets
 
-local LAM2 = LibAddonMenu2
-
 function AutoBanishPets.CreateSettingsWindow()
+    local LAM2 = LibAddonMenu2
     local panelData = {
         type = "panel",
         name = "Auto Banish Pets",
