@@ -25,6 +25,7 @@ local stringsJP = {
     ABP_BEFORE_COMBAT_TOOLTIP = "戦闘に突入する時",
     ABP_AFTER_COMBAT_TOOLTIP = "戦闘を終える時",
     ABP_LOGOUT_TOOLTIP = "ログアウトする時",
+    ABP_NO_PETS_ALLOWED_NAME = "あらゆる状況で戦闘ペットを無効にする",
     -- Setting
     ABP_NOTIFICATION_PETS = "戦闘ペットが消えました！",
     ABP_NOTIFICATION_VANITY_PETS = "非戦闘ペットが消えました！",
@@ -39,6 +40,7 @@ local stringsJP = {
     SI_BINDING_NAME_BANISH_VANITY_PETS = "非戦闘ペットを消す",
     SI_BINDING_NAME_BANISH_ASSISTANTS = "助手を消す",
     SI_BINDING_NAME_BANISH_COMPANIONS = "コンパニオンを消す",
+    SI_BINDING_NAME_NO_PETS_ALLOWED = "'NO-PETS-ALLOWED'を切り替える",
 }
 
 for stringId, stringValue in pairs(stringsJP) do

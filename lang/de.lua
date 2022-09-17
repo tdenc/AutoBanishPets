@@ -3,7 +3,7 @@ local stringsDE = {
     ABP_FENCE_NAME = "Hehler",
     ABP_RETRAIT_STATION_NAME = "Transmutationsstelle",
     ABP_THIEVESTROVE_NAME = "Diebesgut",
-    -- ABP_TORCHBUG_NAME = "Fackelkäfer",
+    ABP_TORCHBUG_NAME = "Fackelkäfer",
     -- Tooltip
     ABP_BANK_TOOLTIP = "Wenn du eine Bank öffnest",
     ABP_GUILD_BANK_TOOLTIP = "Wenn du eine Gilden Bank öffnest",
@@ -23,9 +23,9 @@ local stringsDE = {
     ABP_BEFORE_COMBAT_TOOLTIP = "Wenn du in den Kampf ziehst",
     ABP_AFTER_COMBAT_TOOLTIP = "Wenn du fertig Kampf ziehst",
     ABP_LOGOUT_TOOLTIP = "Wenn du dich ausloggst",
-    -- ABP_AFTER_COMBAT_TOOLTIP = "",
+    ABP_NO_PETS_ALLOWED_NAME = "Deaktiviere Kampf Begleittier in allen Situationen",
     -- Setting
-    ABP_NOTIFICATION_PETS = "Deine Kampf Begleiter wurden verbannt!",
+    ABP_NOTIFICATION_PETS = "Deine Kampf Begleittier wurden verbannt!",
     ABP_NOTIFICATION_VANITY_PETS = "Deine Friedliche Begleiter wurden verbannt!",
     ABP_NOTIFICATION_ASSISTANTS = "Deine Assistenten wurden verbannt!",
     ABP_NOTIFICATION_COMPANIONS = "Deine Gefährten wurden verbannt!",
@@ -33,10 +33,11 @@ local stringsDE = {
     ABP_NOTIFICATION_RESUMMON_ASSISTANTS = "Deine Assistenten sind zurück!",
     -- Keybind
     SI_BINDING_NAME_BANISH_ALL = "Verbanne alle",
-    SI_BINDING_NAME_BANISH_PETS = "Verbanne Kampf Begleiter",
-    SI_BINDING_NAME_BANISH_VANITY_PETS = "Verbanne Kampf Begleiter",
+    SI_BINDING_NAME_BANISH_PETS = "Verbanne Kampf Begleittier",
+    SI_BINDING_NAME_BANISH_VANITY_PETS = "Verbanne Friedliche Begleiter",
     SI_BINDING_NAME_BANISH_ASSISTANTS = "Verbanne Assistenten",
     SI_BINDING_NAME_BANISH_COMPANIONS = "Verbanne Gefährten",
+    SI_BINDING_NAME_NO_PETS_ALLOWED = "Umschalten 'NO-PETS-ALLOWED'",
 }
 
 for stringId, stringValue in pairs(stringsDE) do

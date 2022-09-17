@@ -3,7 +3,7 @@ local stringsRU = {
     ABP_FENCE_NAME = "Скупщик краденого",
     ABP_RETRAIT_STATION_NAME = "Аппарат для трансмутации",
     ABP_THIEVESTROVE_NAME = "Воровской клад",
-    -- ABP_TORCHBUG_NAME = "Светлячок",
+    ABP_TORCHBUG_NAME = "Светлячок",
     -- Tooltip
     --ABP_BANK_TOOLTIP = "When you open a bank",
     --ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",
@@ -23,6 +23,7 @@ local stringsRU = {
     --ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",
     --ABP_AFTER_COMBAT_TOOLTIP = "When you finish combat",
     --ABP_LOGOUT_TOOLTIP = "When you logout",
+    --ABP_NO_PETS_ALLOWED_NAME = "Disable your combat pets in all situations",
     -- Setting
     --ABP_NOTIFICATION_PETS = "Your combat pets were banished!",
     --ABP_NOTIFICATION_VANITY_PETS = "Your non-combat pets were banished!",
@@ -36,6 +37,7 @@ local stringsRU = {
     --SI_BINDING_NAME_BANISH_VANITY_PETS = "Banish non-combat pets",
     --SI_BINDING_NAME_BANISH_ASSISTANTS = "Banish assistants",
     --SI_BINDING_NAME_BANISH_COMPANIONS = "Banish companions",
+    --SI_BINDING_NAME_NO_PETS_ALLOWED = "Toggle 'NO-PETS-ALLOWED'",
 }
 
 for stringId, stringValue in pairs(stringsRU) do

@@ -25,6 +25,7 @@ local stringsEN = {
     ABP_BEFORE_COMBAT_NAME = GetString(SI_AUDIO_OPTIONS_COMBAT),
     ABP_AFTER_COMBAT_NAME = GetString(SI_AUDIO_OPTIONS_COMBAT),
     ABP_LOGOUT_NAME = GetString(SI_GAME_MENU_LOGOUT),
+    ABP_NO_PETS_ALLOWED_NAME = "NO-PETS-ALLOWED",
     -- Tooltip
     ABP_BANK_TOOLTIP = "When you open a bank",
     ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",
@@ -44,6 +45,7 @@ local stringsEN = {
     ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",
     ABP_AFTER_COMBAT_TOOLTIP = "When you finish combat",
     ABP_LOGOUT_TOOLTIP = "When you logout",
+    ABP_NO_PETS_ALLOWED_TOOLTIP = "Disable your combat pets in all situations",
     -- Setting
     ABP_SELECT_OPTION1 = GetString(SI_CHECK_BUTTON_OFF),
     ABP_SELECT_OPTION2 = GetString(SI_CHECK_BUTTON_ON),
@@ -61,6 +63,7 @@ local stringsEN = {
     SI_BINDING_NAME_BANISH_VANITY_PETS = "Banish non-combat pets",
     SI_BINDING_NAME_BANISH_ASSISTANTS = "Banish assistants",
     SI_BINDING_NAME_BANISH_COMPANIONS = "Banish companions",
+    SI_BINDING_NAME_NO_PETS_ALLOWED = "Toggle 'NO-PETS-ALLOWED'",
 }
 
 for stringId, stringValue in pairs(stringsEN) do

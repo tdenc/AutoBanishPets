@@ -16,6 +16,9 @@
 			<Action name="BANISH_COMPANIONS">
 				<Up>AutoBanishPets.BanishCompanions()</Up>
 			</Action>
+			<Action name="NO_PETS_ALLOWED">
+				<Up>AutoBanishPets.ToggleNPA(not AutoBanishPets.savedVariables.noPetsAllowed)</Up>
+			</Action>
 		</Category>
 	</Layer>
 	<Layer name="GamepadUIMode" allowFallthrough="false">
@@ -25,6 +28,7 @@
             <AllowAction name="BANISH_VANITY_PETS"/>
             <AllowAction name="BANISH_ASSISTANTS"/>
             <AllowAction name="BANISH_COMPANIONS"/>
+            <AllowAction name="NO_PETS_ALLOWED"/>
         </Category>
     </Layer>
 </Bindings>

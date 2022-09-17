@@ -5,10 +5,11 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.2.5"
+AutoBanishPets.version = "0.2.6"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
+    ["noPetsAllowed"] = false,
     ["bank"] = {
         ["pets"] = true,
         ["vanityPets"] = false,
@@ -143,16 +144,16 @@ AutoBanishPets.defaultSettings = {
 local EM = EVENT_MANAGER
 local messages = {
     ["banish"] = {
-        ["pets"] = GetString(ABP_NOTIFICATION_PETS),
-        ["vanityPets"] = GetString(ABP_NOTIFICATION_VANITY_PETS),
-        ["assistants"] = GetString(ABP_NOTIFICATION_ASSISTANTS),
-        ["companions"] = GetString(ABP_NOTIFICATION_COMPANIONS),
+        ["pets"] = string.format("|cf10000%s|r", GetString(ABP_NOTIFICATION_PETS)),
+        ["vanityPets"] = string.format("|cf10000%s|r", GetString(ABP_NOTIFICATION_VANITY_PETS)),
+        ["assistants"] = string.format("|cf10000%s|r", GetString(ABP_NOTIFICATION_ASSISTANTS)),
+        ["companions"] = string.format("|cf10000%s|r", GetString(ABP_NOTIFICATION_COMPANIONS)),
     },
     ["resummon"] = {
-        ["pets"] = GetString(ABP_NOTIFICATION_RESUMMON_PETS),
-        ["vanityPets"] = GetString(ABP_NOTIFICATION_RESUMMON_VANITY_PETS),
-        ["assistants"] = GetString(ABP_NOTIFICATION_RESUMMON_ASSISTANTS),
-        ["companions"] = GetString(ABP_NOTIFICATION_RESUMMON_COMPANIONS),
+        ["pets"] = string.format("|c43ad53%s|r", GetString(ABP_NOTIFICATION_RESUMMON_PETS)),
+        ["vanityPets"] = string.format("|c43ad53%s|r", GetString(ABP_NOTIFICATION_RESUMMON_VANITY_PETS)),
+        ["assistants"] = string.format("|c43ad53%s|r", GetString(ABP_NOTIFICATION_RESUMMON_ASSISTANTS)),
+        ["companions"] = string.format("|c43ad53%s|r", GetString(ABP_NOTIFICATION_RESUMMON_COMPANIONS)),
     },
 }
 
@@ -317,6 +318,31 @@ function AutoBanishPets.BanishAll()
     -- Clear queue
     for k, v in pairs(AutoBanishPets.queuedId) do
         AutoBanishPets.queuedId[k] = 0
+    end
+end
+
+-- Toggle No-Pets-Allowed
+function AutoBanishPets.ToggleNPA(enable)
+    local unitClassId = AutoBanishPets.unitClassId
+    local abilities = AutoBanishPets.abilities -- AutoBanishPetsAbilities.lua
+    if not abilities[unitClassId] then return end
+
+    if (AutoBanishPets.savedVariables.notification and enable ~= AutoBanishPets.savedVariables.noPetsAllowed) then
+        if enable then
+            df("[%s] |cf10000NO-PETS-ALLOWED|r: %s", AutoBanishPets.name, GetString(SI_CHECK_BUTTON_ON))
+        else
+            df("[%s] |c43ad53NO-PETS-ALLOWED|r: %s", AutoBanishPets.name, GetString(SI_CHECK_BUTTON_OFF))
+        end
+    end
+
+    if enable then
+        AutoBanishPets.BanishPets()
+        EM:RegisterForEvent(AutoBanishPets.name .. "_NPA", EVENT_UNIT_CREATED, AutoBanishPets.BanishPets)
+        EM:AddFilterForEvent(AutoBanishPets.name .. "_NPA", EVENT_UNIT_CREATED, REGISTER_FILTER_UNIT_TAG_PREFIX, "playerpet")
+        AutoBanishPets.savedVariables.noPetsAllowed = true
+    else
+        EM:UnregisterForEvent(AutoBanishPets.name .. "_NPA", EVENT_UNIT_CREATED)
+        AutoBanishPets.savedVariables.noPetsAllowed = false
     end
 end
 
@@ -622,6 +648,11 @@ function AutoBanishPets.onPlayerActivated()
             AutoBanishPets:RegisterEvents()
             AutoBanishPets.isInPVP = false
         end
+    end
+
+    -- Dismiss combat pets if "NO-PETS-ALLOWED" is active
+    if AutoBanishPets.savedVariables.noPetsAllowed then
+        AutoBanishPets.ToggleNPA(true)
     end
 
 end

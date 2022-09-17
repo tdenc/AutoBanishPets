@@ -55,12 +55,25 @@ function AutoBanishPets.CreateSettingsWindow()
             type = "submenu", name = GetString(ABP_PETS_NAME), controls = {
                 {
                     type = "checkbox",
+                    name = GetString(ABP_NO_PETS_ALLOWED_NAME),
+                    tooltip = GetString(ABP_NO_PETS_ALLOWED_TOOLTIP),
+                    default = dS.noPetsAllowed,
+                    requiresReload = false,
+                    getFunc = function() return sV.noPetsAllowed end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.ToggleNPA(newValue)
+                        sV.noPetsAllowed = newValue
+                    end,
+                },
+                {
+                    type = "checkbox",
                     name = GetString(ABP_BANK_NAME),
                     tooltip = GetString(ABP_BANK_TOOLTIP),
                     default = dS.bank.pets,
                     requiresReload = false,
                     getFunc = function() return sV.bank.pets end,
                     setFunc = function(newValue) sV.bank.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -70,6 +83,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.guildBank.pets end,
                     setFunc = function(newValue) sV.guildBank.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -79,6 +93,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.store.pets end,
                     setFunc = function(newValue) sV.store.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -88,6 +103,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.guildStore.pets end,
                     setFunc = function(newValue) sV.guildStore.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -97,6 +113,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.fence.pets end,
                     setFunc = function(newValue) sV.fence.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -106,6 +123,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.craftStation.pets end,
                     setFunc = function(newValue) sV.craftStation.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -115,6 +133,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.retraitStation.pets end,
                     setFunc = function(newValue) sV.retraitStation.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -124,6 +143,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.dyeingStation.pets end,
                     setFunc = function(newValue) sV.dyeingStation.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -133,6 +153,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.wayshrine.pets end,
                     setFunc = function(newValue) sV.wayshrine.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -142,6 +163,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.quest.pets end,
                     setFunc = function(newValue) sV.quest.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -151,6 +173,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.stealth.pets end,
                     setFunc = function(newValue) sV.stealth.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -160,6 +183,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.combat.pets end,
                     setFunc = function(newValue) sV.combat.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
                 {
                     type = "checkbox",
@@ -169,6 +193,7 @@ function AutoBanishPets.CreateSettingsWindow()
                     requiresReload = false,
                     getFunc = function() return sV.logout.pets end,
                     setFunc = function(newValue) sV.logout.pets = newValue end,
+                    disabled = function() return sV.noPetsAllowed end,
                 },
             }
         },
