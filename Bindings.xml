@@ -22,13 +22,13 @@
 		</Category>
 	</Layer>
 	<Layer name="GamepadUIMode" allowFallthrough="false">
-        <Category>
-            <AllowAction name="BANISH_ALL"/>
-            <AllowAction name="BANISH_PETS"/>
-            <AllowAction name="BANISH_VANITY_PETS"/>
-            <AllowAction name="BANISH_ASSISTANTS"/>
-            <AllowAction name="BANISH_COMPANIONS"/>
-            <AllowAction name="NO_PETS_ALLOWED"/>
-        </Category>
-    </Layer>
+		<Category>
+			<AllowAction name="BANISH_ALL"/>
+			<AllowAction name="BANISH_PETS"/>
+			<AllowAction name="BANISH_VANITY_PETS"/>
+			<AllowAction name="BANISH_ASSISTANTS"/>
+			<AllowAction name="BANISH_COMPANIONS"/>
+			<AllowAction name="NO_PETS_ALLOWED"/>
+		</Category>
+	</Layer>
 </Bindings>
