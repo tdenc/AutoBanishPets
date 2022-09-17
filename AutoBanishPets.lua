@@ -5,8 +5,134 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.1.8"
+AutoBanishPets.version = "0.2.1"
 AutoBanishPets.variableVersion = 8
+AutoBanishPets.defaultSettings = {
+    ["notification"] = true,
+    ["bank"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["guildBank"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = true,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["store"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["guildStore"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = true,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["fence"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["craftStation"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = true,
+        [9245] = true,
+        [9353] = false,
+    },
+    ["dyeingStation"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = true,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["retraitStation"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = true,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["wayshrine"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["quest"] = {
+        ["pets"] = true,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["combat"] = {
+        ["pets"] = false,
+        ["vanityPets"] = 2,
+        ["assistants"] = 2,
+        ["companions"] = {
+            [9245] = 1,
+            [9353] = 1,
+        },
+    },
+    ["stealth"] = {
+        ["pets"] = false,
+        ["vanityPets"] = 1,
+        ["assistants"] = 1,
+        ["companions"] = {
+            [9245] = 2,
+            [9353] = 2,
+        },
+    },
+    ["logout"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = false,
+    },
+    ["thievesTrove"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = true,
+        [9353] = false,
+    },
+    ["torchbug"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = false,
+        [9353] = true,
+    },
+    ["steal"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = true,
+        [9353] = false,
+    },
+    ["arrested"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = true,
+        [9353] = false,
+    },
+}
 local EM = EVENT_MANAGER
 local messages = {
     ["banish"] = {
@@ -69,35 +195,36 @@ function AutoBanishPets.ToggleCollectible(collectibleId, toggle, key)
         activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
     end
 
-    -- Already active/inactive
-    if (toggle and activeId ~= 0) or (not toggle and activeId == 0) then
-        UnregisterUpdate(key)
-    -- Player changed collectible manually during cooldown
-    elseif (activeId ~= 0 and activeId ~= collectibleId) then
-        UnregisterUpdate(key)
-    -- Do not summon in combat
-    elseif (toggle and IsUnitInCombat("player")) then
-        UnregisterUpdate(key)
-    -- Then toggle
-    elseif (IsCollectibleActive(collectibleId) ~= toggle and not IsCollectibleBlocked(collectibleId) and not AutoBanishPets.isToggling[key]) then
-        UseCollectible(collectibleId)
-        if toggle then
-            AutoBanishPets.queuedId[key] = 0
-        end
-        AutoBanishPets.isToggling[key] = true
-    -- Toggle done
-    elseif AutoBanishPets.isToggling[key] then -- Done toggling
-        if AutoBanishPets.savedVariables.notification then
+    if not AutoBanishPets.isToggling[key] then -- So this is the first toggling
+        -- Already active/inactive
+        if (toggle and activeId ~= 0) or (not toggle and activeId == 0) then
+            UnregisterUpdate(key)
+        -- Player changed collectible manually during cooldown
+        elseif (activeId ~= 0 and activeId ~= collectibleId) then
+            UnregisterUpdate(key)
+        -- Do not summon in combat
+        elseif (toggle and IsUnitInCombat("player")) then
+            UnregisterUpdate(key)
+        -- Then toggle
+        elseif (IsCollectibleActive(collectibleId) ~= toggle and not IsCollectibleBlocked(collectibleId)) then
+            UseCollectible(collectibleId)
             if toggle then
-                df("[%s] %s", AutoBanishPets.name, messages.resummon[key])
-            else
-                df("[%s] %s", AutoBanishPets.name, messages.banish[key])
+                AutoBanishPets.queuedId[key] = 0
+            end
+            AutoBanishPets.isToggling[key] = true
+        end
+    else
+        -- Toggling done
+        if IsCollectibleActive(collectibleId) == toggle then
+            UnregisterUpdate(key)
+            if AutoBanishPets.savedVariables.notification then
+                if toggle then
+                    df("[%s] %s", AutoBanishPets.name, messages.resummon[key])
+                else
+                    df("[%s] %s", AutoBanishPets.name, messages.banish[key])
+                end
             end
         end
-        UnregisterUpdate(key)
-    -- This should not happen :)
-    else
-        UnregisterUpdate(key)
     end
 end
 
@@ -493,27 +620,6 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT, AutoBanishPets.onEventTriggered)
     -- Prehook
     ZO_PreHook("Logout", AutoBanishPets.onLogout)
-    -- Override StartInteraction
-    local ZO_StartInteraction = FISHING_MANAGER.StartInteraction
-    FISHING_MANAGER.StartInteraction = function(...)
-        local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
-        if (activeId == 0) then
-            return ZO_StartInteraction(...)
-        end
-
-        local _, interactableName, interactionBlocked, _, _, _, _, isCriminalInteract = GetGameCameraInteractableActionInfo()
-        -- Block taking torchbug/butterfly
-        if AutoBanishPets.savedVariables.torchbug[activeId] and AutoBanishPets.torchbug[interactableName] then
-            AutoBanishPets.BanishCompanions(activeId)
-            return true
-        end
-        -- Block stealing
-        if AutoBanishPets.savedVariables.steal[activeId] and isCriminalInteract then
-            AutoBanishPets.BanishCompanions(activeId)
-            return true
-        end
-        return ZO_StartInteraction(...)
-    end
 
 end
 
@@ -540,8 +646,6 @@ function AutoBanishPets:UnregisterEvents()
     EM:UnregisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT)
     -- Prehook
     ZO_PreHook("Logout", function() end)
-    -- Reset StartInteraction
-    FISHING_MANAGER.StartInteraction = ZO_StartInteraction
 
 end
 
@@ -549,133 +653,7 @@ end
 --INITIALIZE ADDON--
 --------------------
 function AutoBanishPets:Initialize()
-    local defaultSettings = {
-        ["notification"] = true,
-        ["bank"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["guildBank"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = true,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["store"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["guildStore"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = true,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["fence"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = true,
-            [9353] = true,
-        },
-        ["craftStation"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = true,
-            [9245] = true,
-            [9353] = false,
-        },
-        ["dyeingStation"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = true,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["retraitStation"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = true,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["wayshrine"] = {
-            ["pets"] = false,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["quest"] = {
-            ["pets"] = true,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["combat"] = {
-            ["pets"] = false,
-            ["vanityPets"] = 2,
-            ["assistants"] = 2,
-            ["companions"] = {
-                [9245] = 1,
-                [9353] = 1,
-            },
-        },
-        ["stealth"] = {
-            ["pets"] = false,
-            ["vanityPets"] = 1,
-            ["assistants"] = 1,
-            ["companions"] = {
-                [9245] = 2,
-                [9353] = 2,
-            },
-        },
-        ["logout"] = {
-            ["pets"] = false,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = false,
-            [9353] = false,
-        },
-        ["thievesTrove"] = {
-            ["pets"] = false,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = true,
-            [9353] = true,
-        },
-        ["torchbug"] = {
-            ["pets"] = false,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = false,
-            [9353] = true,
-        },
-        ["steal"] = {
-            ["pets"] = false,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = true,
-            [9353] = false,
-        },
-        ["arrested"] = {
-            ["pets"] = false,
-            ["vanityPets"] = false,
-            ["assistants"] = false,
-            [9245] = true,
-            [9353] = false,
-        },
-    }
-    AutoBanishPets.savedVariables = ZO_SavedVars:NewAccountWide("AutoBanishPetsSavedVars", AutoBanishPets.variableVersion, nil, defaultSettings)
+    AutoBanishPets.savedVariables = ZO_SavedVars:NewAccountWide("AutoBanishPetsSavedVars", AutoBanishPets.variableVersion, nil, AutoBanishPets.defaultSettings)
     AutoBanishPets.queuedId = { -- Table for resummoning
         ["vanityPets"] = 0,
         ["assistants"] = 0,
@@ -690,8 +668,29 @@ function AutoBanishPets:Initialize()
     AutoBanishPets.isInPVP = false
     AutoBanishPets.CreateSettingsWindow() -- AutoBanishPetsSettings.lua
     AutoBanishPets:RegisterEvents()
-
     EM:RegisterForEvent(AutoBanishPets.name, EVENT_PLAYER_ACTIVATED, AutoBanishPets.onPlayerActivated)
+
+    -- Override StartInteraction
+    local ZO_StartInteraction = FISHING_MANAGER.StartInteraction
+    FISHING_MANAGER.StartInteraction = function(...)
+        local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+        if (activeId == 0) then
+            return ZO_StartInteraction(...)
+        end
+
+        local _, interactableName, interactionBlocked, _, _, _, _, isCriminalInteract = GetGameCameraInteractableActionInfo()
+        -- Block taking torchbug/butterfly
+        if AutoBanishPets.savedVariables.torchbug[activeId] and AutoBanishPets.torchbug[interactableName] then
+            AutoBanishPets.BanishCompanions(activeId)
+            return true
+        end
+        -- Block stealing
+        if AutoBanishPets.savedVariables.steal[activeId] and isCriminalInteract then
+            AutoBanishPets.BanishCompanions(activeId)
+            return true
+        end
+        return ZO_StartInteraction(...)
+    end
 
     EM:UnregisterForEvent(AutoBanishPets.name, EVENT_ADD_ON_LOADED)
 end

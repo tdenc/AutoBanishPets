@@ -14,11 +14,8 @@ This addon dismisses your pets/assistants/companions under some circumstances:
   - Crafting writs / Undaunted pledges / WBs and delves
   - Guild dailies (Mages / Fighters / Undaunted / Thieves)
   - Event dailies and so on
-- When you visit
-  - Dark Brotherhood Sanctuary [Mirri, Isobel]
-  - Outlaws Refuge [Isobel only]
-- When you are arrested [Companions only]
 - When you crouch (+auto-resummon)
+- When you are arrested [Companions only]
 - When you begin/finish combat (+auto-resummon)
 - Whenever you want (by your shortcut key)
 
@@ -31,10 +28,6 @@ All options are customizable
   - Avoid talking to her accidentally!
 - Dismiss your Bastian while you crouch to kill friendly NPC.
   - Without decreasing rapport!
-
-## Slash commands
-- /abp : Dismiss all pets/assistants/companions
-- /abpsetting : Open the addon setting panel
 
 ## Dependencies
 - [LibAddonMenu-2.0](https://www.esoui.com/downloads/info7-LibAddonMenu.html)

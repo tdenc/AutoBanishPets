@@ -30,6 +30,7 @@ function AutoBanishPets.CreateSettingsWindow()
         [2] = GetCollectibleName(AutoBanishPets.companions[2]),
     }
 
+    local dS = AutoBanishPets.defaultSettings
     local sV = AutoBanishPets.savedVariables
     local optionsData = {
         {
@@ -43,144 +44,118 @@ function AutoBanishPets.CreateSettingsWindow()
                     type = "checkbox",
                     name = GetString(ABP_BANK_NAME),
                     tooltip = GetString(ABP_BANK_TOOLTIP),
-                    default = true,
+                    default = dS.bank.pets,
                     requiresReload = false,
                     getFunc = function() return sV.bank.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.bank.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.bank.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_GUILD_BANK_NAME),
                     tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
-                    default = true,
+                    default = dS.guildBank.pets,
                     requiresReload = false,
                     getFunc = function() return sV.guildBank.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildBank.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildBank.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_STORE_NAME),
                     tooltip = GetString(ABP_STORE_TOOLTIP),
-                    default = true,
+                    default = dS.store.pets,
                     requiresReload = false,
                     getFunc = function() return sV.store.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.store.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.store.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_GUILD_STORE_NAME),
                     tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
-                    default = true,
+                    default = dS.guildStore.pets,
                     requiresReload = false,
                     getFunc = function() return sV.guildStore.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildStore.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildStore.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_FENCE_NAME),
                     tooltip = GetString(ABP_FENCE_TOOLTIP),
-                    default = true,
+                    default = dS.fence.pets,
                     requiresReload = false,
                     getFunc = function() return sV.fence.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.fence.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.fence.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_CRAFT_STATION_NAME),
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
-                    default = true,
+                    default = dS.craftStation.pets,
                     requiresReload = false,
                     getFunc = function() return sV.craftStation.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.craftStation.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.craftStation.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_RETRAIT_STATION_NAME),
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
-                    default = true,
+                    default = dS.retraitStation.pets,
                     requiresReload = false,
                     getFunc = function() return sV.retraitStation.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.retraitStation.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.retraitStation.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_DYEING_STATION_NAME),
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
-                    default = true,
+                    default = dS.dyeingStation.pets,
                     requiresReload = false,
                     getFunc = function() return sV.dyeingStation.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.dyeingStation.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.dyeingStation.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_WAYSHRINE_NAME),
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
-                    default = false,
+                    default = dS.wayshrine.pets,
                     requiresReload = false,
                     getFunc = function() return sV.wayshrine.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.wayshrine.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.wayshrine.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_QUEST_NAME),
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
-                    default = true,
+                    default = dS.quest.pets,
                     requiresReload = false,
                     getFunc = function() return sV.quest.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.quest.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.quest.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_STEALTH_NAME),
                     tooltip = GetString(ABP_STEALTH_TOOLTIP),
-                    default = false,
+                    default = dS.stealth.pets,
                     requiresReload = false,
                     getFunc = function() return sV.stealth.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.stealth.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.stealth.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_AFTER_COMBAT_NAME),
                     tooltip = GetString(ABP_AFTER_COMBAT_TOOLTIP),
-                    default = false,
+                    default = dS.combat.pets,
                     requiresReload = false,
                     getFunc = function() return sV.combat.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.combat.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.combat.pets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_LOGOUT_NAME),
                     tooltip = GetString(ABP_LOGOUT_TOOLTIP),
-                    default = false,
+                    default = dS.logout.pets,
                     requiresReload = false,
                     getFunc = function() return sV.logout.pets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.logout.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.logout.pets = newValue end,
                 },
             }
         },
@@ -190,137 +165,113 @@ function AutoBanishPets.CreateSettingsWindow()
                     type = "checkbox",
                     name = GetString(ABP_BANK_NAME),
                     tooltip = GetString(ABP_BANK_TOOLTIP),
-                    default = false,
+                    default = dS.bank.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.bank.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.bank.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.bank.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_GUILD_BANK_NAME),
                     tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
-                    default = false,
+                    default = dS.guildBank.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.guildBank.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildBank.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildBank.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_STORE_NAME),
                     tooltip = GetString(ABP_STORE_TOOLTIP),
-                    default = false,
+                    default = dS.store.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.store.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.store.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.store.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_GUILD_STORE_NAME),
                     tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
-                    default = false,
+                    default = dS.guildStore.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.guildStore.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildStore.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildStore.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_FENCE_NAME),
                     tooltip = GetString(ABP_FENCE_TOOLTIP),
-                    default = false,
+                    default = dS.fence.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.fence.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.fence.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.fence.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_CRAFT_STATION_NAME),
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
-                    default = false,
+                    default = dS.craftStation.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.craftStation.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.craftStation.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.craftStation.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_RETRAIT_STATION_NAME),
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
-                    default = false,
+                    default = dS.retraitStation.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.retraitStation.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.retraitStation.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.retraitStation.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_DYEING_STATION_NAME),
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
-                    default = false,
+                    default = dS.dyeingStation.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.dyeingStation.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.dyeingStation.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.dyeingStation.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_WAYSHRINE_NAME),
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
-                    default = false,
+                    default = dS.wayshrine.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.wayshrine.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.wayshrine.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.wayshrine.vanityPets = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_QUEST_NAME),
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
-                    default = false,
+                    default = dS.quest.vanityPets,
                     requiresReload = false,
                     getFunc = function() return sV.quest.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.quest.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.quest.vanityPets = newValue end,
                 },
                 {
                     type = "dropdown",
                     name = GetString(ABP_STEALTH_NAME),
                     tooltip = GetString(ABP_STEALTH_TOOLTIP),
-                    default = 1,
+                    default = dS.stealth.vanityPets,
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.stealth.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.vanityPets.pets = newValue
-                    end,
+                    setFunc = function(newValue) sV.stealth.vanityPets = newValue end,
                 },
                 {
                     type = "dropdown",
                     name = GetString(ABP_BEFORE_COMBAT_NAME),
                     tooltip = GetString(ABP_BEFORE_COMBAT_TOOLTIP),
-                    default = 2,
+                    default = dS.combat.vanityPets,
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.combat.vanityPets end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.combat.vanityPets = newValue
-                    end,
+                    setFunc = function(newValue) sV.combat.vanityPets = newValue end,
                 },
             }
         },
@@ -330,104 +281,86 @@ function AutoBanishPets.CreateSettingsWindow()
                     type = "checkbox",
                     name = GetString(ABP_GUILD_BANK_NAME),
                     tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
-                    default = true,
+                    default = dS.guildBank.assistants,
                     requiresReload = false,
                     getFunc = function() return sV.guildBank.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildBank.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildBank.assistants = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_GUILD_STORE_NAME),
                     tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
-                    default = true,
+                    default = dS.guildStore.assistants,
                     requiresReload = false,
                     getFunc = function() return sV.guildStore.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildStore.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildStore.assistants = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_CRAFT_STATION_NAME),
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
-                    default = true,
+                    default = dS.craftStation.assistants,
                     requiresReload = false,
                     getFunc = function() return sV.craftStation.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.craftStation.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.craftStation.assistants = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_RETRAIT_STATION_NAME),
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
-                    default = true,
+                    default = dS.retraitStation.assistants,
                     requiresReload = false,
                     getFunc = function() return sV.retraitStation.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.retraitStation.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.retraitStation.assistants = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_DYEING_STATION_NAME),
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
-                    default = true,
+                    default = dS.dyeingStation.assistants,
                     requiresReload = false,
                     getFunc = function() return sV.dyeingStation.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.dyeingStation.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.dyeingStation.assistants = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_WAYSHRINE_NAME),
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
-                    default = false,
+                    default = dS.wayshrine.assistants,
                     requiresReload = false,
                     getFunc = function() return sV.wayshrine.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.wayshrine.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.wayshrine.assistants = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = GetString(ABP_QUEST_NAME),
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
-                    default = false,
+                    default = dS.quest.assistants,
                     requiresReload = false,
                     getFunc = function() return sV.quest.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.quest.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.quest.assistants = newValue end,
                 },
                 {
                     type = "dropdown",
                     name = GetString(ABP_STEALTH_NAME),
                     tooltip = GetString(ABP_STEALTH_TOOLTIP),
-                    default = 1,
+                    default = dS.stealth.assistants,
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.stealth.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.stealth.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.stealth.assistants = newValue end,
                 },
                 {
                     type = "dropdown",
                     name = GetString(ABP_BEFORE_COMBAT_NAME),
                     tooltip = GetString(ABP_BEFORE_COMBAT_TOOLTIP),
-                    default = 2,
+                    default = dS.combat.assistants,
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.combat.assistants end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.combat.assistants = newValue
-                    end,
+                    setFunc = function(newValue) sV.combat.assistants = newValue end,
                 },
             }
         },
@@ -443,24 +376,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_BANK_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.bank[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.bank[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.bank[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.bank[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_BANK_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.bank[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.bank[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.bank[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.bank[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -472,24 +401,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.guildBank[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.guildBank[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildBank[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildBank[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.guildBank[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.guildBank[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildBank[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildBank[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -501,24 +426,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_STORE_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.store[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.store[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.store[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.store[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_STORE_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.store[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.store[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.store[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.store[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -530,24 +451,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.guildStore[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.guildStore[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildStore[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildStore[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.guildStore[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.guildStore[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.guildStore[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.guildStore[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -559,24 +476,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_FENCE_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.fence[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.fence[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.fence[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.fence[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_FENCE_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.fence[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.fence[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.fence[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.fence[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -588,24 +501,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.craftStation[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.craftStation[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.craftStation[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.craftStation[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.craftStation[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.craftStation[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.craftStation[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.craftStation[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -617,24 +526,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.retraitStation[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.retraitStation[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.retraitStation[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.retraitStation[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.retraitStation[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.retraitStation[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.retraitStation[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.retraitStation[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -646,24 +551,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.dyeingStation[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.dyeingStation[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.dyeingStation[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.dyeingStation[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.dyeingStation[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.dyeingStation[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.dyeingStation[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.dyeingStation[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -675,24 +576,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.wayshrine[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.wayshrine[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.wayshrine[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.wayshrine[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.wayshrine[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.wayshrine[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.wayshrine[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.wayshrine[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -704,24 +601,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_THIEVESTROVE_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.thievesTrove[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.thievesTrove[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.thievesTrove[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.thievesTrove[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_THIEVESTROVE_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.thievesTrove[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.thievesTrove[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.thievesTrove[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.thievesTrove[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -733,24 +626,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_STEAL_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.steal[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.steal[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.steal[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.steal[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_STEAL_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.steal[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.steal[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.steal[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.steal[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -762,24 +651,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_ARRESTED_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.arrested[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.arrested[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.arrested[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.arrested[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_ARRESTED_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.arrested[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.arrested[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.arrested[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.arrested[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -791,24 +676,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.torchbug[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.torchbug[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.torchbug[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
                     width = "half",
-                    default = true,
+                    default = dS.torchbug[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.torchbug[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.torchbug[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -820,24 +701,20 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.quest[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     getFunc = function() return sV.quest[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.quest[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.quest[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "checkbox",
                     name = companionNames[2],
                     tooltip = GetString(ABP_QUEST_TOOLTIP),
                     width = "half",
-                    default = false,
+                    default = dS.quest[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     getFunc = function() return sV.quest[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.quest[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.quest[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -849,28 +726,24 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_STEALTH_TOOLTIP),
                     width = "half",
-                    default = 2,
+                    default = dS.stealth.companions[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.stealth.companions[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.stealth.companions[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.stealth.companions[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "dropdown",
                     name = companionNames[2],
                     tooltip = GetString(ABP_STEALTH_TOOLTIP),
                     width = "half",
-                    default = 2,
+                    default = dS.stealth.companions[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.stealth.companions[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.stealth.companions[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.stealth.companions[AutoBanishPets.companions[2]] = newValue end,
                 },
                 {
                     type = "header",
@@ -882,28 +755,24 @@ function AutoBanishPets.CreateSettingsWindow()
                     name = companionNames[1],
                     tooltip = GetString(ABP_AFTER_COMBAT_TOOLTIP),
                     width = "half",
-                    default = 1,
+                    default = dS.combat.companions[AutoBanishPets.companions[1]],
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.combat.companions[AutoBanishPets.companions[1]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.combat.companions[AutoBanishPets.companions[1]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.combat.companions[AutoBanishPets.companions[1]] = newValue end,
                 },
                 {
                     type = "dropdown",
                     name = companionNames[2],
                     tooltip = GetString(ABP_AFTER_COMBAT_TOOLTIP),
                     width = "half",
-                    default = 1,
+                    default = dS.combat.companions[AutoBanishPets.companions[2]],
                     requiresReload = false,
                     choices = selectOptions,
                     choicesValues = selectOptionValues,
                     getFunc = function() return sV.combat.companions[AutoBanishPets.companions[2]] end,
-                    setFunc = function(newValue)
-                        AutoBanishPets.savedVariables.combat.companions[AutoBanishPets.companions[2]] = newValue
-                    end,
+                    setFunc = function(newValue) sV.combat.companions[AutoBanishPets.companions[2]] = newValue end,
                 },
             },
         },
@@ -915,12 +784,10 @@ function AutoBanishPets.CreateSettingsWindow()
         {
             type = "checkbox",
             name = GetString(ABP_NOTIFICATION_NAME),
-            default = true,
+            default = dS.notification,
             requiresReload = false,
             getFunc = function() return sV.notification end,
-            setFunc = function(newValue)
-                AutoBanishPets.savedVariables.notification = newValue
-            end,
+            setFunc = function(newValue) sV.notification = newValue end,
         },
     }
     LAM2:RegisterOptionControls("AutoBanishPets_Settings", optionsData)
