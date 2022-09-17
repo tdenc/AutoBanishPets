@@ -2,7 +2,7 @@
 ## Description: Banish your minions under some circumstances
 ## APIVersion: 101035
 ## Author: @tdenc
-## Version: 0.5.0
+## Version: 0.5.1
 ## DependsOn: LibAddonMenu-2.0>=32
 ## OptionalDependsOn: DolgubonsLazyWritCreator NoAccidentalStealing NoInteract HarvestMap NoThankYou
 ## SavedVariables: AutoBanishPetsSavedVars

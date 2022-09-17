@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.5.0"
+AutoBanishPets.version = "0.5.1"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -679,7 +679,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
                 AutoBanishPets.BanishVanityPets()
             elseif (k == "assistants") then
                 local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-                if not AutoBanishPets.otherAssistants[activeId] then
+                if not (eventCode == EVENT_CRAFTING_STATION_INTERACT and AutoBanishPets.otherAssistants[activeId]) then
                     AutoBanishPets.BanishAssistants()
                 end
             else
