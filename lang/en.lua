@@ -17,6 +17,7 @@ local stringsEN = {
     ABP_QUEST_NAME = string.format("%s (%s)", GetString(SI_ITEMTYPEDISPLAYCATEGORY8), GetString(SI_QUESTREPEATABLETYPE2)),
     ABP_BEFORE_COMBAT_NAME = GetString(SI_AUDIO_OPTIONS_COMBAT),
     ABP_AFTER_COMBAT_NAME = GetString(SI_AUDIO_OPTIONS_COMBAT),
+    ABP_LOGOUT_NAME = GetString(SI_GAME_MENU_LOGOUT),
     -- Tooltip
     ABP_BANK_TOOLTIP = "When you open a bank",
     ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",
@@ -30,6 +31,7 @@ local stringsEN = {
     ABP_QUEST_TOOLTIP = "When you recieve/complete a daily quest",
     ABP_BEFORE_COMBAT_TOOLTIP = "When you go into combat",
     ABP_AFTER_COMBAT_TOOLTIP = "When you finish combat",
+    ABP_LOGOUT_TOOLTIP = "When you logout",
     -- Setting
     ABP_SELECT_OPTION1 = GetString(SI_CHECK_BUTTON_OFF),
     ABP_SELECT_OPTION2 = GetString(SI_CHECK_BUTTON_ON),

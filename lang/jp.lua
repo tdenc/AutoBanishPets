@@ -16,6 +16,7 @@ local stringsJP = {
     ABP_QUEST_TOOLTIP = "デイリークエストを受注/報告する時",
     ABP_BEFORE_COMBAT_TOOLTIP = "戦闘に突入する時",
     ABP_AFTER_COMBAT_TOOLTIP = "戦闘を終える時",
+    ABP_LOGOUT_TOOLTIP = "ログアウトする時",
     -- Setting
     ABP_NOTIFICATION_PETS = "戦闘ペットが消えました！",
     ABP_NOTIFICATION_VANITY_PETS = "非戦闘ペットが消えました！",

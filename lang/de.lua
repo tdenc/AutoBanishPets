@@ -15,6 +15,7 @@ local stringsDE = {
     ABP_QUEST_TOOLTIP = "Beim Erhalten/abschließen einer täglichen Quest",
     ABP_BEFORE_COMBAT_TOOLTIP = "Wenn du in den Kampf ziehst",
     ABP_AFTER_COMBAT_TOOLTIP = "Wenn du fertig Kampf ziehst",
+    ABP_LOGOUT_TOOLTIP = "Wenn du dich ausloggst",
     -- ABP_AFTER_COMBAT_TOOLTIP = "",
     -- Setting
     ABP_NOTIFICATION_PETS = "Deine Kampf Begleiter wurden verbannt!",

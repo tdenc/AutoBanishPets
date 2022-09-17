@@ -161,6 +161,17 @@ function AutoBanishPets.CreateSettingsWindow()
                         AutoBanishPets.savedVariables.combat.pets = newValue
                     end,
                 },
+                {
+                    type = "checkbox",
+                    name = GetString(ABP_LOGOUT_NAME),
+                    tooltip = GetString(ABP_LOGOUT_TOOLTIP),
+                    default = false,
+                    requiresReload = false,
+                    getFunc = function() return sV.logout.pets end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.logout.pets = newValue
+                    end,
+                },
             }
         },
         {
