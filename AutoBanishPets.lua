@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.1.5"
+AutoBanishPets.version = "0.1.6"
 AutoBanishPets.variableVersion = 8
 local EM = EVENT_MANAGER
 local ZO_StartInteraction = FISHING_MANAGER.StartInteraction
@@ -299,7 +299,7 @@ end
 
 -- Stealth events
 function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
-    local activeId
+    local activeId, targetId
     local sV = AutoBanishPets.savedVariables
 
     -- Start
