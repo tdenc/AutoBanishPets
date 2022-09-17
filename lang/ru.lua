@@ -15,6 +15,7 @@ local stringsRU = {
     --ABP_DYEING_STATION_TOOLTIP = "When you interact with a dyeing station",
     --ABP_WAYSHRINE_TOOLTIP = "When you interact with a wayshrine",
     --ABP_THIEVESTROVE_TOOLTIP = "When you interact with a thieves trove",
+    --ABP_STEAL_TOOLTIP = "When you steal",
     --ABP_TORCHBUG_TOOLTIP = "When you interact with a torchbug",
     --ABP_QUEST_TOOLTIP = "When you recieve/complete a daily quest",
     --ABP_STEALTH_TOOLTIP = "When you crouch",

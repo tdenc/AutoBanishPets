@@ -723,36 +723,65 @@ function AutoBanishPets.CreateSettingsWindow()
                         AutoBanishPets.savedVariables.thievesTrove[AutoBanishPets.companions[2]] = newValue
                     end,
                 },
-                -- Banishment works but cannot avoid decreasing report :(
+                -- This might conflict with other addons
                 -- {
                 --     type = "header",
-                --     name = GetString(ABP_TORCHBUG_NAME),
+                --     name = GetString(ABP_STEAL_NAME),
                 --     width = "full",
                 -- },
                 -- {
                 --     type = "checkbox",
                 --     name = companionNames[1],
-                --     tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
+                --     tooltip = GetString(ABP_STEAL_TOOLTIP),
                 --     width = "half",
                 --     default = false,
                 --     requiresReload = false,
-                --     getFunc = function() return sV.torchbug[AutoBanishPets.companions[1]] end,
+                --     getFunc = function() return sV.steal[AutoBanishPets.companions[1]] end,
                 --     setFunc = function(newValue)
-                --         AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[1]] = newValue
+                --         AutoBanishPets.savedVariables.steal[AutoBanishPets.companions[1]] = newValue
                 --     end,
                 -- },
                 -- {
                 --     type = "checkbox",
                 --     name = companionNames[2],
-                --     tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
+                --     tooltip = GetString(ABP_STEAL_TOOLTIP),
                 --     width = "half",
-                --     default = true,
+                --     default = false,
                 --     requiresReload = false,
-                --     getFunc = function() return sV.torchbug[AutoBanishPets.companions[2]] end,
+                --     getFunc = function() return sV.steal[AutoBanishPets.companions[2]] end,
                 --     setFunc = function(newValue)
-                --         AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[2]] = newValue
+                --         AutoBanishPets.savedVariables.steal[AutoBanishPets.companions[2]] = newValue
                 --     end,
                 -- },
+                {
+                    type = "header",
+                    name = GetString(ABP_TORCHBUG_NAME),
+                    width = "full",
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[1],
+                    tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
+                    width = "half",
+                    default = false,
+                    requiresReload = false,
+                    getFunc = function() return sV.torchbug[AutoBanishPets.companions[1]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[1]] = newValue
+                    end,
+                },
+                {
+                    type = "checkbox",
+                    name = companionNames[2],
+                    tooltip = GetString(ABP_TORCHBUG_TOOLTIP),
+                    width = "half",
+                    default = true,
+                    requiresReload = false,
+                    getFunc = function() return sV.torchbug[AutoBanishPets.companions[2]] end,
+                    setFunc = function(newValue)
+                        AutoBanishPets.savedVariables.torchbug[AutoBanishPets.companions[2]] = newValue
+                    end,
+                },
                 {
                     type = "header",
                     name = GetString(ABP_QUEST_NAME),

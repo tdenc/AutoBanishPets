@@ -29,9 +29,7 @@ AutoBanishPets.thievesTrove = {
     ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true,
 }
 
---[[ Banishment works but cannot avoid decreasing report :(
 AutoBanishPets.torchbug = {
-    ["Butterfly^n"] = true, ["Schmetterling^m"] = true, ["papillon^m"] = true, ["Бабочка^n"] = true, ["蝶^n"] = true,
-    ["Torchbug^n"] = true, ["Fackelkäfer^m"] = true, ["flammouche^f"] = true, ["Светлячок^n"] = true, ["ホタル^n"] = true,
+    ["Butterfly"] = true, ["Schmetterling"] = true, ["papillon"] = true, ["Бабочка"] = true, ["蝶"] = true,
+    ["Torchbug"] = true, ["Fackelkäfer"] = true, ["flammouche"] = true, ["Светлячок"] = true, ["ホタル"] = true,
 }
-]]
