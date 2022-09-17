@@ -2,7 +2,7 @@ local stringsJP = {
     -- Name
     ABP_FENCE_NAME = "盗品商",
     ABP_RETRAIT_STATION_NAME = "変性台",
-    ABP_VANITY_PETS_NAME = zo_strformat(SI_INTERACT_OPTION_DISMISS_ASSISTANT, "非戦闘ペット"),
+    ABP_VANITY_PETS_NAME = "非戦闘ペット",
     ABP_QUEST_NAME = string.format("%s (%s)", GetString(SI_ITEMTYPEDISPLAYCATEGORY8), "デイリー"),
     ABP_THIEVESTROVE_NAME = "盗賊の宝",
     ABP_TORCHBUG_NAME = "ホタル",
