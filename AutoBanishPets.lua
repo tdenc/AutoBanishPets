@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.2.2"
+AutoBanishPets.version = "0.2.3"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -222,7 +222,7 @@ function AutoBanishPets.ToggleCollectible(collectibleId, toggle, key)
         end
     else
         -- Toggling done
-        if IsCollectibleActive(collectibleId) == toggle then
+        if (IsCollectibleActive(collectibleId) == toggle) then
             UnregisterUpdate(key)
             if AutoBanishPets.savedVariables.notification then
                 if toggle then
@@ -413,8 +413,8 @@ function AutoBanishPets.onCombat(eventCode, inCombat)
         for k, v in pairs(sV.combat.companions) do
             -- Dismiss
             if (v > 1) then
-                local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
-                if (activeCompanionId == k) then
+                activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+                if (activeId == k) then
                     AutoBanishPets.BanishCompanions(k)
                     AutoBanishPets.queuedId.companions = k
                 end
@@ -464,8 +464,8 @@ function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
         for k, v in pairs(sV.stealth.companions) do
             -- Dismiss
             if (v > 1) then
-                local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
-                if (activeCompanionId == k) then
+                activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+                if (activeId == k) then
                     AutoBanishPets.BanishCompanions(k)
                     AutoBanishPets.queuedId.companions = k
                 end
