@@ -2,11 +2,20 @@ AutoBanishPets = AutoBanishPets or {}
 local AutoBanishPets = AutoBanishPets
 
 AutoBanishPets.abilities = {
-    [2] = {
-        23304, 30631, 30636, 30641, 23319, 30647, 30652, 30657, 23316, 30664, 30669, 30674,
-        24613, 30581, 30584, 30587, 24636, 30592, 30595, 30598, 24639, 30618, 30622, 30626,
+    [2] = { -- Sorcerer
+        -- Familiars and Clannfears
+        [23304] = true, [30631] = true, [30636] = true, [30641] = true,
+        [23319] = true, [30647] = true, [30652] = true, [30657] = true,
+        [23316] = true, [30664] = true, [30669] = true, [30674] = true,
+        -- Twilights
+        [24613] = true, [30581] = true, [30584] = true, [30587] = true,
+        [24636] = true, [30592] = true, [30595] = true, [30598] = true,
+        [24639] = true, [30618] = true, [30622] = true, [30626] = true,
     },
-    [4] = {
-        85982, 85983, 85984, 85985, 85986, 85987, 85988, 85989, 85990, 85991, 85992, 85993,
+    [4] = { -- Warden
+        -- Bears
+        [85982] = true, [85983] = true, [85984] = true, [85985] = true,
+        [85986] = true, [85987] = true, [85988] = true, [85989] = true,
+        [85990] = true, [85991] = true, [85992] = true, [85993] = true,
     },
 }

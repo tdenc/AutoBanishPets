@@ -139,6 +139,17 @@ function AutoBanishPets.CreateSettingsWindow()
 						AutoBanishPets.savedVariables.pets.wayshrine = newValue
 					end,
 				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_QUEST_NAME),
+					tooltip = GetString(ABP_QUEST_TOOLTIP),
+					default = false,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.quest end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.quest = newValue
+					end,
+				},
 			}
 		},
 		{
@@ -190,6 +201,17 @@ function AutoBanishPets.CreateSettingsWindow()
 					getFunc = function() return savedVariables.assistants.wayshrine end,
 					setFunc = function(newValue)
 						AutoBanishPets.savedVariables.assistants.wayshrine = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_QUEST_NAME),
+					tooltip = GetString(ABP_QUEST_TOOLTIP),
+					default = false,
+					requiresReload = true,
+					getFunc = function() return savedVariables.assistants.quest end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.assistants.quest = newValue
 					end,
 				},
 				{

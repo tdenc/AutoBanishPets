@@ -1,30 +1,38 @@
-ZO_CreateStringId("ABP_WHEN_NAME", "以下の時に消す：")
-ZO_CreateStringId("ABP_PETS_NAME", "戦闘ペット")
-ZO_CreateStringId("ABP_ASSISTANTS_NAME", "助手")
-ZO_CreateStringId("ABP_BANK_NAME", "銀行")
-ZO_CreateStringId("ABP_BANK_TOOLTIP", "銀行を開くとき")
-ZO_CreateStringId("ABP_GUILD_BANK_NAME", "ギルド銀行")
-ZO_CreateStringId("ABP_GUILD_BANK_TOOLTIP", "ギルド銀行を開くとき")
-ZO_CreateStringId("ABP_STORE_NAME", "商人")
-ZO_CreateStringId("ABP_STORE_TOOLTIP", "商人を開くとき")
-ZO_CreateStringId("ABP_GUILD_STORE_NAME", "ギルド商人")
-ZO_CreateStringId("ABP_GUILD_STORE_TOOLTIP", "ギルド商人を開くとき")
-ZO_CreateStringId("ABP_FENCE_NAME", "盗品商")
-ZO_CreateStringId("ABP_FENCE_TOOLTIP", "盗品商を開くとき")
-ZO_CreateStringId("ABP_CRAFT_STATION_NAME", "クラフト台")
-ZO_CreateStringId("ABP_CRAFT_STATION_TOOLTIP", "クラフト台に触れるとき")
-ZO_CreateStringId("ABP_RETRAIT_STATION_NAME", "変性台")
-ZO_CreateStringId("ABP_RETRAIT_STATION_TOOLTIP", "変性台に触れるとき")
-ZO_CreateStringId("ABP_DYEING_STATION_NAME", "染色台")
-ZO_CreateStringId("ABP_DYEING_STATION_TOOLTIP", "染色台に触れるとき")
-ZO_CreateStringId("ABP_WAYSHRINE_NAME", "旅の祠")
-ZO_CreateStringId("ABP_WAYSHRINE_TOOLTIP", "旅の祠に触れるとき")
-ZO_CreateStringId("ABP_COMBAT_NAME", "戦闘")
-ZO_CreateStringId("ABP_COMBAT_TOOLTIP", "戦闘に突入するとき")
-ZO_CreateStringId("ABP_NOTIFICATION_NAME", "通知")
-ZO_CreateStringId("ABP_NOTIFICATION_TOOLTIP", "ペットや助手が消えた時にチャット欄に通知する")
-ZO_CreateStringId("ABP_NOTIFICATION_PETS", "ペットが消えました！")
-ZO_CreateStringId("ABP_NOTIFICATION_ASSISTANTS", "助手が消えました！")
-ZO_CreateStringId("SI_BINDING_NAME_BANISH_ALL", "手動で全てを消す")
-ZO_CreateStringId("SI_BINDING_NAME_BANISH_PETS", "手動でペットを消す")
-ZO_CreateStringId("SI_BINDING_NAME_BANISH_ASSISTANTS", "手動で助手を消す")
+local stringsJP = {
+    ABP_WHEN_NAME = "以下の時に消す：",
+    ABP_PETS_NAME = "戦闘ペット",
+    ABP_ASSISTANTS_NAME = "助手",
+    ABP_BANK_NAME = "銀行",
+    ABP_BANK_TOOLTIP = "銀行を開く時",
+    ABP_GUILD_BANK_NAME = "ギルド銀行",
+    ABP_GUILD_BANK_TOOLTIP = "ギルド銀行を開く時",
+    ABP_STORE_NAME = "商人",
+    ABP_STORE_TOOLTIP = "商人を開く時",
+    ABP_GUILD_STORE_NAME = "ギルド商人",
+    ABP_GUILD_STORE_TOOLTIP = "ギルド商人を開く時",
+    ABP_FENCE_NAME = "盗品商",
+    ABP_FENCE_TOOLTIP = "盗品商を開く時",
+    ABP_CRAFT_STATION_NAME = "クラフト台",
+    ABP_CRAFT_STATION_TOOLTIP = "クラフト台に触れる時",
+    ABP_RETRAIT_STATION_NAME = "変性台",
+    ABP_RETRAIT_STATION_TOOLTIP = "変性台に触れる時",
+    ABP_DYEING_STATION_NAME = "染色台",
+    ABP_DYEING_STATION_TOOLTIP = "染色台に触れる時",
+    ABP_WAYSHRINE_NAME = "旅の祠",
+    ABP_WAYSHRINE_TOOLTIP = "旅の祠に触れる時",
+    ABP_QUEST_NAME = "デイリークエスト",
+    ABP_QUEST_TOOLTIP = "デイリークエストを受注/報告する時",
+    ABP_COMBAT_NAME = "戦闘",
+    ABP_COMBAT_TOOLTIP = "戦闘に突入する時",
+    ABP_NOTIFICATION_NAME = "通知",
+    ABP_NOTIFICATION_TOOLTIP = "ペットや助手が消えた時にチャット欄に通知する",
+    ABP_NOTIFICATION_PETS = "ペットが消えました！",
+    ABP_NOTIFICATION_ASSISTANTS = "助手が消えました！",
+    SI_BINDING_NAME_BANISH_ALL = "手動で全てを消す",
+    SI_BINDING_NAME_BANISH_PETS = "手動でペットを消す",
+    SI_BINDING_NAME_BANISH_ASSISTANTS = "手動で助手を消す",
+}
+
+for stringId, stringValue in pairs(stringsJP) do
+    SafeAddString(_G[stringId], stringValue, 1)
+end

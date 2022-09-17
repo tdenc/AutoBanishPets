@@ -1,8 +1,8 @@
 ## Title: Auto Banish Pets
-## Description: Banish your pets under some circumstances
+## Description: Banish your pets and assistants under some circumstances
 ## APIVersion: 100035
 ## Author: @tdenc
-## Version: 0.0.3
+## Version: 0.0.4
 ## DepentsOn: LibAddonMenu-2.0
 ## SavedVariables: AutoBanishPetsSavedVars
 
