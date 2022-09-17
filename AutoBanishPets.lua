@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.0.4"
+AutoBanishPets.version = "0.0.5"
 AutoBanishPets.variableVersion = 4
 
 AutoBanishPets.defaultSettings = {
@@ -53,14 +53,14 @@ function AutoBanishPets.BanishPets(eventCode, arg)
     -- EVENT_QUEST_ADDED (number eventCode, number journalIndex, string questName, string objectiveName)
     -- EVENT_QUEST_COMPLETE_DIALOG (number eventCode, number journalIndex)
     if (eventCode == EVENT_QUEST_ADDED or eventCode == EVENT_QUEST_COMPLETE_DIALOG) then
-        if not isDaily(arg) then
-            return
-        end
+        if not isDaily(arg) then return end
     end
 
     local numBuffs = GetNumBuffs("player")
     local unitClassId = AutoBanishPets.unitClassId
     local abilities = AutoBanishPets.abilities -- AutoBanishPetsAbilities.lua
+    if not abilities[unitClassId] then return end
+
 	for i = 1, numBuffs do
 		local _, _, _, buffSlot, _, _, _, _, _, _, abilityId, _ = GetUnitBuffInfo("player", i)
         if abilities[unitClassId][abilityId] then
@@ -76,13 +76,9 @@ end
 function AutoBanishPets.BanishAssistants(eventCode, arg)
     -- EVENT_PLAYER_COMBAT_STATE (number eventCode, boolean inCombat)
     if (eventCode == EVENT_PLAYER_COMBAT_STATE) then
-        if not arg then
-            return
-        end
+        if not arg then return end
     elseif (eventCode == EVENT_QUEST_ADDED or eventCode == EVENT_QUEST_COMPLETE_DIALOG) then
-        if not isDaily(arg) then
-            return
-        end
+        if not isDaily(arg) then return end
     end
 
     local activeAssistantId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
