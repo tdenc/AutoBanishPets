@@ -31,6 +31,10 @@ All options are customizable
 - Dismiss your Bastian while you crouch to kill friendly NPC.
   - Without decreasing rapport!
 
+## Slash commands
+- /abp : Dismiss all pets/assistants/companions
+- /abpsetting : Open the addon setting panel
+
 ## Dependencies
 - [LibAddonMenu-2.0](https://www.esoui.com/downloads/info7-LibAddonMenu.html)
 

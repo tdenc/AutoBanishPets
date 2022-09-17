@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.2.3"
+AutoBanishPets.version = "0.2.4"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -654,6 +654,8 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT, AutoBanishPets.onEventTriggered)
     -- Prehook
     ZO_PreHook("Logout", AutoBanishPets.onLogout)
+    -- Slash command
+    SLASH_COMMANDS["/abp"] = AutoBanishPets.BanishAll
 
 end
 

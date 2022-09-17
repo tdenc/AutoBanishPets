@@ -30,6 +30,10 @@
 - しゃがんで友好的NPCを殺す時にバスティアンを消す
   - コンパニオンとの関係が悪化するので
 
+## スラッシュコマンド
+- /abp : ペット・助手・コンパニオンを全て消す
+- /abpsetting : アドオン設定パネルを開く
+
 ## 依存アドオン
 - [LibAddonMenu-2.0](https://www.esoui.com/downloads/info7-LibAddonMenu.html)
 
