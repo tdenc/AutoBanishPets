@@ -33,117 +33,178 @@ function AutoBanishPets.CreateSettingsWindow()
 				AutoBanishPets.savedVariables.notification = newValue
 			end,
 		},
-        {
-            type = "header",
-            name = GetString(ABP_WHEN_NAME),
-            width = "full",
-        },
-        {
-			type = "checkbox",
-			name = GetString(ABP_BANK_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.bank end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.bank = newValue
-			end,
+		{
+			type = "submenu", name = GetString(ABP_PETS_NAME), controls = {
+				{
+					type = "header",
+					name = GetString(ABP_WHEN_NAME),
+					width = "full",
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_BANK_NAME),
+					tooltip = GetString(ABP_BANK_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.bank end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.bank = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_GUILD_BANK_NAME),
+					tooltip = GetString(ABP_GUILD_BANK_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.guildBank end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.guildBank = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_STORE_NAME),
+					tooltip = GetString(ABP_STORE_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.store end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.store = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_GUILD_STORE_NAME),
+					tooltip = GetString(ABP_GUILD_STORE_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.guildStore end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.guildStore = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_FENCE_NAME),
+					tooltip = GetString(ABP_FENCE_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.fence end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.fence = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_CRAFT_STATION_NAME),
+					tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.craftStation end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.craftStation = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_RETRAIT_STATION_NAME),
+					tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.retraitStation end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.retraitStation = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_DYEING_STATION_NAME),
+					tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.dyeingStation end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.dyeingStation = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_WAYSHRINE_NAME),
+					tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
+					default = false,
+					requiresReload = true,
+					getFunc = function() return savedVariables.pets.wayshrine end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.pets.wayshrine = newValue
+					end,
+				},
+			}
 		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_GUILD_BANK_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.guildBank end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.guildBank = newValue
-			end,
-		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_STORE_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.store end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.store = newValue
-			end,
-		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_GUILD_STORE_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.guildStore end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.guildStore = newValue
-			end,
-		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_FENCE_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.fence end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.fence = newValue
-			end,
-		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_CRAFT_STATION_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.craftStation end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.craftStation = newValue
-			end,
-		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_RETRAIT_STATION_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.retraitStation end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.retraitStation = newValue
-			end,
-		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_DYEING_STATION_NAME),
-			default = true,
-            requiresReload = true,
-			getFunc = function() return savedVariables.dyeingStation end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.dyeingStation = newValue
-			end,
-		},
-        {
-			type = "checkbox",
-			name = GetString(ABP_WAYSHRINE_NAME),
-			default = false,
-            requiresReload = true,
-			getFunc = function() return savedVariables.wayshrine end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.wayshrine = newValue
-			end,
-		},
-        {
-            type = "header",
-			name = GetString(ABP_EXPERIMENTAL_NAME),
-            width = "full",
-        },
-        {
-			type = "checkbox",
-			name = GetString(ABP_LOGON_NAME),
-			tooltip = GetString(ABP_LOGON_TOOLTIP),
-			default = false,
-            requiresReload = true,
-			getFunc = function() return savedVariables.logon end,
-			setFunc = function(newValue)
-				AutoBanishPets.savedVariables.logon = newValue
-			end,
-		},
+		{
+			type = "submenu", name = GetString(ABP_ASSISTANTS_NAME), controls = {
+				{
+					type = "header",
+					name = GetString(ABP_WHEN_NAME),
+					width = "full",
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_CRAFT_STATION_NAME),
+					tooltip = GetString(ABP_CRAFT_STATION_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.assistants.craftStation end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.assistants.craftStation = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_RETRAIT_STATION_NAME),
+					tooltip = GetString(ABP_RETRAIT_STATION_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.assistants.retraitStation end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.assistants.retraitStation = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_DYEING_STATION_NAME),
+					tooltip = GetString(ABP_DYEING_STATION_TOOLTIP),
+					default = true,
+					requiresReload = true,
+					getFunc = function() return savedVariables.assistants.dyeingStation end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.assistants.dyeingStation = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_WAYSHRINE_NAME),
+					tooltip = GetString(ABP_WAYSHRINE_TOOLTIP),
+					default = false,
+					requiresReload = true,
+					getFunc = function() return savedVariables.assistants.wayshrine end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.assistants.wayshrine = newValue
+					end,
+				},
+				{
+					type = "checkbox",
+					name = GetString(ABP_COMBAT_NAME),
+					tooltip = GetString(ABP_COMBAT_TOOLTIP),
+					default = false,
+					requiresReload = true,
+					getFunc = function() return savedVariables.assistants.combat end,
+					setFunc = function(newValue)
+						AutoBanishPets.savedVariables.assistants.combat = newValue
+					end,
+				},
+			}
+		}
     }
     LAM2:RegisterOptionControls("AutoBanishPets_Settings", optionsData)
 end

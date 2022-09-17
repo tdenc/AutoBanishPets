@@ -1,0 +1,22 @@
+<Bindings>
+	<Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
+		<Category name="Auto Banish Pets">
+			<Action name="BANISH_ALL">
+				<Up>AutoBanishPets.BanishAll()</Up>
+			</Action>
+			<Action name="BANISH_PETS">
+				<Up>AutoBanishPets.BanishPets()</Up>
+			</Action>
+			<Action name="BANISH_ASSISTANTS">
+				<Up>AutoBanishPets.BanishAssistants()</Up>
+			</Action>
+		</Category>
+	</Layer>
+	<Layer name="GamepadUIMode" allowFallthrough="false">
+        <Category>
+            <AllowAction name="BANISH_ALL"/>
+            <AllowAction name="BANISH_PETS"/>
+            <AllowAction name="BANISH_ASSISTANTS"/>
+        </Category>
+    </Layer>
+</Bindings>
