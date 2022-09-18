@@ -666,6 +666,27 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
     -- Armory assistants
     -- TODO: There does not exist EVENT_CLOSE_ARMORY!
 
+    -- CraftStation
+    if (eventCode == EVENT_CRAFTING_STATION_INTERACT) then
+        local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+        if (AutoBanishPets.otherAssistants[activeId]) then return end
+
+        for k, v in pairs(sV.craftStation) do
+            if v then
+                if (k == "pets") then
+                    AutoBanishPets.BanishPets()
+                elseif (k == "vanityPets") then
+                    AutoBanishPets.BanishVanityPets()
+                elseif (k == "assistants") then
+                    AutoBanishPets.BanishAssistants()
+                else
+                    AutoBanishPets.BanishCompanions(k)
+                end
+            end
+        end
+        return
+    end
+
     -- Others
     local eventKeys = {
         [EVENT_OPEN_BANK] = "bank",
@@ -673,7 +694,6 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
         [EVENT_OPEN_STORE] = "store",
         [EVENT_OPEN_TRADING_HOUSE] = "guildStore",
         [EVENT_OPEN_FENCE] = "fence",
-        [EVENT_CRAFTING_STATION_INTERACT] = "craftStation",
         [EVENT_DYEING_STATION_INTERACT_START] = "dyeingStation",
         [EVENT_RETRAIT_STATION_INTERACT_START] = "retraitStation",
         [EVENT_START_FAST_TRAVEL_INTERACTION] = "wayshrine",
@@ -686,10 +706,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
             elseif (k == "vanityPets") then
                 AutoBanishPets.BanishVanityPets()
             elseif (k == "assistants") then
-                local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
-                if not (eventCode == EVENT_CRAFTING_STATION_INTERACT and AutoBanishPets.otherAssistants[activeId]) then
-                    AutoBanishPets.BanishAssistants()
-                end
+                AutoBanishPets.BanishAssistants()
             else
                 AutoBanishPets.BanishCompanions(k)
             end
