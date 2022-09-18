@@ -231,6 +231,14 @@ end
 
 -- RegisterForUpdate
 local function RegisterUpdate(collectibleId, toggle, key, second)
+
+    -- Queue id for resummon
+    if toggle then
+        AutoBanishPets.queuedId[key] = 0
+    else
+        AutoBanishPets.queuedId[key] = collectibleId
+    end
+
     local delay
     local cooldownRemaining, cooldownDuration = GetCollectibleCooldownAndDuration(collectibleId)
     if (cooldownRemaining > second) then
@@ -280,9 +288,6 @@ function AutoBanishPets.ToggleCollectible(collectibleId, toggle, key)
         -- Then toggle
         elseif (IsCollectibleActive(collectibleId) ~= toggle and not IsCollectibleBlocked(collectibleId)) then
             UseCollectible(collectibleId)
-            if toggle then
-                AutoBanishPets.queuedId[key] = 0
-            end
             AutoBanishPets.isToggling[key] = true
         end
     else
@@ -378,11 +383,6 @@ function AutoBanishPets.BanishAll()
     AutoBanishPets.BanishVanityPets()
     AutoBanishPets.BanishAssistants()
     AutoBanishPets.BanishCompanions()
-
-    -- Clear queue
-    for k, v in pairs(AutoBanishPets.queuedId) do
-        AutoBanishPets.queuedId[k] = 0
-    end
 end
 
 -- Toggle No-Pets-Allowed
@@ -413,18 +413,27 @@ end
 ----------------------
 --RESUMMON FUNCTIONS--
 ----------------------
+-- Resummon combat pets
+function AutoBanishPets.ResummonPets(collectibleId)
+    -- Resummoning combat pets via API is not allowed
+    return
+end
+
 -- Resummon vanity pets
-function AutoBanishPets.ResummonVanityPets(collectibleId)
+function AutoBanishPets.ResummonVanityPets()
     if IsUnitInCombat("player") then
         return
     end
 
+    local targetId = AutoBanishPets.queuedId["vanityPets"]
+    if targetId == 0 then return end
+
     UnregisterUpdate("vanityPets")
-    RegisterUpdate(collectibleId, true, "vanityPets", 3000)
+    RegisterUpdate(targetId, true, "vanityPets", 3000)
 end
 
 -- Resummon assistants
-function AutoBanishPets.ResummonAssistants(collectibleId)
+function AutoBanishPets.ResummonAssistants()
     if IsUnitInCombat("player") then
         return
     end
@@ -432,12 +441,15 @@ function AutoBanishPets.ResummonAssistants(collectibleId)
     local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
     if (activeCompanionId ~= 0) then return end
 
+    local targetId = AutoBanishPets.queuedId["assistants"]
+    if targetId == 0 then return end
+
     UnregisterUpdate("assistants")
-    RegisterUpdate(collectibleId, true, "assistants", 3000)
+    RegisterUpdate(targetId, true, "assistants", 3000)
 end
 
 -- Resummon companions
-function AutoBanishPets.ResummonCompanions(collectibleId)
+function AutoBanishPets.ResummonCompanions()
     if IsUnitInCombat("player") then
         return
     end
@@ -445,8 +457,19 @@ function AutoBanishPets.ResummonCompanions(collectibleId)
     local activeAssistantId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
     if (activeAssistantId ~= 0) then return end
 
-    UnregisterUpdate("vanityPets")
-    RegisterUpdate(collectibleId, true, "companions", 3000)
+    local targetId = AutoBanishPets.queuedId["companions"]
+    if targetId == 0 then return end
+
+    UnregisterUpdate("companions")
+    RegisterUpdate(targetId, true, "companions", 3000)
+end
+
+-- For Bindings.xml
+function AutoBanishPets.ResummonAll()
+    AutoBanishPets.ResummonPets()
+    AutoBanishPets.ResummonVanityPets()
+    AutoBanishPets.ResummonAssistants()
+    AutoBanishPets.ResummonCompanions()
 end
 
 -------------------
@@ -463,7 +486,6 @@ function AutoBanishPets.onCombat(eventCode, inCombat)
         if (sV.combat.vanityPets > 1) then
             activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
             if (activeId ~= 0) then
-                AutoBanishPets.queuedId.vanityPets = activeId
                 AutoBanishPets.BanishVanityPets(activeId)
             end
         end
@@ -472,7 +494,6 @@ function AutoBanishPets.onCombat(eventCode, inCombat)
         if (sV.combat.assistants > 1) then
             activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
             if (activeId ~= 0) then
-                AutoBanishPets.queuedId.assistants = activeId
                 AutoBanishPets.BanishAssistants(activeId)
             end
         end
@@ -485,18 +506,12 @@ function AutoBanishPets.onCombat(eventCode, inCombat)
 
         -- Resummon non-combat pets
         if (sV.combat.vanityPets > 2) then
-            targetId = AutoBanishPets.queuedId.vanityPets
-            if (targetId ~= 0) then
-                AutoBanishPets.ResummonVanityPets(targetId)
-            end
+            AutoBanishPets.ResummonVanityPets()
         end
 
         -- Resummon assistants
         if (sV.combat.assistants > 2) then
-            targetId = AutoBanishPets.queuedId.assistants
-            if (targetId ~= 0) then
-                AutoBanishPets.ResummonAssistants(targetId)
-            end
+            AutoBanishPets.ResummonAssistants()
         end
 
         -- Dismiss/Resummon companions
@@ -506,15 +521,11 @@ function AutoBanishPets.onCombat(eventCode, inCombat)
                 activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
                 if (activeId == k) then
                     AutoBanishPets.BanishCompanions(k)
-                    AutoBanishPets.queuedId.companions = k
                 end
             end
             -- Resummon
             if (v > 2) then
-                targetId = AutoBanishPets.queuedId.companions
-                if (targetId ~= 0) then
-                    AutoBanishPets.ResummonCompanions(targetId)
-                end
+                AutoBanishPets.ResummonCompanions()
             end
         end
     end
@@ -536,7 +547,6 @@ function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
         if (sV.stealth.vanityPets > 1) then
             activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
             if (activeId ~= 0) then
-                AutoBanishPets.queuedId.vanityPets = activeId
                 AutoBanishPets.BanishVanityPets(activeId)
             end
         end
@@ -545,7 +555,6 @@ function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
         if (sV.stealth.assistants > 1) then
             activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
             if (activeId ~= 0) then
-                AutoBanishPets.queuedId.assistants = activeId
                 AutoBanishPets.BanishAssistants(activeId)
             end
         end
@@ -557,7 +566,6 @@ function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
                 activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
                 if (activeId == k) then
                     AutoBanishPets.BanishCompanions(k)
-                    AutoBanishPets.queuedId.companions = k
                 end
             end
         end
@@ -565,27 +573,18 @@ function AutoBanishPets.onStealth(eventCode, unitTag, stealthState)
     else
         -- Resummon non-combat pets
         if (sV.stealth.vanityPets > 2) then
-            targetId = AutoBanishPets.queuedId.vanityPets
-            if (targetId ~= 0) then
-                AutoBanishPets.ResummonVanityPets(targetId)
-            end
+            AutoBanishPets.ResummonVanityPets()
         end
 
         -- Resummon assistants
         if (sV.stealth.assistants > 2) then
-            targetId = AutoBanishPets.queuedId.assistants
-            if (targetId ~= 0) then
-                AutoBanishPets.ResummonAssistants(targetId)
-            end
+            AutoBanishPets.ResummonAssistants()
         end
 
         -- Resummon companions
         for k, v in pairs(sV.stealth.companions) do
             if (v > 2) then
-                targetId = AutoBanishPets.queuedId.companions
-                if (targetId ~= 0) then
-                    AutoBanishPets.ResummonCompanions(targetId)
-                end
+                AutoBanishPets.ResummonCompanions()
             end
         end
     end

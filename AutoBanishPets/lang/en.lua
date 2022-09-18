@@ -71,6 +71,10 @@ local stringsEN = {
     SI_BINDING_NAME_BANISH_VANITY_PETS = "Banish non-combat pets",
     SI_BINDING_NAME_BANISH_ASSISTANTS = "Banish assistants",
     SI_BINDING_NAME_BANISH_COMPANIONS = "Banish companions",
+    SI_BINDING_NAME_RESUMMON_ALL = "Resummon all",
+    SI_BINDING_NAME_RESUMMON_VANITY_PETS = "Resummon non-combat pets",
+    SI_BINDING_NAME_RESUMMON_ASSISTANTS = "Resummon assistants",
+    SI_BINDING_NAME_RESUMMON_COMPANIONS = "Resummon companions",
     SI_BINDING_NAME_NO_PETS_ALLOWED = "Toggle 'NO-PETS-ALLOWED'",
 }
 

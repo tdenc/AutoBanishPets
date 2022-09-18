@@ -16,6 +16,18 @@
 			<Action name="BANISH_COMPANIONS">
 				<Down>AutoBanishPets.BanishCompanions()</Down>
 			</Action>
+			<Action name="RESUMMON_ALL">
+				<Down>AutoBanishPets.ResummonAll()</Down>
+			</Action>
+			<Action name="RESUMMON_VANITY_PETS">
+				<Down>AutoBanishPets.ResummonVanityPets()</Down>
+			</Action>
+			<Action name="RESUMMON_ASSISTANTS">
+				<Down>AutoBanishPets.ResummonAssistants()</Down>
+			</Action>
+			<Action name="RESUMMON_COMPANIONS">
+				<Down>AutoBanishPets.ResummonCompanions()</Down>
+			</Action>
 			<Action name="NO_PETS_ALLOWED">
 				<Down>AutoBanishPets.ToggleNPA(not AutoBanishPets.savedVariables.noPetsAllowed)</Down>
 			</Action>
@@ -28,6 +40,10 @@
 			<AllowAction name="BANISH_VANITY_PETS"/>
 			<AllowAction name="BANISH_ASSISTANTS"/>
 			<AllowAction name="BANISH_COMPANIONS"/>
+			<AllowAction name="RESUMMON_ALL"/>
+			<AllowAction name="RESUMMON_VANITY_PETS"/>
+			<AllowAction name="RESUMMON_ASSISTANTS"/>
+			<AllowAction name="RESUMMON_COMPANIONS"/>
 			<AllowAction name="NO_PETS_ALLOWED"/>
 		</Category>
 	</Layer>
