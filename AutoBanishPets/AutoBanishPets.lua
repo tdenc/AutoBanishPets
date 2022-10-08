@@ -231,14 +231,6 @@ end
 
 -- RegisterForUpdate
 local function RegisterUpdate(collectibleId, toggle, key, second)
-
-    -- Queue id for resummon
-    if toggle then
-        AutoBanishPets.queuedId[key] = 0
-    else
-        AutoBanishPets.queuedId[key] = collectibleId
-    end
-
     local delay
     local cooldownRemaining, cooldownDuration = GetCollectibleCooldownAndDuration(collectibleId)
     if (cooldownRemaining > second) then
@@ -425,11 +417,11 @@ function AutoBanishPets.ResummonVanityPets()
         return
     end
 
-    local targetId = AutoBanishPets.queuedId["vanityPets"]
+    local targetId = AutoBanishPets.lastId["vanityPets"]
     if targetId == 0 then return end
 
     UnregisterUpdate("vanityPets")
-    RegisterUpdate(targetId, true, "vanityPets", 3000)
+    RegisterUpdate(targetId, true, "vanityPets", 0)
 end
 
 -- Resummon assistants
@@ -441,11 +433,11 @@ function AutoBanishPets.ResummonAssistants()
     local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
     if (activeCompanionId ~= 0) then return end
 
-    local targetId = AutoBanishPets.queuedId["assistants"]
+    local targetId = AutoBanishPets.lastId["assistants"]
     if targetId == 0 then return end
 
     UnregisterUpdate("assistants")
-    RegisterUpdate(targetId, true, "assistants", 3000)
+    RegisterUpdate(targetId, true, "assistants", 0)
 end
 
 -- Resummon companions
@@ -457,19 +449,19 @@ function AutoBanishPets.ResummonCompanions()
     local activeAssistantId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
     if (activeAssistantId ~= 0) then return end
 
-    local targetId = AutoBanishPets.queuedId["companions"]
+    local targetId = AutoBanishPets.lastId["companions"]
     if targetId == 0 then return end
 
     UnregisterUpdate("companions")
-    RegisterUpdate(targetId, true, "companions", 3000)
+    RegisterUpdate(targetId, true, "companions", 0)
 end
 
 -- For Bindings.xml
 function AutoBanishPets.ResummonAll()
     AutoBanishPets.ResummonPets()
-    AutoBanishPets.ResummonVanityPets()
-    AutoBanishPets.ResummonAssistants()
     AutoBanishPets.ResummonCompanions()
+    AutoBanishPets.ResummonAssistants()
+    AutoBanishPets.ResummonVanityPets()
 end
 
 -------------------
@@ -778,6 +770,22 @@ function AutoBanishPets.onPlayerActivated()
 
 end
 
+-- Trigger when UseCollectible activated
+function AutoBanishPets.onCollectibleUpdated()
+    local activeVanityPetId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
+    if (activeVanityPetId ~= 0) then
+        AutoBanishPets.lastId["vanityPets"] = activeVanityPetId
+    end
+    local activeAssistantId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_ASSISTANT)
+    if (activeAssistantId ~= 0) then
+        AutoBanishPets.lastId["assistants"] = activeAssistantId
+    end
+    local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    if (activeCompanionId ~= 0) then
+        AutoBanishPets.lastId["companions"] = activeCompanionId
+    end
+end
+
 -----------------------
 --(UN)REGISTER EVENTS--
 -----------------------
@@ -808,6 +816,8 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_ARRESTED", EVENT_JUSTICE_BEING_ARRESTED, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT, AutoBanishPets.onEventTriggered)
     -- Prehook
+    -- Store last collectible IDs
+    ZO_PreHook("UseCollectible", AutoBanishPets.onCollectibleUpdated)
     -- Logout
     if sV.logout.pets then
         ZO_PreHook("Logout", AutoBanishPets.onLogout)
@@ -852,7 +862,7 @@ end
 --------------------
 function AutoBanishPets:Initialize()
     AutoBanishPets.savedVariables = ZO_SavedVars:NewAccountWide("AutoBanishPetsSavedVars", AutoBanishPets.variableVersion, nil, AutoBanishPets.defaultSettings)
-    AutoBanishPets.queuedId = { -- Table for resummoning
+    AutoBanishPets.lastId = { -- Table for resummoning
         ["vanityPets"] = 0,
         ["assistants"] = 0,
         ["companions"] = 0,
