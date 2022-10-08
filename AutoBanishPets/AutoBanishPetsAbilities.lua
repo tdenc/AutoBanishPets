@@ -89,6 +89,7 @@ AutoBanishPets.dislikeLocations = {
         [760] = true, -- Mournhold Outlaws Refuge
         [761] = true, -- Riften Outlaws Refuge
         [780] = true, -- Orsinium Outlaws Refuge
+        [821] = true, -- Thieves Den
         [837] = true, -- Anvil Outlaws Refuge
         [971] = true, -- Vivec City Outlaws Refuge
         [982] = true, -- Slag Town Outlaws Refuge
