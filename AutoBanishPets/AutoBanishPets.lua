@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.5.5"
+AutoBanishPets.version = "0.6.0"
 AutoBanishPets.variableVersion = 8
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
@@ -879,8 +879,9 @@ function AutoBanishPets:Initialize()
     EM:RegisterForEvent(AutoBanishPets.name, EVENT_PLAYER_ACTIVATED, AutoBanishPets.onPlayerActivated)
 
     -- Override StartInteraction
-    local ZO_StartInteraction = FISHING_MANAGER.StartInteraction
-    FISHING_MANAGER.StartInteraction = function(...)
+    local interactionManager = FISHING_MANAGER or INTERACTIVE_WHEEL_MANAGER
+    local ZO_StartInteraction = interactionManager.StartInteraction
+    interactionManager.StartInteraction = function(...)
         local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
         if (activeId == 0) then
             return ZO_StartInteraction(...)
