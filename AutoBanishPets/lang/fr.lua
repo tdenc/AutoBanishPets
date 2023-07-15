@@ -3,7 +3,6 @@ local stringsFR = {
     ABP_FENCE_NAME = "Receleur",
     ABP_RETRAIT_STATION_NAME = "Atelier de transmutation",
     ABP_THIEVESTROVE_NAME = "trésor des voleurs",
-    ABP_TORCHBUG_NAME = "flammouche",
     -- Tooltip
     --ABP_BANK_TOOLTIP = "When you open a bank",
     --ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",

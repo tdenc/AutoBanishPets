@@ -3,7 +3,6 @@ local stringsRU = {
     ABP_FENCE_NAME = "Скупщик краденого",
     ABP_RETRAIT_STATION_NAME = "Аппарат для трансмутации",
     ABP_THIEVESTROVE_NAME = "Воровской клад",
-    ABP_TORCHBUG_NAME = "Светлячок",
     -- Tooltip
     --ABP_BANK_TOOLTIP = "When you open a bank",
     --ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",

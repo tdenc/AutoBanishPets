@@ -39,6 +39,8 @@ AutoBanishPets.companions = {
     [2] = 9353, -- Mirri
     [3] = 9911, -- Ember
     [4] = 9912, -- Isobel
+    [5] = 11113, -- Sharp
+    [6] = 11114, -- Azandar
 }
 
 AutoBanishPets.bankers = {
@@ -64,7 +66,7 @@ AutoBanishPets.otherAssistants = {
     [10184] = true, -- Giladil
 }
 
-AutoBanishPets.dislikeLocations = {
+AutoBanishPets.locations = {
     [9245] = {},
     [9353] = {
         [826] = true, -- Dark Brotherhood Sanctuary
@@ -101,13 +103,58 @@ AutoBanishPets.dislikeLocations = {
         [1211] = true, -- Markarth Outlaws Refuge
         [1252] = true, -- Leyawiin Outlaws Refuge
     },
+    [11113] = {},
+    [11114] = {
+        -- Eyevea
+        [203] = true, -- Cheesemonger's Hollow
+        [218] = true, -- Circus of Cheerful Slaughter
+        [219] = true, -- Chateau of the Ravenous Rodent
+        [267] = true, -- Eyevea
+        [529] = true, -- Eyevea Mages Guild
+        [541] = true, -- Glade of the Divines
+        -- Artaeum
+        [1027] = true, -- Artaeum
+        [1063] = true, -- Grand Psijic Villa
+    },
+}
+
+AutoBanishPets.wayshrines = {
+    [9245] = {},
+    [9353] = {},
+    [9911] = {},
+    [9912] = {},
+    [11113] = {},
+    [11114] = {
+        -- Eyevea
+        [215] = true, -- Eyevea
+        -- Artaeum
+        [360] = true, -- Artaeum
+        [373] = true, -- Grand Psijic Villa
+    },
+
+}
+
+AutoBanishPets.harvests = {
+    [9245] = {},
+    [9353] = {
+        ["Butterfly"] = true, ["Schmetterling"] = true, ["papillon"] = true, ["Бабочка"] = true, ["蝶"] = true,
+        ["Torchbug"] = true, ["Fackelkäfer"] = true, ["flammouche"] = true, ["Светлячок"] = true, ["ホタル"] = true,
+    },
+    [9911] = {},
+    [9912] = {},
+    [11113] = {},
+    [11114] = {
+        ["Blue Entoloma"] = true, ["Blauer Glöckling"] = true, ["Entoloma bleue"] = true, ["Голубая знтолома"] = true, ["アオイッポンシメジ"] = true,
+        ["Emetic Russula"] = true, ["Brechtäubling"] = true, ["Russule émétique"] = true, ["Жгучеедкая сыроежка"] = true, ["ドクベニタケ"] = true,
+        ["Imp Stool"] = true, ["Koboldschemel"] = true, ["Pied-de-lutin"] = true, ["Бесовский гриб"] = true, ["木椅子キノコ"] = true,
+        ["Luminous Russula"] = true, ["Leuchttäubling"] = true, ["Russule phosphorescente"] = true, ["Светящаяся сыроежка"] = true, ["光ベニタケ"] = true,
+        ["Namira's Rot"] = true, ["Namiras Fäulnis"] = true, ["Truffe de Namira"] = true, ["Гниль Намиры"] = true, ["ナミラキノコ"] = true,
+        ["Stinkhorn"] = true, ["Stinkmorchel"] = true, ["Mutinus elegans"] = true, ["Цветохвостник"] = true, ["スッポンタケ"] = true,
+        ["Violet Coprinus"] = true, ["Violetter Tintling"] = true, ["Coprin violet"] = true, ["Лиловый копринус"] = true, ["ムラサキヒトヨタケ"] = true,
+        ["White Cap"] = true, ["Weißkappe"] = true, ["Chapeau blanc"] = true, ["Белянка"] = true, ["白かさキノコ"] = true,
+    },
 }
 
 AutoBanishPets.thievesTrove = {
     ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true,
-}
-
-AutoBanishPets.torchbug = {
-    ["Butterfly"] = true, ["Schmetterling"] = true, ["papillon"] = true, ["Бабочка"] = true, ["蝶"] = true,
-    ["Torchbug"] = true, ["Fackelkäfer"] = true, ["flammouche"] = true, ["Светлячок"] = true, ["ホタル"] = true,
 }

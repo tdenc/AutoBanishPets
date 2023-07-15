@@ -6,7 +6,7 @@ local AutoBanishPets = AutoBanishPets
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
 AutoBanishPets.version = "0.6.0"
-AutoBanishPets.variableVersion = 8
+AutoBanishPets.variableVersion = 9
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
     ["noPetsAllowed"] = false,
@@ -19,6 +19,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["guildBank"] = {
         ["pets"] = true,
@@ -28,6 +30,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["store"] = {
         ["pets"] = true,
@@ -37,6 +41,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["guildStore"] = {
         ["pets"] = true,
@@ -46,6 +52,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["fence"] = {
         ["pets"] = true,
@@ -55,15 +63,19 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["craftStation"] = {
         ["pets"] = true,
         ["vanityPets"] = false,
         ["assistants"] = true,
-        [9245] = true,
+        [9245] = false,
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["dyeingStation"] = {
         ["pets"] = true,
@@ -73,6 +85,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = true,
+        [11114] = false,
     },
     ["retraitStation"] = {
         ["pets"] = true,
@@ -82,6 +96,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["wayshrine"] = {
         ["pets"] = true,
@@ -91,6 +107,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["quest"] = {
         ["pets"] = true,
@@ -100,6 +118,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["combat"] = {
         ["pets"] = false,
@@ -110,6 +130,8 @@ AutoBanishPets.defaultSettings = {
             [9353] = 1,
             [9911] = 1,
             [9912] = 1,
+            [11113] = 1,
+            [11114] = 1,
         },
     },
     ["stealth"] = {
@@ -121,6 +143,8 @@ AutoBanishPets.defaultSettings = {
             [9353] = 2,
             [9911] = 2,
             [9912] = 2,
+            [11113] = 2,
+            [11114] = 2,
         },
     },
     ["logout"] = {
@@ -131,6 +155,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["thievesTrove"] = {
         ["pets"] = false,
@@ -140,8 +166,10 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = true,
+        [11113] = false,
+        [11114] = false,
     },
-    ["torchbug"] = {
+    ["harvesting"] = {
         ["pets"] = false,
         ["vanityPets"] = false,
         ["assistants"] = false,
@@ -149,6 +177,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = true,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = true,
     },
     ["fishing"] = {
         ["pets"] = false,
@@ -158,6 +188,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = true,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["steal"] = {
         ["pets"] = false,
@@ -167,6 +199,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = true,
         [9912] = true,
+        [11113] = true,
+        [11114] = false,
     },
     ["arrested"] = {
         ["pets"] = false,
@@ -176,6 +210,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = true,
         [9912] = false,
+        [11113] = true,
+        [11114] = false,
     },
     ["vampire"] = {
         ["pets"] = false,
@@ -185,6 +221,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["werewolf"] = {
         ["pets"] = false,
@@ -194,6 +232,8 @@ AutoBanishPets.defaultSettings = {
         [9353] = false,
         [9911] = false,
         [9912] = false,
+        [11113] = false,
+        [11114] = false,
     },
     ["location"] = {
         ["pets"] = false,
@@ -203,6 +243,9 @@ AutoBanishPets.defaultSettings = {
         [9353] = true,
         [9911] = false,
         [9912] = true,
+        [11113] = false,
+        [11114] = true,
+    },
     }
 }
 local EM = EVENT_MANAGER
@@ -623,7 +666,7 @@ function AutoBanishPets.onEventTriggered(eventCode, arg1, arg2)
                 if (k == "pets") or (k == "vanityPets") or (k == "assistants") then
                     -- Do nothing
                 elseif v then
-                    for zoneId, _ in pairs(AutoBanishPets.dislikeLocations[k]) do
+                    for zoneId, _ in pairs(AutoBanishPets.locations[k]) do
                         if (arg2 == GetZoneNameById(zoneId)) then
                             AutoBanishPets.BanishCompanions(k)
                         end
@@ -744,7 +787,7 @@ function AutoBanishPets.onPlayerActivated()
         if (k == "pets") or (k == "vanityPets") or (k == "assistants") then
             -- Do nothing
         elseif v then
-            if (AutoBanishPets.dislikeLocations[k][GetZoneId(GetUnitZoneIndex("player"))]) then
+            if (AutoBanishPets.locations[k][GetZoneId(GetUnitZoneIndex("player"))]) then
                 AutoBanishPets.BanishCompanions(k)
             end
         end
@@ -771,7 +814,7 @@ function AutoBanishPets.onPlayerActivated()
 end
 
 -- Trigger when UseCollectible activated
-function AutoBanishPets.onCollectibleUpdated()
+function AutoBanishPets:UseCollectible(collectibleId)
     local activeVanityPetId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_VANITY_PET)
     if (activeVanityPetId ~= 0) then
         AutoBanishPets.lastId["vanityPets"] = activeVanityPetId
@@ -784,6 +827,27 @@ function AutoBanishPets.onCollectibleUpdated()
     if (activeCompanionId ~= 0) then
         AutoBanishPets.lastId["companions"] = activeCompanionId
     end
+
+    if AutoBanishPets.savedVariables.location[collectibleId] and AutoBanishPets.locations[collectibleId][GetZoneId(GetUnitZoneIndex("player"))] then
+        if (activeCompanionId ~= 0) and (activeCompanionId == collectibleId) then
+            return false
+        else
+            ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked summoning the companion.", AutoBanishPets.name))
+            return true
+        end
+    end
+end
+
+function AutoBanishPets:FastTravel(nodeId)
+    local activeCompanionId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    if (activeCompanionId ~= 0) and AutoBanishPets.savedVariables.location[activeCompanionId] and AutoBanishPets.wayshrines[activeCompanionId][nodeId] then
+        AutoBanishPets.BanishCompanions(activeId)
+        ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked fast travel.", AutoBanishPets.name))
+        return true
+    end
+    return false
+end
+
 end
 
 -----------------------
@@ -816,8 +880,13 @@ function AutoBanishPets:RegisterEvents()
     EM:RegisterForEvent(ns .. "_ARRESTED", EVENT_JUSTICE_BEING_ARRESTED, AutoBanishPets.onEventTriggered)
     EM:RegisterForEvent(ns .. "_INTERACT", EVENT_CLIENT_INTERACT_RESULT, AutoBanishPets.onEventTriggered)
     -- Prehook
-    -- Store last collectible IDs
-    ZO_PreHook("UseCollectible", AutoBanishPets.onCollectibleUpdated)
+    -- Modify UseCollectible
+    ZO_PreHook("UseCollectible", function(rowId)
+        if rowId then
+            return AutoBanishPets:UseCollectible(rowId)
+        end
+        return false
+    end)
     -- Logout
     if sV.logout.pets then
         ZO_PreHook("Logout", AutoBanishPets.onLogout)
@@ -825,6 +894,17 @@ function AutoBanishPets:RegisterEvents()
     -- Skill Blocker
     if (sV.vampire[AutoBanishPets.companions[1]] or sV.vampire[AutoBanishPets.companions[2]] or sV.werewolf[AutoBanishPets.companions[1]] or sV.werewolf[AutoBanishPets.companions[2]]) then
         ZO_PreHook("ZO_ActionBar_CanUseActionSlots", AutoBanishPets.onSkillCast)
+    end
+    -- Block fast travel
+    if (sV.location[AutoBanishPets.companions[1]] or sV.location[AutoBanishPets.companions[2]]
+        or sV.location[AutoBanishPets.companions[3]] or sV.location[AutoBanishPets.companions[4]]
+        or sV.location[AutoBanishPets.companions[5]] or sV.location[AutoBanishPets.companions[6]]) then
+        ZO_PreHook("FastTravelToNode", function(rowId)
+            if rowId then
+                return AutoBanishPets:FastTravel(rowId)
+            end
+            return false
+        end)
     end
     -- Slash command
     SLASH_COMMANDS["/abp"] = AutoBanishPets.BanishAll
@@ -888,8 +968,8 @@ function AutoBanishPets:Initialize()
         end
 
         local _, interactableName, interactionBlocked, _, additionalInfo, _, _, isCriminalInteract = GetGameCameraInteractableActionInfo()
-        -- Block taking torchbug/butterfly
-        if AutoBanishPets.savedVariables.torchbug[activeId] and AutoBanishPets.torchbug[interactableName] then
+        -- Block harvesting something
+        if AutoBanishPets.savedVariables.harvesting[activeId] and AutoBanishPets.harvests[activeId][interactableName] then
             AutoBanishPets.BanishCompanions(activeId)
             ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked the interaction.", AutoBanishPets.name))
             return true
