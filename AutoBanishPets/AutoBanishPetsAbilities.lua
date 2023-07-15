@@ -134,6 +134,19 @@ AutoBanishPets.wayshrines = {
 
 }
 
+AutoBanishPets.ingredients = {
+    [9245] = {
+        ["Cheese"] = true, ["Käse"] = true, ["Fromage"] = true, ["Сыр"] = true, ["チーズ"] = true
+    },
+    [9353] = {},
+    [9911] = {},
+    [9912] = {},
+    [11113] = {},
+    [11114] = {
+        ["Coffee"] = true, ["Kaffee"] = true, ["Café"] = true, ["Кофе"] = true, ["コーヒー"] = true,
+    },
+}
+
 AutoBanishPets.harvests = {
     [9245] = {},
     [9353] = {

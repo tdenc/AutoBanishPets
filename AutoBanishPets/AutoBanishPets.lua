@@ -246,6 +246,16 @@ AutoBanishPets.defaultSettings = {
         [11113] = false,
         [11114] = true,
     },
+    ["provisioning"] = {
+        ["pets"] = false,
+        ["vanityPets"] = false,
+        ["assistants"] = false,
+        [9245] = true,
+        [9353] = false,
+        [9911] = false,
+        [9912] = false,
+        [11113] = false,
+        [11114] = true,
     }
 }
 local EM = EVENT_MANAGER
@@ -848,6 +858,22 @@ function AutoBanishPets:FastTravel(nodeId)
     return false
 end
 
+-- Trigger when food created
+function AutoBanishPets.onFoodCreated()
+    local activeId = GetActiveCollectibleByType(COLLECTIBLE_CATEGORY_TYPE_COMPANION)
+    if (activeId == 0) then return false end
+
+    local maxIngredients = GetMaxRecipeIngredients()
+    local selectedData = PROVISIONER.recipeTree:GetSelectedData()
+
+    for i = 1, maxIngredients do
+        local ingredientName, _, _, _, _ = GetRecipeIngredientItemInfo(selectedData.recipeListIndex, selectedData.recipeIndex, i)
+        if AutoBanishPets.ingredients[activeId][ingredientName] then
+            AutoBanishPets.BanishCompanions(activeId)
+            ZO_Alert(ERROR, SOUNDS.GENERAL_ALERT_ERROR, string.format("%s blocked provisioning.", AutoBanishPets.name))
+            return true
+        end
+    end
 end
 
 -----------------------
@@ -899,6 +925,12 @@ function AutoBanishPets:RegisterEvents()
         or sV.vampire[AutoBanishPets.companions[5]] or sV.werewolf[AutoBanishPets.companions[5]]
         or sV.vampire[AutoBanishPets.companions[6]] or sV.werewolf[AutoBanishPets.companions[6]]) then
         ZO_PreHook("ZO_ActionBar_CanUseActionSlots", AutoBanishPets.onSkillCast)
+    end
+    -- Block provisioning
+    if (sV.provisioning[AutoBanishPets.companions[1]] or sV.provisioning[AutoBanishPets.companions[2]]
+        or sV.provisioning[AutoBanishPets.companions[3]] or sV.provisioning[AutoBanishPets.companions[4]]
+        or sV.provisioning[AutoBanishPets.companions[5]] or sV.provisioning[AutoBanishPets.companions[6]]) then
+        ZO_PreHook(ZO_Provisioner, "Create", AutoBanishPets.onFoodCreated)
     end
     -- Block fast travel
     if (sV.location[AutoBanishPets.companions[1]] or sV.location[AutoBanishPets.companions[2]]
