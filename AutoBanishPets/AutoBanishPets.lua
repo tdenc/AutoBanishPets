@@ -892,7 +892,12 @@ function AutoBanishPets:RegisterEvents()
         ZO_PreHook("Logout", AutoBanishPets.onLogout)
     end
     -- Skill Blocker
-    if (sV.vampire[AutoBanishPets.companions[1]] or sV.vampire[AutoBanishPets.companions[2]] or sV.werewolf[AutoBanishPets.companions[1]] or sV.werewolf[AutoBanishPets.companions[2]]) then
+    if (sV.vampire[AutoBanishPets.companions[1]] or sV.werewolf[AutoBanishPets.companions[1]]
+        or sV.vampire[AutoBanishPets.companions[2]] or sV.werewolf[AutoBanishPets.companions[2]]
+        or sV.vampire[AutoBanishPets.companions[3]] or sV.werewolf[AutoBanishPets.companions[3]]
+        or sV.vampire[AutoBanishPets.companions[4]] or sV.werewolf[AutoBanishPets.companions[4]]
+        or sV.vampire[AutoBanishPets.companions[5]] or sV.werewolf[AutoBanishPets.companions[5]]
+        or sV.vampire[AutoBanishPets.companions[6]] or sV.werewolf[AutoBanishPets.companions[6]]) then
         ZO_PreHook("ZO_ActionBar_CanUseActionSlots", AutoBanishPets.onSkillCast)
     end
     -- Block fast travel
