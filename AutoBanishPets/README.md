@@ -9,7 +9,7 @@ This addon dismisses your pets/assistants/companions under some circumstances:
 - When you interact with
   - Craft station / Dyeing station / Retrait station
   - Wayshrine
-  - Thieves trove / Torchbug / Butterfly / Fishing hole [Companions only]
+  - Thieves trove / Torchbug / Butterfly / Mashroom / Fishing hole [Companions only]
 - When you recieve/complete a daily quest
   - Crafting writs / Undaunted pledges / WBs and delves
   - Guild dailies (Mages / Fighters / Undaunted / Thieves)
@@ -17,6 +17,7 @@ This addon dismisses your pets/assistants/companions under some circumstances:
 - When you visit
   - Dark Brotherhood Sanctuary [Mirri, Isobel]
   - Outlaws Refuge [Isobel only]
+  - Artaeum / Eyevea [Azandar only]
 - When you are arrested [Companions only]
 - When you crouch (+auto-resummon)
 - When you begin/finish combat (+auto-resummon)
