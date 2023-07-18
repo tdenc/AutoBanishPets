@@ -150,8 +150,8 @@ AutoBanishPets.ingredients = {
 AutoBanishPets.harvests = {
     [9245] = {},
     [9353] = {
-        ["Butterfly"] = true, ["Schmetterling"] = true, ["papillon"] = true, ["Бабочка"] = true, ["蝶"] = true,
-        ["Torchbug"] = true, ["Fackelkäfer"] = true, ["flammouche"] = true, ["Светлячок"] = true, ["ホタル"] = true,
+        ["Butterfly"] = true, ["Schmetterling"] = true, ["Papillon"] = true, ["Бабочка"] = true, ["蝶"] = true,
+        ["Torchbug"] = true, ["Fackelkäfer"] = true, ["Flammouche"] = true, ["Светлячок"] = true, ["ホタル"] = true,
     },
     [9911] = {},
     [9912] = {},
@@ -169,5 +169,5 @@ AutoBanishPets.harvests = {
 }
 
 AutoBanishPets.thievesTrove = {
-    ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true,
+    ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["Trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true,
 }
