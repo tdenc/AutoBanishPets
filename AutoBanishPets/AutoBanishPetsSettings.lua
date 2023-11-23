@@ -12,7 +12,6 @@ function AutoBanishPets.CreateSettingsWindow()
         registerForRefresh = true,
         registerForDefaults = true,
         website = "https://www.esoui.com/downloads/info3099-AutoBanishPets.html",
-        donation = "https://www.paypal.me/tdenc",
     }
     local cntrlOptionsPanel = LAM2:RegisterAddonPanel("AutoBanishPets_Settings", panelData)
 

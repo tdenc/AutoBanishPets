@@ -46,6 +46,8 @@ All options are customizable
 - German (Menu / Tooltip / Notification) by Baertram
 - French (Menu)
 - Russian (Menu)
+- Spanish (Partly) NEED HELP!
+- Chinese (Partly) NEED HELP!
 
 Translations are welcome
 

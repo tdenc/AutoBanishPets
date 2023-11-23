@@ -45,6 +45,8 @@
 - ドイツ語（メニュー・ツールチップ・通知）Baertram氏の提供
 - フランス語（メニュー）
 - ロシア語（メニュー）
+- スペイン語（一部のみ）
+- 中国語（一部のみ）
 
 ## 謝辞
 - [Pet Dismiss](https://www.esoui.com/downloads/info1314-PetDismiss.html)

@@ -136,38 +136,38 @@ AutoBanishPets.wayshrines = {
 
 AutoBanishPets.ingredients = {
     [9245] = {
-        ["Cheese"] = true, ["Käse"] = true, ["Fromage"] = true, ["Сыр"] = true, ["チーズ"] = true
+        ["Cheese"] = true, ["Käse"] = true, ["Fromage"] = true, ["Сыр"] = true, ["チーズ"] = true, ["Queso"] = true, ["奶酪"] = true,
     },
     [9353] = {},
     [9911] = {},
     [9912] = {},
     [11113] = {},
     [11114] = {
-        ["Coffee"] = true, ["Kaffee"] = true, ["Café"] = true, ["Кофе"] = true, ["コーヒー"] = true,
+        ["Coffee"] = true, ["Kaffee"] = true, ["Café"] = true, ["Кофе"] = true, ["コーヒー"] = true, ["Café"] = true, ["咖啡豆"] = true,
     },
 }
 
 AutoBanishPets.harvests = {
     [9245] = {},
     [9353] = {
-        ["Butterfly"] = true, ["Schmetterling"] = true, ["Papillon"] = true, ["Бабочка"] = true, ["蝶"] = true,
-        ["Torchbug"] = true, ["Fackelkäfer"] = true, ["Flammouche"] = true, ["Светлячок"] = true, ["ホタル"] = true,
+        ["Butterfly"] = true, ["Schmetterling"] = true, ["Papillon"] = true, ["Бабочка"] = true, ["蝶"] = true, ["Mariposa"] = true, ["蝴蝶"] = true,
+        ["Torchbug"] = true, ["Fackelkäfer"] = true, ["Flammouche"] = true, ["Светлячок"] = true, ["ホタル"] = true, ["Luciérnaga"] = true, ["流萤虫"] = true,
     },
     [9911] = {},
     [9912] = {},
     [11113] = {},
     [11114] = {
-        ["Blue Entoloma"] = true, ["Blauer Glöckling"] = true, ["Entoloma bleue"] = true, ["Голубая знтолома"] = true, ["アオイッポンシメジ"] = true,
-        ["Emetic Russula"] = true, ["Brechtäubling"] = true, ["Russule émétique"] = true, ["Жгучеедкая сыроежка"] = true, ["ドクベニタケ"] = true,
-        ["Imp Stool"] = true, ["Koboldschemel"] = true, ["Pied-de-lutin"] = true, ["Бесовский гриб"] = true, ["木椅子キノコ"] = true,
-        ["Luminous Russula"] = true, ["Leuchttäubling"] = true, ["Russule phosphorescente"] = true, ["Светящаяся сыроежка"] = true, ["光ベニタケ"] = true,
-        ["Namira's Rot"] = true, ["Namiras Fäulnis"] = true, ["Truffe de Namira"] = true, ["Гниль Намиры"] = true, ["ナミラキノコ"] = true,
-        ["Stinkhorn"] = true, ["Stinkmorchel"] = true, ["Mutinus elegans"] = true, ["Цветохвостник"] = true, ["スッポンタケ"] = true,
-        ["Violet Coprinus"] = true, ["Violetter Tintling"] = true, ["Coprin violet"] = true, ["Лиловый копринус"] = true, ["ムラサキヒトヨタケ"] = true,
-        ["White Cap"] = true, ["Weißkappe"] = true, ["Chapeau blanc"] = true, ["Белянка"] = true, ["白かさキノコ"] = true,
+        ["Blue Entoloma"] = true, ["Blauer Glöckling"] = true, ["Entoloma bleue"] = true, ["Голубая знтолома"] = true, ["アオイッポンシメジ"] = true, ["Entoloma azul"] = true, ["蓝草菇"] = true,
+        ["Emetic Russula"] = true, ["Brechtäubling"] = true, ["Russule émétique"] = true, ["Жгучеедкая сыроежка"] = true, ["ドクベニタケ"] = true, ["Rúsula emética"] = true, ["臭红菇"] = true,
+        ["Imp Stool"] = true, ["Koboldschemel"] = true, ["Pied-de-lutin"] = true, ["Бесовский гриб"] = true, ["木椅子キノコ"] = true, ["Seta de diablillo"] = true, ["小恶魔粪菌"] = true,
+        ["Luminous Russula"] = true, ["Leuchttäubling"] = true, ["Russule phosphorescente"] = true, ["Светящаяся сыроежка"] = true, ["光ベニタケ"] = true, ["Rúsula luminosa"] = true, ["发光红菇"] = true,
+        ["Namira's Rot"] = true, ["Namiras Fäulnis"] = true, ["Truffe de Namira"] = true, ["Гниль Намиры"] = true, ["ナミラキノコ"] = true, ["Seta de Namira"] = true, ["娜米拉腐菌"] = true,
+        ["Stinkhorn"] = true, ["Stinkmorchel"] = true, ["Mutinus elegans"] = true, ["Цветохвостник"] = true, ["スッポンタケ"] = true, ["Falacea"] = true, ["臭角菇"] = true,
+        ["Violet Coprinus"] = true, ["Violetter Tintling"] = true, ["Coprin violet"] = true, ["Лиловый копринус"] = true, ["ムラサキヒトヨタケ"] = true, ["Coprinus violeta"] = true, ["紫鬼伞菌"] = true,
+        ["White Cap"] = true, ["Weißkappe"] = true, ["Chapeau blanc"] = true, ["Белянка"] = true, ["白かさキノコ"] = true, ["Hongo blanco"] = true, ["白伞菌"] = true,
     },
 }
 
 AutoBanishPets.thievesTrove = {
-    ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["Trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true,
+    ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["Trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true, -- Is this ok? --> ["Tesoro de los ladrones"] = true, ["盗贼宝藏"] = true,
 }
