@@ -169,5 +169,5 @@ AutoBanishPets.harvests = {
 }
 
 AutoBanishPets.thievesTrove = {
-    ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["Trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true, -- Is this ok? --> ["Tesoro de los ladrones"] = true, ["盗贼宝藏"] = true,
+    ["Thieves Trove"] = true, ["Diebesgut^ns"] = true, ["Trésor des voleurs^m"] = true, ["Воровской клад"] = true, ["盗賊の宝"] = true, ["Tesoro de los ladrones"] = true, ["盗贼宝库"] = true,
 }

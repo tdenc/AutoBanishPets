@@ -1,8 +1,8 @@
 local stringsES = {
     -- Name
-    ABP_FENCE_NAME = "Fence",
-    ABP_RETRAIT_STATION_NAME = "Transmute station",
-    ABP_THIEVESTROVE_NAME = "Thieves trove",
+    ABP_FENCE_NAME = "Perista",
+    ABP_RETRAIT_STATION_NAME = "Taller de transmutación",
+    ABP_THIEVESTROVE_NAME = "Tesoro de los ladrones",
     -- Tooltip
     --ABP_BANK_TOOLTIP = "When you open a bank",
     --ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",

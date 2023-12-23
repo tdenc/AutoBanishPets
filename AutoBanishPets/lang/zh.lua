@@ -1,8 +1,8 @@
 local stringsZH = {
     -- Name
-    ABP_FENCE_NAME = "Fence",
-    ABP_RETRAIT_STATION_NAME = "Transmute station",
-    ABP_THIEVESTROVE_NAME = "Thieves trove",
+    ABP_FENCE_NAME = "销赃者",
+    ABP_RETRAIT_STATION_NAME = "蜕变台",
+    ABP_THIEVESTROVE_NAME = "盗贼宝库",
     -- Tooltip
     --ABP_BANK_TOOLTIP = "When you open a bank",
     --ABP_GUILD_BANK_TOOLTIP = "When you open a guild bank",
