@@ -48,6 +48,8 @@ AutoBanishPets.bankers = {
     [6376] = true, -- Ezabi
     [8994] = true, -- Baron
     [9743] = true, -- Factotum Property
+    [11097] = true, -- Pyroclast
+    -- Eri
 }
 
 AutoBanishPets.merchants = {
@@ -55,6 +57,8 @@ AutoBanishPets.merchants = {
     [6378] = true, -- Fezez
     [8995] = true, -- Peddler
     [9744] = true, -- Factotum Commerce
+    [11059] = true, -- Hoarfrost
+    -- Xyn
 }
 
 AutoBanishPets.fences = {
@@ -64,9 +68,14 @@ AutoBanishPets.fences = {
 AutoBanishPets.otherAssistants = {
     [9745] = true, -- Ghrasharog
     [10184] = true, -- Giladil
+    [10617] = true, -- Aderene
+    [10618] = true, -- Zuqoth
+    [11876] = true, -- Drinweth
+    -- Tzozabrar
 }
 
 AutoBanishPets.locations = {
+    -- zoneId: https://wiki.esoui.com/Zones
     [9245] = {},
     [9353] = {
         [826] = true, -- Dark Brotherhood Sanctuary
@@ -102,6 +111,11 @@ AutoBanishPets.locations = {
         [1178] = true, -- Solitude Outlaws Refuge
         [1211] = true, -- Markarth Outlaws Refuge
         [1252] = true, -- Leyawiin Outlaws Refuge
+        [1293] = true, -- Fargrave Outlaws Refuge
+        [1311] = true, -- Ascendant Order Hideout
+        [1319] = true, -- Gonfalon Bay Outlaws Refuge
+        [1367] = true, -- Vastyr Outlaws Refuge
+        [1412] = true, -- Necrom Outlaws Refuge
     },
     [11113] = {},
     [11114] = {

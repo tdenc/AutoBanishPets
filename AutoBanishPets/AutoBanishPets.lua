@@ -5,7 +5,7 @@ local AutoBanishPets = AutoBanishPets
 --INITIATE VARIABLES--
 ----------------------
 AutoBanishPets.name = "AutoBanishPets"
-AutoBanishPets.version = "0.7.1"
+AutoBanishPets.version = "0.8.0"
 AutoBanishPets.variableVersion = 10
 AutoBanishPets.defaultSettings = {
     ["notification"] = true,
